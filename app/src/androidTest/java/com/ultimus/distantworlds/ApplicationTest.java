@@ -14,10 +14,9 @@
  *    limitations under the License.
  */
 
-package com.ultimus.distantworlds_muzei;
+package com.ultimus.distantworlds;
 
 import android.app.Application;
-import android.test.ApplicationTestCase;
 
 /**
  * <a href="http://d.android.com/tools/testing/testing_android.html">Testing Fundamentals</a>

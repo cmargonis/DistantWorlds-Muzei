@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:context="com.ultimus.distantworlds_muzei.com.ultimus.distantworlds.activity.AboutActivity">
+    tools:context="com.ultimus.distantworlds.activity.AboutActivity">
     <RelativeLayout
 
             android:layout_width="match_parent"

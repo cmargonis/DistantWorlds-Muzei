@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package com.ultimus.distantworlds_muzei;
+package com.ultimus.distantworlds;
 
 import org.junit.Test;
 

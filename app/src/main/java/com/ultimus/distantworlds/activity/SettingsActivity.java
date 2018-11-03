@@ -28,12 +28,13 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
-import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
 
-import com.ultimus.distantworlds_muzei.R;
+import com.ultimus.distantworlds.R;
 
 import java.util.List;
+
+import androidx.appcompat.app.ActionBar;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On

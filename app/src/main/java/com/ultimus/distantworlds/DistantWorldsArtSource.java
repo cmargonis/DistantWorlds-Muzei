@@ -31,7 +31,6 @@ import com.ultimus.distantworlds.DistantWorldsService.ImageResponse;
 import com.ultimus.distantworlds.model.Image;
 import com.ultimus.distantworlds.util.NetworkUtils;
 import com.ultimus.distantworlds.util.PrefUtils;
-import com.ultimus.distantworlds_muzei.BuildConfig;
 
 import java.io.IOException;
 import java.util.List;
