@@ -1,6 +1,10 @@
 language: android
 android:
-  components:
+ licenses:
+    - 'android-sdk-preview-license-.+'
+    - 'android-sdk-license-.+'
+    - 'google-gdk-license-.+'
+ components:
     # Uncomment the lines below if you want to
     # use the latest revision of Android SDK Tools
     - tools
@@ -16,12 +20,19 @@ android:
     - extra-android-m2repository
     - addon-google_apis-google-28
 
-  before_cache:
+ before_cache:
     - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
     - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
-  cache:
-    directories:
-      - $HOME/.m2
-      - $HOME/.gradle/caches/
-      - $HOME/.gradle/wrapper/
-      - $HOME/.android/build-cache
+   cache:
+     directories:
+       - $HOME/.m2
+       - $HOME/.gradle/caches/
+       - $HOME/.gradle/wrapper/
+       - $HOME/.android/build-cache
+
+ before_script:
+      # Prepare pre-accepted licenses to not be prompted at installation
+     - mkdir -p "$ANDROID_HOME/licenses"
+     - cp ./google-licenses/* "$ANDROID_HOME/licenses/"
+ script:
+     - ./gradlew build check
