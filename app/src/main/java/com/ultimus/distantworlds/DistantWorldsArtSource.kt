@@ -28,7 +28,8 @@ import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
 import com.ultimus.distantworlds.model.AlbumResponse
 import com.ultimus.distantworlds.model.Image
-import com.ultimus.distantworlds.util.PrefUtils
+import com.ultimus.distantworlds.util.getPrefOnlyWifi
+import com.ultimus.distantworlds.util.getUpdateFrequencyInMillis
 import com.ultimus.distantworlds.util.isWifiConnected
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -53,12 +54,12 @@ class DistantWorldsArtSource : RemoteMuzeiArtSource(SOURCE_NAME) {
     override fun onCreate() {
         super.onCreate()
         setUserCommands(MuzeiArtSource.BUILTIN_COMMAND_ID_NEXT_ARTWORK)
-        rotateTimeMillis = PrefUtils.getUpdateFrequencyInMillis(this)
+        rotateTimeMillis = getUpdateFrequencyInMillis(this)
     }
 
     @Throws(RemoteMuzeiArtSource.RetryException::class)
     override fun onTryUpdate(reason: Int) {
-        if (PrefUtils.getPrefOnlyWifi(this)) {
+        if (getPrefOnlyWifi(this)) {
             if (BuildConfig.DEBUG) {
                 Log.i(tag, "Checking WiFi Connectivity")
             }
@@ -81,12 +82,12 @@ class DistantWorldsArtSource : RemoteMuzeiArtSource(SOURCE_NAME) {
                 Log.i(tag, "WiFi available, proceeding")
             }
         }
-        val currentToken = if (currentArtwork != null) currentArtwork.token else null
+        val currentToken = currentArtwork?.token
 
         val builder = OkHttpClient.Builder()
         builder.addInterceptor { chain ->
             val response = chain.proceed(chain.request())
-            if (response.code() >= 500 && response.code() < 600) {
+            if (response.code() in 500..599) {
                 try {
                     throw RemoteMuzeiArtSource.RetryException()
                 } catch (e: RemoteMuzeiArtSource.RetryException) {
@@ -121,11 +122,11 @@ class DistantWorldsArtSource : RemoteMuzeiArtSource(SOURCE_NAME) {
             e.printStackTrace()
         }
 
-        if (album == null || !album.body().success) {
+        if (album == null || album.body()?.success == false) {
             throw RemoteMuzeiArtSource.RetryException()
         }
 
-        if (album.body().data == null) {
+        if (album.body()?.data == null) {
             if (BuildConfig.DEBUG) {
                 Log.w(tag, "No photos returned from API.")
             }
@@ -136,7 +137,7 @@ class DistantWorldsArtSource : RemoteMuzeiArtSource(SOURCE_NAME) {
         var photo: Image
         val random = Random()
         var token: String
-        val photosList = album.body().data?.images
+        val photosList = album.body()?.data?.images
         while (true) {
             photo = photosList!![random.nextInt(photosList.size)]
             token = photo.id
@@ -147,18 +148,18 @@ class DistantWorldsArtSource : RemoteMuzeiArtSource(SOURCE_NAME) {
         val imageResponseCall = service.getSingleAlbumImage(ALBUM_ID, photo.id, "Client-ID dc487820261fcea")
         try {
             val img = imageResponseCall.execute()
-            if (img?.body() != null && img.body().success) {
-                val image = img.body().data
+            if (img?.body() != null && img.body()?.success == true) {
+                val image = img.body()?.data
                 publishArtwork(
                     Artwork.Builder()
-                        .title(image.title)
-                        .byline(image.description)
-                        .imageUri(Uri.parse(image.link))
+                        .title(image?.title)
+                        .byline(image?.description)
+                        .imageUri(Uri.parse(image?.link))
                         .token(token)
                         .viewIntent(
                             Intent(
                                 Intent.ACTION_VIEW,
-                                Uri.parse(image.link)
+                                Uri.parse(image?.link)
                             )
                         )
                         .build()
