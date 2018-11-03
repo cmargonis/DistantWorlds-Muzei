@@ -14,21 +14,18 @@
  *    limitations under the License.
  */
 
-package com.ultimus.distantworlds.util;
+package com.ultimus.distantworlds.util
 
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
+import android.content.Context
+import android.net.ConnectivityManager
 
 /**
  * Created by ultimus on 29/3/2016.
  */
-public class NetworkUtils {
 
-    public static boolean isWifiConnected(Context context) {
-        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo wifi = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+fun isWifiConnected(context: Context): Boolean {
+    val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    val wifi = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI)
 
-        return wifi.isConnected();
-    }
+    return wifi.isConnected
 }
