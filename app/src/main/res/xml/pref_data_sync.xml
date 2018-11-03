@@ -1,25 +1,41 @@
+<!--
+   Copyright 2018 Chris Margonis
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+  -->
+
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- NOTE: Hide buttons to simplify the UI. Users can touch outside the dialog to
          dismiss it. -->
     <CheckBoxPreference
-            android:key="update_only_wifi"
-            android:title="@string/pref_title_update_wifi"
-            android:defaultValue="true"/>
+        android:key="update_only_wifi"
+        android:title="@string/pref_title_update_wifi"
+        android:defaultValue="true"/>
     <!-- NOTE: ListPreference's summary should be set to its value by the activity code. -->
     <ListPreference
-            android:key="update_frequency"
-            android:title="@string/pref_title_update_frequency"
-            android:entries="@array/pref_update_frequency_titles"
-            android:entryValues="@array/pref_update_frequency_values"
-            android:defaultValue="180"
-            android:negativeButtonText="@null"
-            android:positiveButtonText="@null"/>
+        android:key="update_frequency"
+        android:title="@string/pref_title_update_frequency"
+        android:entries="@array/pref_update_frequency_titles"
+        android:entryValues="@array/pref_update_frequency_values"
+        android:defaultValue="180"
+        android:negativeButtonText="@null"
+        android:positiveButtonText="@null"/>
 
     <Preference
-            android:key="about"
-            android:title="About DWE For Muzei"
-            android:summary="Attributions and more"
-            android:selectable="true"/>
+        android:key="about"
+        android:title="About DWE For Muzei"
+        android:summary="Attributions and more"
+        android:selectable="true"/>
 
 </PreferenceScreen>
