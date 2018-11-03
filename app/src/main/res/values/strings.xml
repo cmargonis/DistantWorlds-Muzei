@@ -16,7 +16,7 @@
 
 <resources>
     <string name="app_name">Elite Dangerous - Distant Worlds Expedition For Muzei</string>
-    <string name="app_version">Version 1.1</string>
+    <string name="app_version">Version 3.0</string>
     <string name="source_description">A journey beyond the Abyss</string>
     <string name="title_activity_settings">DWE For Muzei - Settings</string>
     <string name="app_name_formatted">Elite Dangerous\nDistant Worlds Expedition For Muzei</string>
