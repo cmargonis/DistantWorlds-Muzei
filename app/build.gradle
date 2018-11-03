@@ -21,10 +21,14 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.ultimus.distantworlds_muzei"
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion 28
         versionCode 4
         versionName "3.0"
+
+        def distantWorldsAuthorityValue = "com.ultimus.distantworlds"
+        manifestPlaceholders = [distantWorldsAuthority: distantWorldsAuthorityValue]
+        buildConfigField "String", "DISTANT_WORLDS_AUTHORITY", "\"${distantWorldsAuthorityValue}\""
     }
 
     buildTypes {
@@ -48,15 +52,16 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation "androidx.appcompat:appcompat:$support_version"
     implementation "androidx.legacy:legacy-support-v4:$support_version"
+    implementation "android.arch.work:work-runtime-ktx:$workManagerVersion"
     implementation 'com.google.android.material:material:1.1.0-alpha01'
 
     implementation "com.google.android.apps.muzei:muzei-api:3.0.0"
-    implementation 'com.squareup.retrofit2:retrofit:2.0.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.0.0'
-    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.2.0'
+    implementation "com.squareup.retrofit2:retrofit:$retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit"
+    implementation "com.squareup.okhttp3:okhttp:$okhttp"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp"
 
-    implementation 'com.google.code.gson:gson:2.8.2'
+    implementation "com.google.code.gson:gson:$gson"
 
     androidTestImplementation 'androidx.test:runner:1.1.0'
     androidTestImplementation 'androidx.test:rules:1.1.0'
