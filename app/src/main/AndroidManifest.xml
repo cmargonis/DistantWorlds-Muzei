@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.ultimus.distantworlds_muzei">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Required by RemoteMuzeiArtSource -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:smallScreens="true"
+        android:xlargeScreens="true" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <activity
+            android:name="com.ultimus.distantworlds.activity.SettingsActivity"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/title_activity_settings">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name="com.ultimus.distantworlds.DistantWorldsArtSource"
+            android:description="@string/source_description"
+            android:exported="true"
+            android:icon="@drawable/flat_icon"
+            android:label="@string/source_name">
+            <intent-filter>
+                <action android:name="com.google.android.apps.muzei.api.MuzeiArtSource" />
+            </intent-filter>
+
+            <meta-data
+                android:name="color"
+                android:value="#fa0" />
+            <meta-data
+                android:name="settingsActivity"
+                android:value=".activity.SettingsActivity" />
+        </service>
+
+        <activity
+            android:name="com.ultimus.distantworlds.activity.AboutActivity"
+            android:label="@string/title_activity_about"
+            android:parentActivityName="com.ultimus.distantworlds.activity.SettingsActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ultimus.distantworlds.activity.SettingsActivity" />
+        </activity>
+    </application>
+</manifest>
