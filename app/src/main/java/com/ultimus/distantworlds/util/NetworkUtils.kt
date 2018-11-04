@@ -18,6 +18,7 @@ package com.ultimus.distantworlds.util
 
 import android.content.Context
 import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 
 /**
  * Created by ultimus on 29/3/2016.
@@ -25,7 +26,13 @@ import android.net.ConnectivityManager
 
 fun isWifiConnected(context: Context): Boolean {
     val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-    val wifi = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI)
-
-    return wifi.isConnected
+    cm.allNetworks.forEach { network ->
+        val capabilities = cm.getNetworkCapabilities(network)
+        if (wifiConnected(capabilities)) return true
+    }
+    return false
 }
+
+private fun wifiConnected(capabilities: NetworkCapabilities) =
+    capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+            && capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
