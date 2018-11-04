@@ -28,7 +28,6 @@ import retrofit2.http.Query
 /**
  * Created by cmargonis on 28/3/2016.
  */
-const val ALBUM_ID = "Upm7x"
 const val IMGUR_API_VERSION = "3"
 const val IMGUR_BASE_URL = "https://api.imgur.com/$IMGUR_API_VERSION/"
 

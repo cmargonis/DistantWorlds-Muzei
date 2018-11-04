@@ -29,6 +29,14 @@ android {
         def distantWorldsAuthorityValue = "com.ultimus.distantworlds"
         manifestPlaceholders = [distantWorldsAuthority: distantWorldsAuthorityValue]
         buildConfigField "String", "DISTANT_WORLDS_AUTHORITY", "\"${distantWorldsAuthorityValue}\""
+
+        Properties apiProps = new Properties()
+        apiProps.load(new FileInputStream(file('../apikeys.properties')))
+        def imgurClient = apiProps["imgur_client_id"]
+        buildConfigField "String", "IMGUR_CLIENT_ID", "\"${imgurClient}\""
+
+        def imgurAlbum = apiProps["imgur_dw_album_id"]
+        buildConfigField "String", "IMGUR_DW_ALBUM", "\"${imgurAlbum}\""
     }
 
     buildTypes {

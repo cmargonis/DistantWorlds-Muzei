@@ -114,7 +114,7 @@ class DistantWorldsArtSource : RemoteMuzeiArtSource(SOURCE_NAME) {
             .build()
 
         val service = retrofit.create(DistantWorldsService::class.java)
-        val response = service.getAlbumDetails(ALBUM_ID, "Client-ID dc487820261fcea")
+        val response = service.getAlbumDetails(BuildConfig.IMGUR_DW_ALBUM, BuildConfig.IMGUR_CLIENT_ID)
         var album: retrofit2.Response<AlbumResponse>? = null
         try {
             album = response.execute()
@@ -145,7 +145,8 @@ class DistantWorldsArtSource : RemoteMuzeiArtSource(SOURCE_NAME) {
                 break
             }
         }
-        val imageResponseCall = service.getSingleAlbumImage(ALBUM_ID, photo.id, "Client-ID dc487820261fcea")
+        val imageResponseCall =
+            service.getSingleAlbumImage(BuildConfig.IMGUR_DW_ALBUM, photo.id, BuildConfig.IMGUR_CLIENT_ID)
         try {
             val img = imageResponseCall.execute()
             if (img?.body() != null && img.body()?.success == true) {

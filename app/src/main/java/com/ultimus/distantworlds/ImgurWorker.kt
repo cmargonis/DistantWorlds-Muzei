@@ -95,7 +95,7 @@ class ImgurWorker(context: Context, workerParams: WorkerParameters) : Worker(con
             .build()
 
         val service = retrofit.create(DistantWorldsService::class.java)
-        val response = service.getAlbumDetails(ALBUM_ID, "Client-ID dc487820261fcea")
+        val response = service.getAlbumDetails(BuildConfig.IMGUR_DW_ALBUM, BuildConfig.IMGUR_CLIENT_ID)
         val album: Response<AlbumResponse>?
         try {
             album = response.execute()
@@ -122,7 +122,8 @@ class ImgurWorker(context: Context, workerParams: WorkerParameters) : Worker(con
         photo = photosList!![random.nextInt(photosList.size)]
         imageToken = photo.id
 
-        val imageResponseCall = service.getSingleAlbumImage(ALBUM_ID, photo.id, "Client-ID dc487820261fcea")
+        val imageResponseCall =
+            service.getSingleAlbumImage(BuildConfig.IMGUR_DW_ALBUM, photo.id, BuildConfig.IMGUR_CLIENT_ID)
         try {
             val img = imageResponseCall.execute()
             if (img?.body() != null && img.body()?.success == true) {
