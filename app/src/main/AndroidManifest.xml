@@ -46,24 +46,6 @@
             </intent-filter>
         </activity>
 
-        <service
-                android:name="com.ultimus.distantworlds.DistantWorldsArtSource"
-                android:description="@string/source_description"
-                android:exported="true"
-                android:icon="@drawable/flat_icon"
-                android:label="@string/source_name">
-            <intent-filter>
-                <action android:name="com.google.android.apps.muzei.api.MuzeiArtSource"/>
-            </intent-filter>
-
-            <meta-data
-                    android:name="color"
-                    android:value="#fa0"/>
-            <meta-data
-                    android:name="settingsActivity"
-                    android:value=".activity.SettingsActivity"/>
-        </service>
-
         <activity
                 android:name="com.ultimus.distantworlds.activity.AboutActivity"
                 android:label="@string/title_activity_about"
@@ -83,6 +65,12 @@
             <intent-filter>
                 <action android:name="com.google.android.apps.muzei.api.MuzeiArtProvider"/>
             </intent-filter>
+            <meta-data
+                    android:name="color"
+                    android:value="#fa0"/>
+            <meta-data
+                    android:name="settingsActivity"
+                    android:value=".activity.SettingsActivity"/>
         </provider>
 
     </application>
