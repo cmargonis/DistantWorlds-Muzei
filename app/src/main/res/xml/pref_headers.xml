@@ -19,7 +19,7 @@
     <!-- These settings headers are only used on tablets. -->
     <header
         android:fragment="com.ultimus.distantworlds.activity.SettingsActivity$DataSyncPreferenceFragment"
-        android:title="@string/pref_header_data_sync"
-        android:icon="@drawable/ic_sync_black_24dp"/>
+        android:icon="@drawable/ic_sync_black_24dp"
+        android:title="@string/pref_header_data_sync" />
 
 </preference-headers>
