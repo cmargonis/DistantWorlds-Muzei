@@ -59,7 +59,7 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation "androidx.appcompat:appcompat:$support_version"
-    implementation "androidx.legacy:legacy-support-v4:$support_version"
+    implementation "androidx.legacy:legacy-support-v4:$legacyv4_version"
     implementation "android.arch.work:work-runtime-ktx:$workManagerVersion"
     implementation 'com.google.android.material:material:1.1.0-alpha01'
 
