@@ -41,7 +41,7 @@
             android:exported="true"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/title_activity_about"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>

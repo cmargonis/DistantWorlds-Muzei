@@ -15,12 +15,12 @@
   -->
 
 <resources>
-    <color name="colorPrimary">#673AB7</color>
-    <color name="colorPrimaryDark">#512DA8</color>
-    <color name="colorPrimaryLight">#D1C4E9</color>
-    <color name="colorAccent">#FF5722</color>
-    <color name="textIcons">#FFFFFF</color>
-    <color name="colorTextPrimary">#212121</color>
-    <color name="colorTextSecondary">#727272</color>
-    <color name="colorDivider">#B6B6B6</color>
+    <color name="primaryColor">#7e56c1</color>
+    <color name="primaryLightColor">#b084f4</color>
+    <color name="primaryDarkColor">#4d2b90</color>
+    <color name="secondaryColor">#ffffff</color>
+    <color name="secondaryLightColor">#ffffff</color>
+    <color name="secondaryDarkColor">#cccccc</color>
+    <color name="primaryTextColor">#ffffff</color>
+    <color name="secondaryTextColor">#000000</color>
 </resources>
