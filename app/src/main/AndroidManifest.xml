@@ -58,7 +58,7 @@
             </intent-filter>
             <meta-data
                 android:name="settingsActivity"
-                android:value="com.ultimus.distantworlds.activity.SettingsActivity" />
+                android:value="com.ultimus.distantworlds.activity.AboutActivity" />
         </provider>
     </application>
 </manifest>
