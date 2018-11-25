@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package com.ultimus.distantworlds
+package com.ultimus.distantworlds.service
 
 import android.content.Context
 import android.net.Uri
@@ -28,6 +28,7 @@ import com.google.android.apps.muzei.api.provider.Artwork
 import com.google.android.apps.muzei.api.provider.ProviderContract
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
+import com.ultimus.distantworlds.BuildConfig
 import com.ultimus.distantworlds.BuildConfig.DISTANT_WORLDS_AUTHORITY
 import com.ultimus.distantworlds.model.AlbumResponse
 import com.ultimus.distantworlds.model.Image
@@ -82,7 +83,10 @@ class ImgurWorker(context: Context, workerParams: WorkerParameters) : Worker(con
             .build()
 
         val service = retrofit.create(DistantWorldsService::class.java)
-        val response = service.getAlbumDetails(BuildConfig.IMGUR_DW_ALBUM, BuildConfig.IMGUR_CLIENT_ID)
+        val response = service.getAlbumDetails(
+            BuildConfig.IMGUR_DW_ALBUM,
+            BuildConfig.IMGUR_CLIENT_ID
+        )
         val album: Response<AlbumResponse>?
         try {
             album = response.execute()
@@ -110,7 +114,10 @@ class ImgurWorker(context: Context, workerParams: WorkerParameters) : Worker(con
         imageToken = photo.id
 
         val imageResponseCall =
-            service.getSingleAlbumImage(BuildConfig.IMGUR_DW_ALBUM, photo.id, BuildConfig.IMGUR_CLIENT_ID)
+            service.getSingleAlbumImage(
+                BuildConfig.IMGUR_DW_ALBUM, photo.id,
+                BuildConfig.IMGUR_CLIENT_ID
+            )
         try {
             val img = imageResponseCall.execute()
             if (img?.body() != null && img.body()?.success == true) {

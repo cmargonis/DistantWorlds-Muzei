@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package com.ultimus.distantworlds
+package com.ultimus.distantworlds.service
 
 import com.ultimus.distantworlds.model.AlbumResponse
 import com.ultimus.distantworlds.model.ImageResponse

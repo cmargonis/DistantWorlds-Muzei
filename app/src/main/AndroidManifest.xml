@@ -37,7 +37,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name="com.ultimus.distantworlds.activity.AboutActivity"
+            android:name="com.ultimus.distantworlds.about.AboutActivity"
             android:exported="true"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name_short"
@@ -51,7 +51,7 @@
             </intent-filter>
         </activity>
         <provider
-            android:name="com.ultimus.distantworlds.DistantWorldsArtProvider"
+            android:name="com.ultimus.distantworlds.provider.DistantWorldsArtProvider"
             android:authorities="${distantWorldsAuthority}"
             android:description="@string/source_description"
             android:exported="true"
@@ -62,7 +62,7 @@
             </intent-filter>
             <meta-data
                 android:name="settingsActivity"
-                android:value="com.ultimus.distantworlds.activity.AboutActivity" />
+                android:value="com.ultimus.distantworlds.about.AboutActivity" />
         </provider>
     </application>
 </manifest>

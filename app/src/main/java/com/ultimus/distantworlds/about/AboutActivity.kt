@@ -14,15 +14,20 @@
  *    limitations under the License.
  */
 
-package com.ultimus.distantworlds
+package com.ultimus.distantworlds.about
 
-import com.google.android.apps.muzei.api.provider.MuzeiArtProvider
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import com.ultimus.distantworlds.R
 
-/**
- * Created by Chris Margonis on 03/11/2018.
- */
-class DistantWorldsArtProvider : MuzeiArtProvider() {
-    override fun onLoadRequested(initial: Boolean) {
-        ImgurWorker.enqueueLoad()
+class AboutActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_about)
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 }
