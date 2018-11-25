@@ -15,59 +15,50 @@
   -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.ultimus.distantworlds">
+    package="com.ultimus.distantworlds">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <!-- Required by RemoteMuzeiArtSource -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <supports-screens
-            android:anyDensity="true"
-            android:largeScreens="true"
-            android:normalScreens="true"
-            android:smallScreens="true"
-            android:xlargeScreens="true"/>
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:smallScreens="true"
+        android:xlargeScreens="true" />
 
     <application
-            android:allowBackup="true"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <activity
+            android:name="com.ultimus.distantworlds.activity.AboutActivity"
+            android:exported="true"
             android:icon="@mipmap/ic_launcher"
-            android:label="@string/app_name"
-            android:supportsRtl="true"
-            android:theme="@style/AppTheme">
-
-        <activity
-                android:name="com.ultimus.distantworlds.activity.SettingsActivity"
-                android:exported="true"
-                android:icon="@mipmap/ic_launcher"
-                android:label="@string/title_activity_settings">
+            android:label="@string/title_activity_about"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.VIEW" />
             </intent-filter>
-        </activity>
-
-        <activity
-                android:name="com.ultimus.distantworlds.activity.AboutActivity"
-                android:label="@string/title_activity_about"
-                android:parentActivityName="com.ultimus.distantworlds.activity.SettingsActivity"
-                android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.ultimus.distantworlds.activity.SettingsActivity"/>
         </activity>
         <provider
-                android:name="com.ultimus.distantworlds.DistantWorldsArtProvider"
-                android:authorities="${distantWorldsAuthority}"
-                android:label="@string/app_name"
-                android:description="@string/source_description"
-                android:exported="true"
-                android:permission="com.google.android.apps.muzei.api.ACCESS_PROVIDER">
+            android:name="com.ultimus.distantworlds.DistantWorldsArtProvider"
+            android:authorities="${distantWorldsAuthority}"
+            android:description="@string/source_description"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:permission="com.google.android.apps.muzei.api.ACCESS_PROVIDER">
             <intent-filter>
-                <action android:name="com.google.android.apps.muzei.api.MuzeiArtProvider"/>
+                <action android:name="com.google.android.apps.muzei.api.MuzeiArtProvider" />
             </intent-filter>
             <meta-data
-                    android:name="settingsActivity"
-                    android:value="com.ultimus.distantworlds.activity.SettingsActivity"/>
+                android:name="settingsActivity"
+                android:value="com.ultimus.distantworlds.activity.SettingsActivity" />
         </provider>
     </application>
 </manifest>
