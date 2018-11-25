@@ -30,7 +30,7 @@
         android:xlargeScreens="true" />
 
     <application
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
@@ -40,10 +40,14 @@
             android:name="com.ultimus.distantworlds.activity.AboutActivity"
             android:exported="true"
             android:icon="@mipmap/ic_launcher"
-            android:label="@string/title_activity_about"
+            android:label="@string/app_name_short"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <provider
