@@ -19,7 +19,10 @@ package com.ultimus.distantworlds
 import android.content.Context
 import android.net.Uri
 import android.util.Log
-import androidx.work.*
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
+import androidx.work.Worker
+import androidx.work.WorkerParameters
 import com.google.android.apps.muzei.api.RemoteMuzeiArtSource
 import com.google.android.apps.muzei.api.provider.Artwork
 import com.google.android.apps.muzei.api.provider.ProviderContract
@@ -28,7 +31,6 @@ import com.google.gson.GsonBuilder
 import com.ultimus.distantworlds.BuildConfig.DISTANT_WORLDS_AUTHORITY
 import com.ultimus.distantworlds.model.AlbumResponse
 import com.ultimus.distantworlds.model.Image
-import com.ultimus.distantworlds.util.getPrefOnlyWifi
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Response
@@ -47,18 +49,8 @@ class ImgurWorker(context: Context, workerParams: WorkerParameters) : Worker(con
             context: Context
         ) {
             val workManager = WorkManager.getInstance()
-            val onlyWifi = getPrefOnlyWifi(context)
             workManager.enqueue(
                 OneTimeWorkRequestBuilder<ImgurWorker>()
-                    .setConstraints(
-                        Constraints.Builder()
-                            .setRequiredNetworkType(
-                                if (onlyWifi)
-                                    NetworkType.UNMETERED
-                                else NetworkType.CONNECTED
-                            )
-                            .build()
-                    )
                     .build()
             )
         }
