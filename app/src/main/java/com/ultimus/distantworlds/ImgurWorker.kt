@@ -45,14 +45,9 @@ import java.util.*
 class ImgurWorker(context: Context, workerParams: WorkerParameters) : Worker(context, workerParams) {
 
     companion object {
-        internal fun enqueueLoad(
-            context: Context
-        ) {
+        internal fun enqueueLoad() {
             val workManager = WorkManager.getInstance()
-            workManager.enqueue(
-                OneTimeWorkRequestBuilder<ImgurWorker>()
-                    .build()
-            )
+            workManager.enqueue(OneTimeWorkRequestBuilder<ImgurWorker>().build())
         }
     }
 
