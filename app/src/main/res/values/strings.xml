@@ -20,42 +20,8 @@
     <string name="source_description">A journey beyond the Abyss</string>
     <string name="title_activity_settings">DWE For Muzei - Settings</string>
     <string name="app_name_formatted">Elite Dangerous\nDistant Worlds Expedition For Muzei</string>
-    <!-- Strings related to Settings -->
-    <string name="pref_title_social_recommendations">Enable social recommendations</string>
-    <string name="pref_description_social_recommendations">Recommendations for people to contact
-        based on your message history
-    </string>
 
-    <string name="pref_title_display_name">Display name</string>
-    <string name="pref_default_display_name">John Smith</string>
-
-    <string name="pref_title_add_friends_to_messages">Add friends to messages</string>
-
-    <!-- Example settings for Data & Sync -->
-    <string name="pref_header_data_sync">Data &amp; sync</string>
-
-    <string name="pref_title_update_frequency">Update frequency</string>
-    <string-array name="pref_update_frequency_titles">
-        <item>15 minutes</item>
-        <item>30 minutes</item>
-        <item>1 hour</item>
-        <item>3 hours</item>
-        <item>6 hours</item>
-    </string-array>
-    <string-array name="pref_update_frequency_values">
-        <item>15</item>
-        <item>30</item>
-        <item>60</item>
-        <item>180</item>
-        <item>360</item>
-    </string-array>
-
-    <!-- Example settings for Notifications -->
-    <string name="pref_header_notifications">Notifications</string>
-
-    <string name="pref_title_new_message_notifications">New message notifications</string>
     <string name="source_name">Distant Worlds Expedition</string>
-    <string name="pref_title_update_wifi">Download only on WiFi</string>
     <string name="title_activity_about">About</string>
     <string name="about_description">This application was made to honor the explorers of the Distant Worlds Expedition of the year 3302.</string>
     <string name="about_forum_thread">You can find the main source of images at the link: https://forums.frontier.co.uk/showthread.php?t=222490</string>
