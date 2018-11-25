@@ -18,29 +18,21 @@ package com.ultimus.distantworlds
 
 import com.ultimus.distantworlds.model.AlbumResponse
 import com.ultimus.distantworlds.model.ImageResponse
-import com.ultimus.distantworlds.model.PhotosResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Path
-import retrofit2.http.Query
 
 /**
  * Created by cmargonis on 28/3/2016.
  */
-const val IMGUR_API_VERSION = "3"
-const val IMGUR_BASE_URL = "https://api.imgur.com/$IMGUR_API_VERSION/"
+const val IMGUR_API_VERSION: String = "3"
+const val IMGUR_BASE_URL: String = "https://api.imgur.com/$IMGUR_API_VERSION/"
 
 internal interface DistantWorldsService {
-    @GET("image")
-    fun getPopularPhotos(@Query("max_results") maxResults: Int?): Call<PhotosResponse>
-
     @GET("album/{id}")
     fun getAlbumDetails(@Path("id") albumId: String, @Header("Authorization") clientId: String): Call<AlbumResponse>
 
     @GET("album/{id}/image/{imageId}")
     fun getSingleAlbumImage(@Path("id") albumId: String, @Path("imageId") imageId: String, @Header("Authorization") clientId: String): Call<ImageResponse>
-
-    @GET("album/{id}/images")
-    fun getAlbumImages(@Path("id") albumId: String): Call<Any>
 }
