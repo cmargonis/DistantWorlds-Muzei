@@ -16,7 +16,7 @@
 
 buildscript {
     ext {
-        kotlin_version = '1.3.0'
+        kotlin_version = '1.3.10'
         support_version = '1.0.2'
         legacyv4_version = '1.0.0'
         workManagerVersion = '1.0.0-alpha11'
@@ -24,6 +24,19 @@ buildscript {
         retrofit = '2.4.0'
         okhttp = '3.11.0'
         gson = '2.8.5'
+    }
+    ext.getImgurApiProperties = {
+        Properties apiProps = new Properties()
+
+        def propsFile = new File('apikeys.properties')
+        if (!propsFile.exists()) {
+            propsFile.createNewFile()
+            propsFile << "imgur_client_id=placeholder\n"
+            propsFile << "imgur_dw_album_id=placeholderId"
+        }
+
+        apiProps.load(new FileInputStream(propsFile))
+        return apiProps
     }
 
     repositories {
