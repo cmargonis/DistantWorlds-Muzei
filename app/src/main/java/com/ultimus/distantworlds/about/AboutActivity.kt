@@ -16,17 +16,45 @@
 
 package com.ultimus.distantworlds.about
 
+import android.content.Context
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.view.View
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.ultimus.distantworlds.R
 
 class AboutActivity : AppCompatActivity() {
 
+    private lateinit var warning: TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_about)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
+        warning = findViewById(R.id.muzeiNotInstalledLabel)
         setSupportActionBar(toolbar)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        determineWarningVisibility()
+    }
+
+    private fun determineWarningVisibility() {
+        val muzeiInstalled = isMuzeiInstalled(this)
+        warning.visibility = if (muzeiInstalled) View.GONE else View.VISIBLE
+    }
+
+    private fun isMuzeiInstalled(context: Context): Boolean {
+        val muzeiPackage = "net.nurik.roman.muzei"
+        val packageManager = context.packageManager
+        return try {
+            val info = packageManager.getApplicationInfo(muzeiPackage, 0)
+            info.enabled
+        } catch (ex: PackageManager.NameNotFoundException) {
+            false
+        }
     }
 }
