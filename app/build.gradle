@@ -16,6 +16,7 @@
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'io.fabric'
 
 android {
     compileSdkVersion 28
@@ -55,9 +56,9 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation "androidx.appcompat:appcompat:$support_version"
-    implementation "androidx.legacy:legacy-support-v4:$legacyv4_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    implementation "androidx.appcompat:appcompat:$supportVersion"
+    implementation "androidx.legacy:legacy-support-v4:$legacyv4Version"
     implementation "android.arch.work:work-runtime-ktx:$workManagerVersion"
     implementation "com.android.support.constraint:constraint-layout:$constraintVersion"
     implementation 'com.google.android.material:material:1.1.0-alpha01'
@@ -70,8 +71,13 @@ dependencies {
 
     implementation "com.google.code.gson:gson:$gson"
 
+    implementation "com.google.firebase:firebase-core:$firebaseCore"
+    implementation "com.crashlytics.sdk.android:crashlytics:2.9.6"
+
     androidTestImplementation 'androidx.test:runner:1.1.0'
     androidTestImplementation 'androidx.test:rules:1.1.0'
     // Optional -- UI testing with Espresso
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
 }
+
+apply plugin: 'com.google.gms.google-services'

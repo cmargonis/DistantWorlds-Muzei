@@ -16,15 +16,19 @@
 
 buildscript {
     ext {
-        kotlin_version = '1.3.10'
-        support_version = '1.0.2'
-        legacyv4_version = '1.0.0'
+        kotlinVersion = '1.3.10'
+        supportVersion = '1.0.2'
+        legacyv4Version = '1.0.0'
         workManagerVersion = '1.0.0-alpha11'
         constraintVersion = '1.1.3'
+        googleServices = '4.2.0'
         retrofit = '2.4.0'
         okhttp = '3.11.0'
         gson = '2.8.5'
+        fabricGradle = '1.26.1'
+        firebaseCore = '16.0.5'
     }
+
     ext.getImgurApiProperties = {
         Properties apiProps = new Properties()
 
@@ -48,7 +52,9 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.2.1'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "com.google.gms:google-services:$googleServices"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+        classpath "io.fabric.tools:gradle:$fabricGradle"
     }
 }
 
