@@ -32,6 +32,7 @@ import com.ultimus.distantworlds.BuildConfig
 import com.ultimus.distantworlds.BuildConfig.DISTANT_WORLDS_AUTHORITY
 import com.ultimus.distantworlds.model.AlbumResponse
 import com.ultimus.distantworlds.model.Image
+import com.ultimus.distantworlds.provider.DistantWorldsSource
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Response
@@ -46,7 +47,7 @@ import java.util.*
 class ImgurWorker(context: Context, workerParams: WorkerParameters) : Worker(context, workerParams) {
 
     companion object {
-        internal fun enqueueLoad() {
+        internal fun enqueueLoad(source: DistantWorldsSource) {
             val workManager = WorkManager.getInstance()
             workManager.enqueue(OneTimeWorkRequestBuilder<ImgurWorker>().build())
         }

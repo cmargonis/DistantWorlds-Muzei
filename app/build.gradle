@@ -28,8 +28,12 @@ android {
         versionName "3.0"
 
         def distantWorldsAuthorityValue = "com.ultimus.distantworlds"
-        manifestPlaceholders = [distantWorldsAuthority: distantWorldsAuthorityValue]
         buildConfigField "String", "DISTANT_WORLDS_AUTHORITY", "\"${distantWorldsAuthorityValue}\""
+
+        def distantWorlds2AuthorityValue = "com.ultimus.distantworlds_two"
+        buildConfigField "String", "DISTANT_WORLDS_TWO_AUTHORITY", "\"${distantWorlds2AuthorityValue}\""
+
+        manifestPlaceholders = [distantWorldsAuthority: distantWorldsAuthorityValue, distantWorlds2Authority: distantWorlds2AuthorityValue]
 
         Properties apiProps = getImgurApiProperties()
         def imgurClient = apiProps["imgur_client_id"]

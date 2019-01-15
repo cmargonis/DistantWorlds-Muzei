@@ -66,5 +66,21 @@
                 android:name="settingsActivity"
                 android:value="com.ultimus.distantworlds.about.AboutActivity" />
         </provider>
+
+        <provider
+            android:name="com.ultimus.distantworlds.provider.DistantWorlds2ArtProvider"
+            android:authorities="${distantWorlds2Authority}"
+            android:description="@string/source_description"
+            android:exported="true"
+            android:icon="@drawable/ic_dw2logo"
+            android:label="@string/provider_name_dw2"
+            android:permission="com.google.android.apps.muzei.api.ACCESS_PROVIDER">
+            <intent-filter>
+                <action android:name="com.google.android.apps.muzei.api.MuzeiArtProvider" />
+            </intent-filter>
+            <meta-data
+                android:name="settingsActivity"
+                android:value="com.ultimus.distantworlds.about.AboutActivity" />
+        </provider>
     </application>
 </manifest>
