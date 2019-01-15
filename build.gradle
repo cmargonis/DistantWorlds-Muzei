@@ -28,6 +28,8 @@ buildscript {
         fabricGradle = '1.26.1'
         firebaseCore = '16.0.5'
         androidGradlePlugin = '3.3.0'
+        androidTestRunner = '1.1.1'
+        espressoCore = '3.1.1'
     }
 
     ext.getImgurApiProperties = {
