@@ -19,6 +19,7 @@ package com.ultimus.distantworlds.service
 import android.content.Context
 import android.net.Uri
 import android.util.Log
+import androidx.work.Data
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.Worker
@@ -47,15 +48,21 @@ import java.util.*
 class ImgurWorker(context: Context, workerParams: WorkerParameters) : Worker(context, workerParams) {
 
     companion object {
+        private const val keySource: String = "imgur_source"
         internal fun enqueueLoad(source: DistantWorldsSource) {
             val workManager = WorkManager.getInstance()
-            workManager.enqueue(OneTimeWorkRequestBuilder<ImgurWorker>().build())
+            val data = Data.Builder().putAll(mutableMapOf<String, Any>(keySource to source.name)).build()
+            workManager.enqueue(OneTimeWorkRequestBuilder<ImgurWorker>().setInputData(data).build())
         }
     }
 
     private val tag = "ImgurWorker"
 
     override fun doWork(): Result {
+        val inputSource = inputData.getString(keySource)
+            ?: throw IllegalArgumentException("Source not specified. Has to be one from ${DistantWorldsSource::name}")
+
+        val source = DistantWorldsSource.valueOf(inputSource)
         val builder = OkHttpClient.Builder()
         builder.addInterceptor { chain ->
             val response = chain.proceed(chain.request())
