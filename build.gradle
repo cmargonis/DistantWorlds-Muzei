@@ -27,6 +27,7 @@ buildscript {
         gson = '2.8.5'
         fabricGradle = '1.26.1'
         firebaseCore = '16.0.5'
+        androidGradlePlugin = '3.3.0'
     }
 
     ext.getImgurApiProperties = {
@@ -51,7 +52,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.2.1'
+        classpath "com.android.tools.build:gradle:$androidGradlePlugin"
         classpath "com.google.gms:google-services:$googleServices"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         classpath "io.fabric.tools:gradle:$fabricGradle"
