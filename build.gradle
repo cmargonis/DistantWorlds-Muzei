@@ -1,5 +1,5 @@
 /*
- *  Copyright 2018 Chris Margonis
+ *  Copyright 2019 Chris Margonis
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 
 buildscript {
     ext {
-        kotlinVersion = '1.3.10'
+        kotlinVersion = '1.3.11'
         supportVersion = '1.0.2'
         legacyv4Version = '1.0.0'
         workManagerVersion = '1.0.0-alpha11'
