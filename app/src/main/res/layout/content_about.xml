@@ -78,16 +78,29 @@
         android:layout_height="wrap_content"
         android:autoLink="web"
         android:padding="12dp"
-        android:text="@string/about_forum_thread"
+        android:text="@string/about_forum_thread_dw2"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text" />
+
+    <TextView
+        android:id="@+id/forum_link_dw2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:autoLink="web"
+        android:padding="12dp"
+        android:text="@string/about_forum_thread"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/forum_link" />
 
     <TextView
         android:id="@+id/muzeiNotInstalledLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:autoLink="web"
-        android:text="Warning! You have to install Muzei for this application to work! You can download it here: http://bit.ly/2rhIhrY"
+        android:padding="12dp"
+        android:text="@string/warning_muzei_not_installed"
         android:textSize="16sp"
         android:textStyle="bold"
         android:visibility="gone"
