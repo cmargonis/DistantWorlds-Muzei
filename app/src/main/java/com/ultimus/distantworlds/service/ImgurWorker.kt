@@ -1,5 +1,5 @@
 /*
- *  Copyright 2018 Chris Margonis
+ *  Copyright 2019 Chris Margonis
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -92,18 +92,18 @@ class ImgurWorker(context: Context, workerParams: WorkerParameters) : Worker(con
             album = response.execute()
         } catch (e: IOException) {
             e.printStackTrace()
-            return Result.RETRY
+            return Result.retry()
         }
 
         if (album == null || album.body()?.success == false) {
-            return Result.RETRY
+            return Result.retry()
         }
 
         if (album.body()?.data == null) {
             if (BuildConfig.DEBUG) {
                 Log.w(tag, "No photos returned from API.")
             }
-            return Result.FAILURE
+            return Result.failure()
         }
 
         val photo: Image
@@ -136,8 +136,8 @@ class ImgurWorker(context: Context, workerParams: WorkerParameters) : Worker(con
 
         } catch (e: IOException) {
             e.printStackTrace()
-            return Result.FAILURE
+            return Result.failure()
         }
-        return Result.SUCCESS
+        return Result.success()
     }
 }
