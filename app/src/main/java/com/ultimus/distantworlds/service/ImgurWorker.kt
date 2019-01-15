@@ -31,6 +31,7 @@ import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
 import com.ultimus.distantworlds.BuildConfig
 import com.ultimus.distantworlds.BuildConfig.DISTANT_WORLDS_AUTHORITY
+import com.ultimus.distantworlds.BuildConfig.DISTANT_WORLDS_TWO_AUTHORITY
 import com.ultimus.distantworlds.model.AlbumResponse
 import com.ultimus.distantworlds.model.Image
 import com.ultimus.distantworlds.provider.DistantWorldsSource
@@ -91,8 +92,12 @@ class ImgurWorker(context: Context, workerParams: WorkerParameters) : Worker(con
             .build()
 
         val service = retrofit.create(DistantWorldsService::class.java)
+        val (albumId, authority) = when (source) {
+            DistantWorldsSource.DISTANT_WORLDS_1 -> Pair(BuildConfig.IMGUR_DW_ALBUM, DISTANT_WORLDS_AUTHORITY)
+            DistantWorldsSource.DISTANT_WORLDS_2 -> Pair(BuildConfig.IMGUR_DW2_ALBUM, DISTANT_WORLDS_TWO_AUTHORITY)
+        }
         val response = service.getAlbumDetails(
-            BuildConfig.IMGUR_DW_ALBUM,
+            albumId,
             BuildConfig.IMGUR_CLIENT_ID
         )
         val album: Response<AlbumResponse>?
@@ -123,7 +128,7 @@ class ImgurWorker(context: Context, workerParams: WorkerParameters) : Worker(con
 
         val imageResponseCall =
             service.getSingleAlbumImage(
-                BuildConfig.IMGUR_DW_ALBUM, photo.id,
+                albumId, photo.id,
                 BuildConfig.IMGUR_CLIENT_ID
             )
         try {
@@ -132,7 +137,7 @@ class ImgurWorker(context: Context, workerParams: WorkerParameters) : Worker(con
                 val image = img.body()?.data
                 ProviderContract.Artwork.addArtwork(
                     applicationContext,
-                    DISTANT_WORLDS_AUTHORITY,
+                    authority,
                     Artwork().apply {
                         this.token = imageToken
                         title = image?.title

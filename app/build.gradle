@@ -38,8 +38,12 @@ android {
         Properties apiProps = getImgurApiProperties()
         def imgurClient = apiProps["imgur_client_id"]
         buildConfigField "String", "IMGUR_CLIENT_ID", "\"${imgurClient}\""
-        def imgurAlbum = apiProps["imgur_dw_album_id"]
-        buildConfigField "String", "IMGUR_DW_ALBUM", "\"${imgurAlbum}\""
+
+        def imgurDWAlbum = apiProps["imgur_dw_album_id"]
+        buildConfigField "String", "IMGUR_DW_ALBUM", "\"${imgurDWAlbum}\""
+
+        def imgurDW2Album = apiProps["imgur_dw2_album_id"]
+        buildConfigField "String", "IMGUR_DW2_ALBUM", "\"${imgurDW2Album}\""
     }
 
     buildTypes {
