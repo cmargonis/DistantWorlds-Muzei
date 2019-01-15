@@ -139,14 +139,14 @@ class ImgurWorker(context: Context, workerParams: WorkerParameters) : Worker(con
                     applicationContext,
                     authority,
                     Artwork().apply {
-                        this.token = imageToken
-                        title = image?.title
-                        byline = image?.description
+                        token = imageToken
+                        title = image?.title ?: ""
+                        byline = image?.description ?: ""
+                        webUri = Uri.parse(image?.link)
                         persistentUri = Uri.parse(image?.link)
                     }
                 )
             }
-
         } catch (e: IOException) {
             e.printStackTrace()
             return Result.failure()
