@@ -72,7 +72,7 @@ dependencies {
     implementation "com.google.code.gson:gson:$gson"
 
     implementation "com.google.firebase:firebase-core:$firebaseCore"
-    implementation "com.crashlytics.sdk.android:crashlytics:2.9.6"
+    implementation "com.crashlytics.sdk.android:crashlytics:$firebaseCrashlytics"
 
     androidTestImplementation "androidx.test:runner:$androidTestRunner"
     androidTestImplementation "androidx.test:rules:$androidTestRunner"
