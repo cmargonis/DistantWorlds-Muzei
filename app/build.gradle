@@ -80,7 +80,7 @@ dependencies {
     implementation "com.android.support.constraint:constraint-layout:$constraintVersion"
     implementation "com.google.android.material:material:$materialComponents"
 
-    implementation "com.google.android.apps.muzei:muzei-api:3.0.0"
+    implementation "com.google.android.apps.muzei:muzei-api:3.1.0"
     implementation "com.squareup.retrofit2:retrofit:$retrofit"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit"
     implementation "com.squareup.okhttp3:okhttp:$okhttp"
