@@ -82,5 +82,10 @@
                 android:name="settingsActivity"
                 android:value="com.ultimus.distantworlds.about.AboutActivity" />
         </provider>
+
+        <meta-data
+            android:name="google_analytics_adid_collection_enabled"
+            android:value="false" />
+
     </application>
 </manifest>
