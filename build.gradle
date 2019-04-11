@@ -25,7 +25,7 @@ buildscript {
         retrofit = '2.4.0'
         okhttp = '3.11.0'
         gson = '2.8.5'
-        fabricGradle = '1.27.0'
+        fabricGradle = '1.28.1'
         firebaseCrashlytics = '2.9.8'
         firebaseCore = '16.0.6'
         androidGradlePlugin = '3.3.2'
