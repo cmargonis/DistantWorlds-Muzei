@@ -24,7 +24,7 @@ buildscript {
         googleServices = '4.2.0'
         retrofit = '2.9.0'
         okhttp = '4.7.2'
-        gson = '2.8.5'
+        gson = '2.8.6'
         fabricGradle = '1.28.1'
         firebaseCrashlytics = '2.9.9'
         firebaseCore = '16.0.8'
