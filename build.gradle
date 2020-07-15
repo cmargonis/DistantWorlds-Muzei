@@ -26,7 +26,7 @@ buildscript {
         okhttp = '4.7.2'
         gson = '2.8.6'
         fabricGradle = '1.28.1'
-        firebaseCrashlytics = '2.9.9'
+        firebaseCrashlytics = '2.10.1'
         firebaseCore = '17.4.4'
         androidGradlePlugin = '4.0.1'
         androidTestRunner = '1.1.1'
