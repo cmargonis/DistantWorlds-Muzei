@@ -27,7 +27,7 @@ buildscript {
         gson = '2.8.6'
         fabricGradle = '1.28.1'
         firebaseCrashlytics = '2.9.9'
-        firebaseCore = '16.0.8'
+        firebaseCore = '17.4.4'
         androidGradlePlugin = '4.0.1'
         androidTestRunner = '1.1.1'
         espressoCore = '3.1.1'
