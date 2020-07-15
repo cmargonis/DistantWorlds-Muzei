@@ -1,5 +1,5 @@
 /*
- *  Copyright 2019 Chris Margonis
+ *  Copyright 2020 Chris Margonis
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -67,7 +67,7 @@ class ImgurWorker(context: Context, workerParams: WorkerParameters) : Worker(con
         val builder = OkHttpClient.Builder()
         builder.addInterceptor { chain ->
             val response = chain.proceed(chain.request())
-            if (response.code() in 500..599) {
+            if (response.code in 500..599) {
                 try {
                     throw RemoteMuzeiArtSource.RetryException()
                 } catch (e: RemoteMuzeiArtSource.RetryException) {
