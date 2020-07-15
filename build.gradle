@@ -1,5 +1,5 @@
 /*
- *  Copyright 2019 Chris Margonis
+ *  Copyright 2020 Chris Margonis
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -16,22 +16,22 @@
 
 buildscript {
     ext {
-        kotlinVersion = '1.3.21'
-        supportVersion = '1.1.0-alpha04'
+        kotlinVersion = '1.3.72'
+        supportVersion = '1.3.0-alpha01'
         legacyv4Version = '1.0.0'
         workManagerVersion = '1.0.1'
         constraintVersion = '1.1.3'
         googleServices = '4.2.0'
-        retrofit = '2.4.0'
-        okhttp = '3.11.0'
-        gson = '2.8.5'
+        retrofit = '2.9.0'
+        okhttp = '4.7.2'
+        gson = '2.8.6'
         fabricGradle = '1.28.1'
-        firebaseCrashlytics = '2.9.9'
-        firebaseCore = '16.0.8'
-        androidGradlePlugin = '3.3.2'
-        androidTestRunner = '1.1.1'
-        espressoCore = '3.1.1'
-        materialComponents = '1.1.0-alpha05'
+        firebaseCrashlytics = '2.10.1'
+        firebaseCore = '17.4.4'
+        androidGradlePlugin = '4.0.1'
+        androidTestRunner = '1.2.0'
+        espressoCore = '3.2.0'
+        materialComponents = '1.3.0-alpha01'
     }
 
     ext.getImgurApiProperties = {
