@@ -17,7 +17,6 @@
 package com.ultimus.distantworlds.service
 
 import com.ultimus.distantworlds.model.AlbumResponse
-import com.ultimus.distantworlds.model.ImageResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -32,7 +31,4 @@ const val IMGUR_BASE_URL: String = "https://api.imgur.com/$IMGUR_API_VERSION/"
 internal interface DistantWorldsService {
     @GET("album/{id}")
     fun getAlbumDetails(@Path("id") albumId: String, @Header("Authorization") clientId: String): Call<AlbumResponse>
-
-    @GET("album/{id}/image/{imageId}")
-    fun getSingleAlbumImage(@Path("id") albumId: String, @Path("imageId") imageId: String, @Header("Authorization") clientId: String): Call<ImageResponse>
 }

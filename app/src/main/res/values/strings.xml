@@ -30,5 +30,12 @@
     <string name="about_description">This application was made to honor the explorers of the Distant Worlds Expeditions of the years 3302 and 3305.\nYou can select either expedition as your wallpaper source.</string>
     <string name="about_forum_thread">Images from Distant Worlds can be found here: <a href="https://forums.frontier.co.uk/showthread.php?t=222490">[Distant Worlds] Centralized photo gallery</a></string>
     <string name="about_forum_thread_dw2">Link for images from Distant Worlds 2 will be uploaded soon</string>
-    <string name="warning_muzei_not_installed">Warning! You have to install Muzei for this application to work! You can download it here: http://bit.ly/2rhIhrY</string>
+
+    <string name="enable_distant_worlds">Select Distant Worlds</string>
+    <string name="enable_distant_worlds_2">Select Distant Worlds 2</string>
+    <string name="warning_select_source">Select Distant Worlds from the "Sources" screen</string>
+    <string name="warning_select_source_2">Select Distant Worlds 2 from the "Sources" screen</string>
+    <string name="install_muzei">Install Muzei</string>
+    <string name="warning_muzei_not_installed">Failed to launch the Google Play Store to install Muzei</string>
+    <string name="open_muzei">Open Muzei</string>
 </resources>

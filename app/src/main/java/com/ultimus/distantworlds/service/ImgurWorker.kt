@@ -24,7 +24,6 @@ import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.Worker
 import androidx.work.WorkerParameters
-import com.google.android.apps.muzei.api.RemoteMuzeiArtSource
 import com.google.android.apps.muzei.api.provider.Artwork
 import com.google.android.apps.muzei.api.provider.ProviderContract
 import com.google.gson.FieldNamingPolicy
@@ -33,7 +32,6 @@ import com.ultimus.distantworlds.BuildConfig
 import com.ultimus.distantworlds.BuildConfig.DISTANT_WORLDS_AUTHORITY
 import com.ultimus.distantworlds.BuildConfig.DISTANT_WORLDS_TWO_AUTHORITY
 import com.ultimus.distantworlds.model.AlbumResponse
-import com.ultimus.distantworlds.model.Image
 import com.ultimus.distantworlds.provider.DistantWorldsSource
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -41,7 +39,6 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
-import java.util.*
 
 /**
  * Created by Chris Margonis on 03/11/2018.
@@ -68,11 +65,7 @@ class ImgurWorker(context: Context, workerParams: WorkerParameters) : Worker(con
         builder.addInterceptor { chain ->
             val response = chain.proceed(chain.request())
             if (response.code in 500..599) {
-                try {
-                    throw RemoteMuzeiArtSource.RetryException()
-                } catch (e: RemoteMuzeiArtSource.RetryException) {
-                    e.printStackTrace()
-                }
+                Log.e(tag, "Got error code ${response.code}")
             }
             response
         }
@@ -112,45 +105,25 @@ class ImgurWorker(context: Context, workerParams: WorkerParameters) : Worker(con
             return Result.retry()
         }
 
-        if (album.body()?.data == null) {
+        val photosList = album.body()?.data?.images
+        if (photosList.isNullOrEmpty()) {
             if (BuildConfig.DEBUG) {
                 Log.w(tag, "No photos returned from API.")
             }
             return Result.failure()
         }
 
-        val photo: Image
-        val random = Random()
-        val imageToken: String
-        val photosList = album.body()?.data?.images
-        photo = photosList!![random.nextInt(photosList.size)]
-        imageToken = photo.id
-
-        val imageResponseCall =
-            service.getSingleAlbumImage(
-                albumId, photo.id,
-                BuildConfig.IMGUR_CLIENT_ID
-            )
-        try {
-            val img = imageResponseCall.execute()
-            if (img?.body() != null && img.body()?.success == true) {
-                val image = img.body()?.data
-                ProviderContract.Artwork.addArtwork(
-                    applicationContext,
-                    authority,
-                    Artwork().apply {
-                        token = imageToken
-                        title = image?.title ?: ""
-                        byline = image?.description ?: ""
-                        webUri = Uri.parse(image?.link)
-                        persistentUri = Uri.parse(image?.link)
-                    }
-                )
-            }
-        } catch (e: IOException) {
-            e.printStackTrace()
-            return Result.failure()
-        }
+        val providerClient = ProviderContract.getProviderClient(
+                applicationContext,
+                authority)
+        providerClient.addArtwork(photosList.map { image ->
+            Artwork(
+                    token = image.id,
+                    title = image.title,
+                    byline = image.description,
+                    webUri = Uri.parse(image.link),
+                    persistentUri = Uri.parse(image.link))
+        }.shuffled())
         return Result.success()
     }
 }

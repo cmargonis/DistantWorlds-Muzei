@@ -18,16 +18,6 @@
     package="com.ultimus.distantworlds">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <!-- Required by RemoteMuzeiArtSource -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-
-    <supports-screens
-        android:anyDensity="true"
-        android:largeScreens="true"
-        android:normalScreens="true"
-        android:smallScreens="true"
-        android:xlargeScreens="true" />
 
     <application
         android:allowBackup="false"
@@ -67,6 +57,16 @@
                 android:value="com.ultimus.distantworlds.about.AboutActivity" />
         </provider>
 
+        <provider android:name=".provider.DistantWorldsArtDocumentsProvider"
+            android:authorities="${distantWorldsAuthority}.documents"
+            android:exported="true"
+            android:grantUriPermissions="true"
+            android:permission="android.permission.MANAGE_DOCUMENTS">
+            <intent-filter>
+                <action android:name="android.content.action.DOCUMENTS_PROVIDER" />
+            </intent-filter>
+        </provider>
+
         <provider
             android:name="com.ultimus.distantworlds.provider.DistantWorlds2ArtProvider"
             android:authorities="${distantWorlds2Authority}"
@@ -81,6 +81,16 @@
             <meta-data
                 android:name="settingsActivity"
                 android:value="com.ultimus.distantworlds.about.AboutActivity" />
+        </provider>
+
+        <provider android:name=".provider.DistantWorlds2ArtDocumentsProvider"
+            android:authorities="${distantWorlds2Authority}.documents"
+            android:exported="true"
+            android:grantUriPermissions="true"
+            android:permission="android.permission.MANAGE_DOCUMENTS">
+            <intent-filter>
+                <action android:name="android.content.action.DOCUMENTS_PROVIDER" />
+            </intent-filter>
         </provider>
 
         <meta-data

@@ -16,6 +16,7 @@
 
 package com.ultimus.distantworlds.provider
 
+import com.google.android.apps.muzei.api.provider.MuzeiArtDocumentsProvider
 import com.google.android.apps.muzei.api.provider.MuzeiArtProvider
 import com.ultimus.distantworlds.service.ImgurWorker
 
@@ -26,4 +27,7 @@ class DistantWorldsArtProvider : MuzeiArtProvider() {
     override fun onLoadRequested(initial: Boolean) {
         ImgurWorker.enqueueLoad(DistantWorldsSource.DISTANT_WORLDS_1)
     }
+}
+
+class DistantWorldsArtDocumentsProvider : MuzeiArtDocumentsProvider() {
 }
