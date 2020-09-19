@@ -16,7 +16,7 @@
 
 buildscript {
     ext {
-        kotlinVersion = '1.3.72'
+        kotlinVersion = '1.4.10'
         supportVersion = '1.3.0-alpha01'
         legacyv4Version = '1.0.0'
         workManagerVersion = '1.0.1'
