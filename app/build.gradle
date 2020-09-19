@@ -16,6 +16,7 @@
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
 
 android {
@@ -93,7 +94,7 @@ dependencies {
     implementation "com.google.code.gson:gson:$gson"
 
     implementation "com.google.firebase:firebase-core:$firebaseCore"
-    implementation "com.google.firebase:firebase-crashlytics:$firebaseCrashlytics"
+    implementation "com.google.firebase:firebase-crashlytics:$firebaseCrashlyticsVersion"
 
     androidTestImplementation "androidx.test:runner:$androidTestRunner"
     androidTestImplementation "androidx.test:rules:$androidTestRunner"
@@ -101,4 +102,3 @@ dependencies {
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoCore"
 }
 
-apply plugin: 'com.google.gms.google-services'
