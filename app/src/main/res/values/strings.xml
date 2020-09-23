@@ -1,5 +1,5 @@
 <!--
-   Copyright 2019 Chris Margonis
+   Copyright 2020 Chris Margonis
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@
     <string name="app_name_short">Distant Worlds</string>
     <string name="provider_name_dw">Distant Worlds</string>
     <string name="provider_name_dw2">Distant Worlds 2</string>
-    <string name="app_version">Version 3.1</string>
+    <string name="app_version">Version 3.2</string>
     <string name="source_description">A journey beyond the Abyss</string>
     <string name="title_activity_settings">DWE For Muzei - Settings</string>
     <string name="app_name_formatted">Elite Dangerous - Distant Worlds Expedition\n For Muzei</string>
