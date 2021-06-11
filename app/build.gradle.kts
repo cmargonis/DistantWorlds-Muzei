@@ -87,26 +87,26 @@ android {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.4.10")
-    implementation("androidx.core:core-ktx:1.3.1")
-    implementation("androidx.appcompat:appcompat:1.3.0-alpha02")
-    implementation("androidx.work:work-runtime-ktx:2.4.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.0.1")
-    implementation("com.google.android.material:material:1.3.0-alpha02")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:_")
+    implementation("androidx.core:core-ktx:_")
+    implementation("androidx.appcompat:appcompat:_")
+    implementation("androidx.work:work-runtime-ktx:_")
+    implementation("androidx.constraintlayout:constraintlayout:_")
+    implementation("com.google.android.material:material:_")
 
-    implementation("com.google.android.apps.muzei:muzei-api:3.4.0")
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation("com.squareup.okhttp3:okhttp:4.8.1")
-    implementation("com.squareup.okhttp3:logging-interceptor:4.8.1")
+    implementation("com.google.android.apps.muzei:muzei-api:_")
+    implementation("com.squareup.retrofit2:retrofit:_")
+    implementation("com.squareup.retrofit2:converter-gson:_")
+    implementation("com.squareup.okhttp3:okhttp:_")
+    implementation("com.squareup.okhttp3:logging-interceptor:_")
 
-    implementation("com.google.code.gson:gson:2.8.6")
+    implementation("com.google.code.gson:gson:_")
 
-    implementation("com.google.firebase:firebase-core:17.5.0")
-    implementation("com.google.firebase:firebase-crashlytics:17.2.1")
+    implementation("com.google.firebase:firebase-core:_")
+    implementation("com.google.firebase:firebase-crashlytics:_")
 
-    androidTestImplementation("androidx.test:runner:1.3.0")
-    androidTestImplementation("androidx.test:rules:1.3.0")
+    androidTestImplementation("androidx.test:runner:_")
+    androidTestImplementation("androidx.test:rules:_")
     // Optional -- UI testing with Espresso
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
+    androidTestImplementation("androidx.test.espresso:espresso-core:_")
 }
