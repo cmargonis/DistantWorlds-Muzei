@@ -1,5 +1,5 @@
 /*
- *  Copyright 2018 Chris Margonis
+ *  Copyright 2021 Chris Margonis
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -13,5 +13,9 @@
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
  */
+plugins {
+    // See https://jmfayard.github.io/refreshVersions
+    id("de.fayard.refreshVersions") version "0.10.1"
+}
 
-include ':app'
+include(":app")
