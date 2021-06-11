@@ -1,5 +1,5 @@
 /*
- *  Copyright 2020 Chris Margonis
+ *  Copyright 2021 Chris Margonis
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -78,27 +78,26 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.4.10"
     implementation "androidx.core:core-ktx:1.3.1"
-    implementation "androidx.appcompat:appcompat:$supportVersion"
-    implementation "androidx.work:work-runtime-ktx:$workManagerVersion"
-    implementation "androidx.constraintlayout:constraintlayout:$constraintVersion"
-    implementation "com.google.android.material:material:$materialComponents"
+    implementation "androidx.appcompat:appcompat:1.3.0-alpha02"
+    implementation "androidx.work:work-runtime-ktx:2.4.0"
+    implementation "androidx.constraintlayout:constraintlayout:2.0.1"
+    implementation "com.google.android.material:material:1.3.0-alpha02"
 
     implementation "com.google.android.apps.muzei:muzei-api:3.4.0"
-    implementation "com.squareup.retrofit2:retrofit:$retrofit"
-    implementation "com.squareup.retrofit2:converter-gson:$retrofit"
-    implementation "com.squareup.okhttp3:okhttp:$okhttp"
-    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp"
+    implementation "com.squareup.retrofit2:retrofit:2.9.0"
+    implementation "com.squareup.retrofit2:converter-gson:2.9.0"
+    implementation "com.squareup.okhttp3:okhttp:4.8.1"
+    implementation "com.squareup.okhttp3:logging-interceptor:4.8.1"
 
-    implementation "com.google.code.gson:gson:$gson"
+    implementation "com.google.code.gson:gson:2.8.6"
 
-    implementation "com.google.firebase:firebase-core:$firebaseCore"
-    implementation "com.google.firebase:firebase-crashlytics:$firebaseCrashlyticsVersion"
+    implementation "com.google.firebase:firebase-core:17.5.0"
+    implementation "com.google.firebase:firebase-crashlytics:17.2.1"
 
-    androidTestImplementation "androidx.test:runner:$androidTestRunner"
-    androidTestImplementation "androidx.test:rules:$androidTestRunner"
+    androidTestImplementation "androidx.test:runner:1.3.0"
+    androidTestImplementation "androidx.test:rules:1.3.0"
     // Optional -- UI testing with Espresso
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoCore"
+    androidTestImplementation "androidx.test.espresso:espresso-core:3.3.0"
 }
-
