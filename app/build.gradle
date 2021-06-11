@@ -28,6 +28,20 @@ android {
         versionCode 6
         versionName "3.2"
 
+        def getImgurApiProperties = {
+            Properties apiProps = new Properties()
+
+            def propsFile = new File('apikeys.properties')
+            if (!propsFile.exists()) {
+                propsFile.createNewFile()
+                propsFile << "imgur_client_id=placeholder\n"
+                propsFile << "imgur_dw_album_id=placeholderId"
+            }
+
+            apiProps.load(new FileInputStream(propsFile))
+            return apiProps
+        }
+
         def distantWorldsAuthorityValue = "com.ultimus.distantworlds"
         buildConfigField "String", "DISTANT_WORLDS_AUTHORITY", "\"${distantWorldsAuthorityValue}\""
 

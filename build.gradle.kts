@@ -15,30 +15,16 @@
  */
 
 buildscript {
-    ext.getImgurApiProperties = {
-        Properties apiProps = new Properties()
-
-        def propsFile = new File('apikeys.properties')
-        if (!propsFile.exists()) {
-            propsFile.createNewFile()
-            propsFile << "imgur_client_id=placeholder\n"
-            propsFile << "imgur_dw_album_id=placeholderId"
-        }
-
-        apiProps.load(new FileInputStream(propsFile))
-        return apiProps
-    }
-
     repositories {
         google()
         jcenter()
     }
 
     dependencies {
-        classpath "com.android.tools.build:gradle:4.2.1"
-        classpath "com.google.gms:google-services:4.3.3"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.10"
-        classpath "com.google.firebase:firebase-crashlytics-gradle:2.3.0"
+        classpath("com.android.tools.build:gradle:4.2.1")
+        classpath("com.google.gms:google-services:4.3.3")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.10")
+        classpath("com.google.firebase:firebase-crashlytics-gradle:2.3.0")
     }
 }
 
@@ -49,6 +35,6 @@ allprojects {
     }
 }
 
-task clean(type: Delete) {
-    delete rootProject.buildDir
+tasks.register<Delete>("clean") {
+    delete(rootProject.buildDir)
 }
