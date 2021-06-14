@@ -1,5 +1,5 @@
 /*
- *  Copyright 2018 Chris Margonis
+ *  Copyright 2021 Chris Margonis
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -14,4 +14,27 @@
  *    limitations under the License.
  */
 
-include ':app'
+buildscript {
+    repositories {
+        google()
+        jcenter()
+    }
+
+    dependencies {
+        classpath("com.android.tools.build:gradle:_")
+        classpath("com.google.gms:google-services:_")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:_")
+        classpath("com.google.firebase:firebase-crashlytics-gradle:_")
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+
+tasks.register<Delete>("clean") {
+    delete(rootProject.buildDir)
+}
