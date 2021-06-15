@@ -57,7 +57,8 @@
                 android:value="com.ultimus.distantworlds.about.AboutActivity" />
         </provider>
 
-        <provider android:name=".provider.DistantWorldsArtDocumentsProvider"
+        <provider
+            android:name=".provider.DistantWorldsArtDocumentsProvider"
             android:authorities="${distantWorldsAuthority}.documents"
             android:exported="true"
             android:grantUriPermissions="true"
@@ -83,7 +84,8 @@
                 android:value="com.ultimus.distantworlds.about.AboutActivity" />
         </provider>
 
-        <provider android:name=".provider.DistantWorlds2ArtDocumentsProvider"
+        <provider
+            android:name=".provider.DistantWorlds2ArtDocumentsProvider"
             android:authorities="${distantWorlds2Authority}.documents"
             android:exported="true"
             android:grantUriPermissions="true"

@@ -32,6 +32,7 @@ import com.ultimus.distantworlds.BuildConfig
 import com.ultimus.distantworlds.R
 
 class AboutActivity : AppCompatActivity() {
+
     companion object {
 
         const val muzeiPackage: String = "net.nurik.roman.muzei"

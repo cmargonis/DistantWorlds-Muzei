@@ -24,10 +24,10 @@ import com.ultimus.distantworlds.service.ImgurWorker
  * Created by Chris Margonis on 03/11/2018.
  */
 class DistantWorlds2ArtProvider : MuzeiArtProvider() {
+
     override fun onLoadRequested(initial: Boolean) {
         ImgurWorker.enqueueLoad(DistantWorldsSource.DISTANT_WORLDS_2)
     }
 }
 
-class DistantWorlds2ArtDocumentsProvider : MuzeiArtDocumentsProvider() {
-}
+class DistantWorlds2ArtDocumentsProvider : MuzeiArtDocumentsProvider()

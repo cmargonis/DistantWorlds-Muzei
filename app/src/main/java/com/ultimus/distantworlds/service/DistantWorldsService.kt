@@ -29,6 +29,7 @@ const val IMGUR_API_VERSION: String = "3"
 const val IMGUR_BASE_URL: String = "https://api.imgur.com/$IMGUR_API_VERSION/"
 
 internal interface DistantWorldsService {
+
     @GET("album/{id}")
     fun getAlbumDetails(@Path("id") albumId: String, @Header("Authorization") clientId: String): Call<AlbumResponse>
 }
