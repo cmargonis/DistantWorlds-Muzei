@@ -31,7 +31,7 @@ import com.google.android.apps.muzei.api.MuzeiContract.Sources.createChooseProvi
 import com.ultimus.distantworlds.BuildConfig
 import com.ultimus.distantworlds.R
 
-class AboutActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
     companion object {
 
@@ -42,7 +42,7 @@ class AboutActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_about)
+        setContentView(R.layout.activity_main)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         redirectAnimator = findViewById(R.id.redirect_animator)
         setSupportActionBar(toolbar)
