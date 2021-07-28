@@ -37,11 +37,12 @@ fun getImgurApiProperties(): Properties {
 }
 
 android {
-    compileSdkVersion(30)
+    compileSdk = 30
     defaultConfig {
         applicationId = "com.ultimus.distantworlds_muzei"
         minSdkVersion(21)
-        targetSdkVersion(30)
+        minSdk = 21
+        targetSdk = 30
         versionCode = 6
         versionName = "3.2"
 
@@ -65,6 +66,10 @@ android {
         buildConfigField("String", "IMGUR_DW2_ALBUM", "\"${imgurDW2Album}\"")
     }
 
+    buildFeatures {
+        viewBinding = true
+    }
+    
     buildTypes {
         getByName("debug") {
             versionNameSuffix = " Debug"
