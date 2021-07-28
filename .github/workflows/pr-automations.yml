@@ -1,4 +1,4 @@
-name: Pull Request Mealit
+name: Pull Request Automation
 
 on:
   pull_request:
