@@ -40,7 +40,6 @@ android {
     compileSdk = 30
     defaultConfig {
         applicationId = "com.ultimus.distantworlds_muzei"
-        minSdkVersion(21)
         minSdk = 21
         targetSdk = 30
         versionCode = 6
@@ -69,7 +68,7 @@ android {
     buildFeatures {
         viewBinding = true
     }
-    
+
     buildTypes {
         getByName("debug") {
             versionNameSuffix = " Debug"
