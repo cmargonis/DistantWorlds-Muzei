@@ -1,0 +1,53 @@
+name: Pull Request Mealit
+
+on:
+  pull_request:
+    types: [ opened, closed, ready_for_review, reopened ]
+
+jobs:
+
+  # Add the PR author as assignee.
+  add-assignee:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add assignee
+        if: ${{ github.event.action == 'opened' || github.event.action == 'ready_for_review' }}
+        uses: actions/github-script@v3
+        with:
+          github-token: ${{github.token}}
+          script: |
+            await github.issues.addAssignees({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.payload.number,
+              assignees: context.payload.pull_request.user.login
+            })
+
+  # Add labels based on branch name
+  add-branch-labels:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add branch labels
+        if: ${{ github.event.action == 'opened' }}
+        uses: TimonVS/pr-labeler-action@v3
+        with:
+          configuration-path: .github/pull-request-labels.yml
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # Add pull request status-indicating labels
+  add-status-label:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add WIP label
+        if: ${{ github.event.action == 'opened' && github.event.pull_request.draft }}
+        uses: actions/github-script@v3
+        with:
+          github-token: ${{github.token}}
+          script: |
+            github.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.payload.number,
+              labels: ['WIP']
+            })

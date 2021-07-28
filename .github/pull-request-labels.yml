@@ -1,0 +1,4 @@
+Bugfix: [ 'bugfix/**' ]
+feature: [ 'feature/**' ]
+Release: 'release/**'
+Platform: 'platform/**'
