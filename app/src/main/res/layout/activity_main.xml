@@ -43,5 +43,4 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/nav_graph" />
 
-    <include layout="@layout/content_about" />
 </androidx.constraintlayout.widget.ConstraintLayout>
