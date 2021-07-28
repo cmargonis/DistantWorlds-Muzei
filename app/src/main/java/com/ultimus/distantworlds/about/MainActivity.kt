@@ -1,5 +1,5 @@
 /*
- *  Copyright 2021 Chris Margonis
+ *  Copyright 2018 Chris Margonis
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -14,27 +14,21 @@
  *    limitations under the License.
  */
 
-buildscript {
-    repositories {
-        google()
-        mavenCentral()
+package com.ultimus.distantworlds.about
+
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.ultimus.distantworlds.R
+
+class MainActivity : AppCompatActivity() {
+
+    companion object {
+
+        const val muzeiPackage: String = "net.nurik.roman.muzei"
     }
 
-    dependencies {
-        classpath("com.android.tools.build:gradle:_")
-        classpath("com.google.gms:google-services:_")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:_")
-        classpath("com.google.firebase:firebase-crashlytics-gradle:_")
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
     }
-}
-
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
-    }
-}
-
-tasks.register<Delete>("clean") {
-    delete(rootProject.buildDir)
 }

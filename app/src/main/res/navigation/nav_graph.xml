@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?><!--
-   Copyright 2019 Chris Margonis
+   Copyright 2021 Chris Margonis
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,7 +14,14 @@
      limitations under the License.
   -->
 
-<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
-    <background android:drawable="@drawable/ic_launcher_background" />
-    <foreground android:drawable="@mipmap/ic_launcher_foreground" />
-</adaptive-icon>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_main"
+    app:startDestination="@id/aboutFragment">
+
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.ultimus.distantworlds.about.AboutFragment"
+        tools:layout="@layout/fragment_about" />
+</navigation>

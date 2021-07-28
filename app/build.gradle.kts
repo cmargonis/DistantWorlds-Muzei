@@ -37,11 +37,11 @@ fun getImgurApiProperties(): Properties {
 }
 
 android {
-    compileSdkVersion(30)
+    compileSdk = 30
     defaultConfig {
         applicationId = "com.ultimus.distantworlds_muzei"
-        minSdkVersion(21)
-        targetSdkVersion(30)
+        minSdk = 21
+        targetSdk = 30
         versionCode = 6
         versionName = "3.2"
 
@@ -65,13 +65,17 @@ android {
         buildConfigField("String", "IMGUR_DW2_ALBUM", "\"${imgurDW2Album}\"")
     }
 
+    buildFeatures {
+        viewBinding = true
+    }
+
     buildTypes {
         getByName("debug") {
             versionNameSuffix = " Debug"
 
         }
         getByName("release") {
-            minifyEnabled(false)
+            isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
         }
     }
@@ -88,11 +92,16 @@ android {
 
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib:_")
+
     implementation("androidx.core:core-ktx:_")
     implementation("androidx.appcompat:appcompat:_")
     implementation("androidx.work:work-runtime-ktx:_")
     implementation("androidx.constraintlayout:constraintlayout:_")
     implementation("com.google.android.material:material:_")
+
+    implementation("androidx.navigation:navigation-fragment-ktx:_")
+    implementation("androidx.navigation:navigation-ui-ktx:_")
+    implementation("androidx.navigation:navigation-compose:_")
 
     implementation("com.google.android.apps.muzei:muzei-api:_")
     implementation("com.squareup.retrofit2:retrofit:_")
@@ -109,4 +118,5 @@ dependencies {
     androidTestImplementation("androidx.test:rules:_")
     // Optional -- UI testing with Espresso
     androidTestImplementation("androidx.test.espresso:espresso-core:_")
+    androidTestImplementation("androidx.navigation:navigation-testing:_")
 }

@@ -20,6 +20,7 @@ package com.ultimus.distantworlds.provider
  * Created by Chris Margonis on 15/01/2019.
  */
 enum class DistantWorldsSource {
+
     DISTANT_WORLDS_1,
     DISTANT_WORLDS_2
 }

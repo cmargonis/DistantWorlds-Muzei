@@ -46,6 +46,7 @@ import java.io.IOException
 class ImgurWorker(context: Context, workerParams: WorkerParameters) : Worker(context, workerParams) {
 
     companion object {
+
         private const val keySource: String = "imgur_source"
         internal fun enqueueLoad(source: DistantWorldsSource) {
             val workManager = WorkManager.getInstance()
@@ -114,15 +115,17 @@ class ImgurWorker(context: Context, workerParams: WorkerParameters) : Worker(con
         }
 
         val providerClient = ProviderContract.getProviderClient(
-                applicationContext,
-                authority)
+            applicationContext,
+            authority
+        )
         providerClient.addArtwork(photosList.map { image ->
             Artwork(
-                    token = image.id,
-                    title = image.title,
-                    byline = image.description,
-                    webUri = Uri.parse(image.link),
-                    persistentUri = Uri.parse(image.link))
+                token = image.id,
+                title = image.title,
+                byline = image.description,
+                webUri = Uri.parse(image.link),
+                persistentUri = Uri.parse(image.link)
+            )
         }.shuffled())
         return Result.success()
     }

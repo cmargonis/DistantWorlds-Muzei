@@ -22,8 +22,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.ultimus.distantworlds.about.AboutActivity"
-    tools:showIn="@layout/activity_about">
+    tools:context="com.ultimus.distantworlds.about.MainActivity"
+    tools:showIn="@layout/activity_main">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
