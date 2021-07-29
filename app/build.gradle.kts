@@ -95,6 +95,7 @@ dependencies {
 
     implementation("androidx.core:core-ktx:_")
     implementation("androidx.appcompat:appcompat:_")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:_")
     implementation("androidx.work:work-runtime-ktx:_")
     implementation("androidx.constraintlayout:constraintlayout:_")
     implementation("com.google.android.material:material:_")
