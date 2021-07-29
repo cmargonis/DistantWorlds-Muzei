@@ -1,5 +1,5 @@
 /*
- *  Copyright 2018 Chris Margonis
+ *  Copyright 2021 Chris Margonis
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -14,23 +14,10 @@
  *    limitations under the License.
  */
 
-package com.ultimus.distantworlds.about
+package com.ultimus.distantworlds
 
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import com.ultimus.distantworlds.R
-import dagger.hilt.android.AndroidEntryPoint
+import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
 
-@AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
-
-    companion object {
-
-        const val muzeiPackage: String = "net.nurik.roman.muzei"
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-    }
-}
+@HiltAndroidApp
+class DistantWorldsApplication : Application()

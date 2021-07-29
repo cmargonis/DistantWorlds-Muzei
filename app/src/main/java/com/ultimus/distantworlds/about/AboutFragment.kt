@@ -30,7 +30,9 @@ import com.google.android.apps.muzei.api.MuzeiContract
 import com.ultimus.distantworlds.BuildConfig
 import com.ultimus.distantworlds.R
 import com.ultimus.distantworlds.databinding.FragmentAboutBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AboutFragment : Fragment() {
 
     private var _binding: FragmentAboutBinding? = null
