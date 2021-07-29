@@ -111,6 +111,7 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:_")
 
     implementation("com.google.android.apps.muzei:muzei-api:_")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:_")
     implementation("com.squareup.retrofit2:retrofit:_")
     implementation("com.squareup.retrofit2:converter-gson:_")
     implementation("com.squareup.okhttp3:okhttp:_")
@@ -120,6 +121,13 @@ dependencies {
 
     implementation("com.google.firebase:firebase-core:_")
     implementation("com.google.firebase:firebase-crashlytics:_")
+
+    testImplementation("org.junit.jupiter:junit-jupiter-api:_")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:_")
+    testImplementation("org.junit.jupiter:junit-jupiter-params:_")
+    testImplementation("io.mockk:mockk:_")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:_")
+    testImplementation("app.cash.turbine:turbine:_")
 
     androidTestImplementation("androidx.test:runner:_")
     androidTestImplementation("androidx.test:rules:_")
