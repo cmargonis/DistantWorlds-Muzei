@@ -21,6 +21,8 @@ plugins {
     id("kotlin-android")
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
+    kotlin("kapt")
+    id("dagger.hilt.android.plugin")
 }
 
 fun getImgurApiProperties(): Properties {
@@ -92,6 +94,9 @@ android {
 
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib:_")
+
+    implementation("com.google.dagger:hilt-android:_")
+    kapt("com.google.dagger:hilt-android-compiler:_")
 
     implementation("androidx.core:core-ktx:_")
     implementation("androidx.appcompat:appcompat:_")
