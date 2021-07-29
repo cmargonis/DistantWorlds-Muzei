@@ -96,6 +96,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib:_")
 
     implementation("com.google.dagger:hilt-android:_")
+    implementation("androidx.hilt:hilt-navigation-fragment:_")
     kapt("com.google.dagger:hilt-android-compiler:_")
 
     implementation("androidx.core:core-ktx:_")
