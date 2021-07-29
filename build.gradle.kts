@@ -25,6 +25,7 @@ buildscript {
         classpath("com.google.gms:google-services:_")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:_")
         classpath("com.google.firebase:firebase-crashlytics-gradle:_")
+        classpath("com.google.dagger:hilt-android-gradle-plugin:_")
     }
 }
 
