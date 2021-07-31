@@ -16,14 +16,37 @@
 
 package com.ultimus.distantworlds.about
 
+import app.cash.turbine.test
+import com.ultimus.distantworlds.utils.CoroutinesTestExtension
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.runBlockingTest
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.RegisterExtension
+import kotlin.time.ExperimentalTime
 
+@ExperimentalTime
+@ExperimentalCoroutinesApi
 class AboutViewModelTest {
+
+    @JvmField
+    @RegisterExtension
+    val coroutinesTestExtension = CoroutinesTestExtension()
 
     private lateinit var testedClass: AboutViewModel
 
     @BeforeEach
     fun setup() {
         testedClass = AboutViewModel()
+    }
+
+    @Test
+    fun `when select distant worlds 1 is pressed, then navigate to setup distant worlds 1`() = runBlockingTest {
+        testedClass.effect.test {
+            testedClass.onDistantWorlds1Clicked()
+            assertEquals(AboutView.Navigation.ToDistantWorlds1, this.awaitItem())
+            cancelAndConsumeRemainingEvents()
+        }
     }
 }

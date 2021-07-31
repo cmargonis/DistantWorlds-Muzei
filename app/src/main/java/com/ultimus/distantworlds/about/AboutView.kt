@@ -16,18 +16,9 @@
 
 package com.ultimus.distantworlds.about
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.launch
+object AboutView {
 
-class AboutViewModel : ViewModel() {
-
-    val effect: MutableSharedFlow<AboutView.Navigation> = MutableSharedFlow(replay = 0)
-
-    fun onDistantWorlds1Clicked() {
-        viewModelScope.launch {
-            effect.emit(AboutView.Navigation.ToDistantWorlds1)
-        }
+    sealed class Navigation {
+        object ToDistantWorlds1 : Navigation()
     }
 }
