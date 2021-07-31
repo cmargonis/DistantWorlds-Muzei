@@ -48,7 +48,7 @@ class AboutFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val muzeiLaunchIntent = activity?.packageManager?.getLaunchIntentForPackage(MainActivity.muzeiPackage)
-        binding.redirectAnimator.enable1.setOnClickListener {
+        binding.redirectAnimator.btnDistantWorlds1.setOnClickListener {
             val deepLinkIntent = MuzeiContract.Sources.createChooseProviderIntent(BuildConfig.DISTANT_WORLDS_AUTHORITY)
             try {
                 startActivity(deepLinkIntent)
@@ -57,7 +57,7 @@ class AboutFragment : Fragment() {
                 startActivity(muzeiLaunchIntent)
             }
         }
-        binding.redirectAnimator.enable2.setOnClickListener {
+        binding.redirectAnimator.btnDistantWorlds2.setOnClickListener {
             val deepLinkIntent = MuzeiContract.Sources.createChooseProviderIntent(BuildConfig.DISTANT_WORLDS_TWO_AUTHORITY)
             try {
                 startActivity(deepLinkIntent)
