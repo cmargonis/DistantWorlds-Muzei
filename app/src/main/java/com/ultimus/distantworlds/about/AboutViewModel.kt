@@ -30,4 +30,10 @@ class AboutViewModel : ViewModel() {
             effect.emit(AboutView.Navigation.ToDistantWorlds1)
         }
     }
+
+    fun onDistantWorlds2Clicked() {
+        viewModelScope.launch {
+            effect.emit(AboutView.Navigation.ToDistantWorlds2)
+        }
+    }
 }

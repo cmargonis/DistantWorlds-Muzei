@@ -49,4 +49,13 @@ class AboutViewModelTest {
             cancelAndConsumeRemainingEvents()
         }
     }
+
+    @Test
+    fun `when select distant worlds 2 is pressed, then navigate to setup distant worlds 2`() = runBlockingTest {
+        testedClass.effect.test {
+            testedClass.onDistantWorlds2Clicked()
+            assertEquals(AboutView.Navigation.ToDistantWorlds2, this.awaitItem())
+            cancelAndConsumeRemainingEvents()
+        }
+    }
 }

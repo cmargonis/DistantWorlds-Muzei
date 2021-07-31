@@ -20,5 +20,6 @@ object AboutView {
 
     sealed class Navigation {
         object ToDistantWorlds1 : Navigation()
+        object ToDistantWorlds2 : Navigation()
     }
 }
