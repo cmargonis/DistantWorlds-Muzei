@@ -25,6 +25,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -76,30 +77,25 @@ class AboutFragment : Fragment() {
 
     private fun handle(effect: AboutView.Navigation) {
         when (effect) {
-            AboutView.Navigation.ToDistantWorlds1 -> goToDistantWorlds1()
-            AboutView.Navigation.ToDistantWorlds2 -> goToDistantWorlds2()
+            AboutView.Navigation.ToDistantWorlds1 -> goToDistantWolds(
+                BuildConfig.DISTANT_WORLDS_AUTHORITY,
+                R.string.warning_select_source
+            )
+            AboutView.Navigation.ToDistantWorlds2 -> goToDistantWolds(
+                BuildConfig.DISTANT_WORLDS_TWO_AUTHORITY,
+                R.string.warning_select_source_2
+            )
             AboutView.Navigation.ToInstallMuzei -> goToInstallMuzei()
             AboutView.Navigation.ToOpenMuzei -> goToOpenMuzei()
         }
     }
 
-    private fun goToDistantWorlds1() {
-        val deepLinkIntent = MuzeiContract.Sources.createChooseProviderIntent(BuildConfig.DISTANT_WORLDS_AUTHORITY)
+    private fun goToDistantWolds(authority: String, @StringRes failedMessage: Int) {
+        val deepLinkIntent = MuzeiContract.Sources.createChooseProviderIntent(authority)
         try {
             startActivity(deepLinkIntent)
         } catch (e: Exception) {
-            Toast.makeText(activity, R.string.warning_select_source, Toast.LENGTH_LONG).show()
-            val muzeiLaunchIntent = activity?.packageManager?.getLaunchIntentForPackage(MainActivity.muzeiPackage)
-            startActivity(muzeiLaunchIntent)
-        }
-    }
-
-    private fun goToDistantWorlds2() {
-        val deepLinkIntent = MuzeiContract.Sources.createChooseProviderIntent(BuildConfig.DISTANT_WORLDS_TWO_AUTHORITY)
-        try {
-            startActivity(deepLinkIntent)
-        } catch (e: Exception) {
-            Toast.makeText(activity, R.string.warning_select_source_2, Toast.LENGTH_LONG).show()
+            Toast.makeText(activity, failedMessage, Toast.LENGTH_LONG).show()
             val muzeiLaunchIntent = activity?.packageManager?.getLaunchIntentForPackage(MainActivity.muzeiPackage)
             startActivity(muzeiLaunchIntent)
         }
