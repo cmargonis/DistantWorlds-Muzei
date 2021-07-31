@@ -52,17 +52,25 @@ class AboutFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.redirectAnimator.btnDistantWorlds1.setOnClickListener { viewModel.onDistantWorlds1Clicked() }
-        binding.redirectAnimator.btnDistantWorlds2.setOnClickListener { viewModel.onDistantWorlds2Clicked() }
-        binding.redirectAnimator.installMuzei.setOnClickListener { viewModel.onInstallMuzeiClicked() }
-        binding.redirectAnimator.openMuzei.setOnClickListener { viewModel.onOpenMuzeiClicked() }
-
         determineRedirectVisibility()
+        initializeListeners()
+        observeState()
+    }
 
+    private fun observeState() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.effect.collect { effect -> handle(effect) }
             }
+        }
+    }
+
+    private fun initializeListeners() {
+        with(binding.redirectAnimator) {
+            btnDistantWorlds1.setOnClickListener { viewModel.onDistantWorlds1Clicked() }
+            btnDistantWorlds2.setOnClickListener { viewModel.onDistantWorlds2Clicked() }
+            installMuzei.setOnClickListener { viewModel.onInstallMuzeiClicked() }
+            openMuzei.setOnClickListener { viewModel.onOpenMuzeiClicked() }
         }
     }
 
