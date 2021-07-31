@@ -54,15 +54,7 @@ class AboutFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val muzeiLaunchIntent = activity?.packageManager?.getLaunchIntentForPackage(MainActivity.muzeiPackage)
         binding.redirectAnimator.btnDistantWorlds1.setOnClickListener { viewModel.onDistantWorlds1Clicked() }
-        binding.redirectAnimator.btnDistantWorlds2.setOnClickListener {
-            val deepLinkIntent = MuzeiContract.Sources.createChooseProviderIntent(BuildConfig.DISTANT_WORLDS_TWO_AUTHORITY)
-            try {
-                startActivity(deepLinkIntent)
-            } catch (e: Exception) {
-                Toast.makeText(activity, R.string.warning_select_source_2, Toast.LENGTH_LONG).show()
-                startActivity(muzeiLaunchIntent)
-            }
-        }
+        binding.redirectAnimator.btnDistantWorlds2.setOnClickListener { viewModel.onDistantWorlds2Clicked() }
         binding.redirectAnimator.installMuzei.setOnClickListener {
             val installIntent = Intent(
                 Intent.ACTION_VIEW,
@@ -88,7 +80,7 @@ class AboutFragment : Fragment() {
     private fun handle(effect: AboutView.Navigation) {
         when (effect) {
             AboutView.Navigation.ToDistantWorlds1 -> goToDistantWorlds1()
-            AboutView.Navigation.ToDistantWorlds2 -> TODO()
+            AboutView.Navigation.ToDistantWorlds2 -> goToDistantWorlds2()
         }
     }
 
@@ -98,6 +90,17 @@ class AboutFragment : Fragment() {
             startActivity(deepLinkIntent)
         } catch (e: Exception) {
             Toast.makeText(activity, R.string.warning_select_source, Toast.LENGTH_LONG).show()
+            val muzeiLaunchIntent = activity?.packageManager?.getLaunchIntentForPackage(MainActivity.muzeiPackage)
+            startActivity(muzeiLaunchIntent)
+        }
+    }
+
+    private fun goToDistantWorlds2() {
+        val deepLinkIntent = MuzeiContract.Sources.createChooseProviderIntent(BuildConfig.DISTANT_WORLDS_TWO_AUTHORITY)
+        try {
+            startActivity(deepLinkIntent)
+        } catch (e: Exception) {
+            Toast.makeText(activity, R.string.warning_select_source_2, Toast.LENGTH_LONG).show()
             val muzeiLaunchIntent = activity?.packageManager?.getLaunchIntentForPackage(MainActivity.muzeiPackage)
             startActivity(muzeiLaunchIntent)
         }
