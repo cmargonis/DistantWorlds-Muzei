@@ -22,5 +22,6 @@ object AboutView {
         object ToDistantWorlds1 : Navigation()
         object ToDistantWorlds2 : Navigation()
         object ToInstallMuzei : Navigation()
+        object ToOpenMuzei : Navigation()
     }
 }

@@ -42,4 +42,10 @@ class AboutViewModel : ViewModel() {
             effect.emit(AboutView.Navigation.ToInstallMuzei)
         }
     }
+
+    fun onOpenMuzeiClicked() {
+        viewModelScope.launch {
+            effect.emit(AboutView.Navigation.ToOpenMuzei)
+        }
+    }
 }

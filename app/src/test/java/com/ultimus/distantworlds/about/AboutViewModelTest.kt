@@ -67,4 +67,13 @@ class AboutViewModelTest {
             cancelAndConsumeRemainingEvents()
         }
     }
+
+    @Test
+    fun `when open muzei is pressed, then navigate to open muzei page`() = runBlockingTest {
+        testedClass.effect.test {
+            testedClass.onOpenMuzeiClicked()
+            assertEquals(AboutView.Navigation.ToOpenMuzei, awaitItem())
+            cancelAndConsumeRemainingEvents()
+        }
+    }
 }
