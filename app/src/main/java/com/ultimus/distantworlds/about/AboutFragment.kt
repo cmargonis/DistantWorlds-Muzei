@@ -55,17 +55,7 @@ class AboutFragment : Fragment() {
         val muzeiLaunchIntent = activity?.packageManager?.getLaunchIntentForPackage(MainActivity.muzeiPackage)
         binding.redirectAnimator.btnDistantWorlds1.setOnClickListener { viewModel.onDistantWorlds1Clicked() }
         binding.redirectAnimator.btnDistantWorlds2.setOnClickListener { viewModel.onDistantWorlds2Clicked() }
-        binding.redirectAnimator.installMuzei.setOnClickListener {
-            val installIntent = Intent(
-                Intent.ACTION_VIEW,
-                Uri.parse("https://play.google.com/store/apps/details?id=${MainActivity.muzeiPackage}")
-            )
-            try {
-                startActivity(installIntent)
-            } catch (e: Exception) {
-                Toast.makeText(activity, R.string.warning_muzei_not_installed, Toast.LENGTH_LONG).show()
-            }
-        }
+        binding.redirectAnimator.installMuzei.setOnClickListener { viewModel.onInstallMuzeiClicked() }
         binding.redirectAnimator.openMuzei.setOnClickListener { startActivity(muzeiLaunchIntent) }
 
         determineRedirectVisibility()
@@ -81,6 +71,7 @@ class AboutFragment : Fragment() {
         when (effect) {
             AboutView.Navigation.ToDistantWorlds1 -> goToDistantWorlds1()
             AboutView.Navigation.ToDistantWorlds2 -> goToDistantWorlds2()
+            AboutView.Navigation.ToInstallMuzei -> goToInstallMuzei()
         }
     }
 
@@ -103,6 +94,18 @@ class AboutFragment : Fragment() {
             Toast.makeText(activity, R.string.warning_select_source_2, Toast.LENGTH_LONG).show()
             val muzeiLaunchIntent = activity?.packageManager?.getLaunchIntentForPackage(MainActivity.muzeiPackage)
             startActivity(muzeiLaunchIntent)
+        }
+    }
+
+    private fun goToInstallMuzei() {
+        val installIntent = Intent(
+            Intent.ACTION_VIEW,
+            Uri.parse("https://play.google.com/store/apps/details?id=${MainActivity.muzeiPackage}")
+        )
+        try {
+            startActivity(installIntent)
+        } catch (e: Exception) {
+            Toast.makeText(activity, R.string.warning_muzei_not_installed, Toast.LENGTH_LONG).show()
         }
     }
 
