@@ -52,11 +52,10 @@ class AboutFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val muzeiLaunchIntent = activity?.packageManager?.getLaunchIntentForPackage(MainActivity.muzeiPackage)
         binding.redirectAnimator.btnDistantWorlds1.setOnClickListener { viewModel.onDistantWorlds1Clicked() }
         binding.redirectAnimator.btnDistantWorlds2.setOnClickListener { viewModel.onDistantWorlds2Clicked() }
         binding.redirectAnimator.installMuzei.setOnClickListener { viewModel.onInstallMuzeiClicked() }
-        binding.redirectAnimator.openMuzei.setOnClickListener { startActivity(muzeiLaunchIntent) }
+        binding.redirectAnimator.openMuzei.setOnClickListener { viewModel.onOpenMuzeiClicked() }
 
         determineRedirectVisibility()
 
@@ -72,6 +71,7 @@ class AboutFragment : Fragment() {
             AboutView.Navigation.ToDistantWorlds1 -> goToDistantWorlds1()
             AboutView.Navigation.ToDistantWorlds2 -> goToDistantWorlds2()
             AboutView.Navigation.ToInstallMuzei -> goToInstallMuzei()
+            AboutView.Navigation.ToOpenMuzei -> goToOpenMuzei()
         }
     }
 
@@ -107,6 +107,11 @@ class AboutFragment : Fragment() {
         } catch (e: Exception) {
             Toast.makeText(activity, R.string.warning_muzei_not_installed, Toast.LENGTH_LONG).show()
         }
+    }
+
+    private fun goToOpenMuzei() {
+        val muzeiLaunchIntent = activity?.packageManager?.getLaunchIntentForPackage(MainActivity.muzeiPackage)
+        startActivity(muzeiLaunchIntent)
     }
 
     override fun onDestroyView() {
