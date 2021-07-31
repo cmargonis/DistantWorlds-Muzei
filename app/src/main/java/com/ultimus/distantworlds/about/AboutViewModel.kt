@@ -36,4 +36,10 @@ class AboutViewModel : ViewModel() {
             effect.emit(AboutView.Navigation.ToDistantWorlds2)
         }
     }
+
+    fun onInstallMuzeiClicked() {
+        viewModelScope.launch {
+            effect.emit(AboutView.Navigation.ToInstallMuzei)
+        }
+    }
 }

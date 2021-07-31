@@ -45,7 +45,7 @@ class AboutViewModelTest {
     fun `when select distant worlds 1 is pressed, then navigate to setup distant worlds 1`() = runBlockingTest {
         testedClass.effect.test {
             testedClass.onDistantWorlds1Clicked()
-            assertEquals(AboutView.Navigation.ToDistantWorlds1, this.awaitItem())
+            assertEquals(AboutView.Navigation.ToDistantWorlds1, awaitItem())
             cancelAndConsumeRemainingEvents()
         }
     }
@@ -54,7 +54,16 @@ class AboutViewModelTest {
     fun `when select distant worlds 2 is pressed, then navigate to setup distant worlds 2`() = runBlockingTest {
         testedClass.effect.test {
             testedClass.onDistantWorlds2Clicked()
-            assertEquals(AboutView.Navigation.ToDistantWorlds2, this.awaitItem())
+            assertEquals(AboutView.Navigation.ToDistantWorlds2, awaitItem())
+            cancelAndConsumeRemainingEvents()
+        }
+    }
+
+    @Test
+    fun `when install muzei is pressed, then navigate to play store to muzei page`() = runBlockingTest {
+        testedClass.effect.test {
+            testedClass.onInstallMuzeiClicked()
+            assertEquals(AboutView.Navigation.ToInstallMuzei, awaitItem())
             cancelAndConsumeRemainingEvents()
         }
     }
