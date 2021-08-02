@@ -21,6 +21,8 @@ plugins {
     id("kotlin-android")
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
+    kotlin("kapt")
+    id("dagger.hilt.android.plugin")
 }
 
 fun getImgurApiProperties(): Properties {
@@ -88,13 +90,23 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    tasks.withType<Test> {
+        useJUnitPlatform()
+    }
 }
 
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib:_")
 
+    implementation("com.google.dagger:hilt-android:_")
+    implementation("androidx.hilt:hilt-navigation-fragment:_")
+    kapt("com.google.dagger:hilt-android-compiler:_")
+
     implementation("androidx.core:core-ktx:_")
     implementation("androidx.appcompat:appcompat:_")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:_")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:_")
     implementation("androidx.work:work-runtime-ktx:_")
     implementation("androidx.constraintlayout:constraintlayout:_")
     implementation("com.google.android.material:material:_")
@@ -104,6 +116,7 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:_")
 
     implementation("com.google.android.apps.muzei:muzei-api:_")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:_")
     implementation("com.squareup.retrofit2:retrofit:_")
     implementation("com.squareup.retrofit2:converter-gson:_")
     implementation("com.squareup.okhttp3:okhttp:_")
@@ -113,6 +126,13 @@ dependencies {
 
     implementation("com.google.firebase:firebase-core:_")
     implementation("com.google.firebase:firebase-crashlytics:_")
+
+    testImplementation("org.junit.jupiter:junit-jupiter-api:_")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:_")
+    testImplementation("org.junit.jupiter:junit-jupiter-params:_")
+    testImplementation("io.mockk:mockk:_")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:_")
+    testImplementation("app.cash.turbine:turbine:_")
 
     androidTestImplementation("androidx.test:runner:_")
     androidTestImplementation("androidx.test:rules:_")

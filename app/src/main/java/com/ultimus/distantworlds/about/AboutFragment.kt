@@ -25,16 +25,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.google.android.apps.muzei.api.MuzeiContract
 import com.ultimus.distantworlds.BuildConfig
 import com.ultimus.distantworlds.R
 import com.ultimus.distantworlds.databinding.FragmentAboutBinding
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class AboutFragment : Fragment() {
 
     private var _binding: FragmentAboutBinding? = null
     private val binding get() = _binding!!
+    private val viewModel: AboutViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentAboutBinding.inflate(inflater, container, false)
@@ -43,39 +53,69 @@ class AboutFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val muzeiLaunchIntent = activity?.packageManager?.getLaunchIntentForPackage(MainActivity.muzeiPackage)
-        binding.redirectAnimator.enable1.setOnClickListener {
-            val deepLinkIntent = MuzeiContract.Sources.createChooseProviderIntent(BuildConfig.DISTANT_WORLDS_AUTHORITY)
-            try {
-                startActivity(deepLinkIntent)
-            } catch (e: Exception) {
-                Toast.makeText(activity, R.string.warning_select_source, Toast.LENGTH_LONG).show()
-                startActivity(muzeiLaunchIntent)
-            }
-        }
-        binding.redirectAnimator.enable2.setOnClickListener {
-            val deepLinkIntent = MuzeiContract.Sources.createChooseProviderIntent(BuildConfig.DISTANT_WORLDS_TWO_AUTHORITY)
-            try {
-                startActivity(deepLinkIntent)
-            } catch (e: Exception) {
-                Toast.makeText(activity, R.string.warning_select_source_2, Toast.LENGTH_LONG).show()
-                startActivity(muzeiLaunchIntent)
-            }
-        }
-        binding.redirectAnimator.installMuzei.setOnClickListener {
-            val installIntent = Intent(
-                Intent.ACTION_VIEW,
-                Uri.parse("https://play.google.com/store/apps/details?id=${MainActivity.muzeiPackage}")
-            )
-            try {
-                startActivity(installIntent)
-            } catch (e: Exception) {
-                Toast.makeText(activity, R.string.warning_muzei_not_installed, Toast.LENGTH_LONG).show()
-            }
-        }
-        binding.redirectAnimator.openMuzei.setOnClickListener { startActivity(muzeiLaunchIntent) }
-
         determineRedirectVisibility()
+        initializeListeners()
+        observeState()
+    }
+
+    private fun observeState() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.effect.collect { effect -> handle(effect) }
+            }
+        }
+    }
+
+    private fun initializeListeners() {
+        with(binding.redirectAnimator) {
+            btnDistantWorlds1.setOnClickListener { viewModel.onDistantWorlds1Clicked() }
+            btnDistantWorlds2.setOnClickListener { viewModel.onDistantWorlds2Clicked() }
+            installMuzei.setOnClickListener { viewModel.onInstallMuzeiClicked() }
+            openMuzei.setOnClickListener { viewModel.onOpenMuzeiClicked() }
+        }
+    }
+
+    private fun handle(effect: AboutView.Navigation) {
+        when (effect) {
+            AboutView.Navigation.ToDistantWorlds1 -> goToDistantWolds(
+                BuildConfig.DISTANT_WORLDS_AUTHORITY,
+                R.string.warning_select_source
+            )
+            AboutView.Navigation.ToDistantWorlds2 -> goToDistantWolds(
+                BuildConfig.DISTANT_WORLDS_TWO_AUTHORITY,
+                R.string.warning_select_source_2
+            )
+            AboutView.Navigation.ToInstallMuzei -> goToInstallMuzei()
+            AboutView.Navigation.ToOpenMuzei -> goToOpenMuzei()
+        }
+    }
+
+    private fun goToDistantWolds(authority: String, @StringRes failedMessage: Int) {
+        val deepLinkIntent = MuzeiContract.Sources.createChooseProviderIntent(authority)
+        try {
+            startActivity(deepLinkIntent)
+        } catch (e: Exception) {
+            Toast.makeText(activity, failedMessage, Toast.LENGTH_LONG).show()
+            val muzeiLaunchIntent = activity?.packageManager?.getLaunchIntentForPackage(MainActivity.muzeiPackage)
+            startActivity(muzeiLaunchIntent)
+        }
+    }
+
+    private fun goToInstallMuzei() {
+        val installIntent = Intent(
+            Intent.ACTION_VIEW,
+            Uri.parse("https://play.google.com/store/apps/details?id=${MainActivity.muzeiPackage}")
+        )
+        try {
+            startActivity(installIntent)
+        } catch (e: Exception) {
+            Toast.makeText(activity, R.string.warning_muzei_not_installed, Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun goToOpenMuzei() {
+        val muzeiLaunchIntent = activity?.packageManager?.getLaunchIntentForPackage(MainActivity.muzeiPackage)
+        startActivity(muzeiLaunchIntent)
     }
 
     override fun onDestroyView() {

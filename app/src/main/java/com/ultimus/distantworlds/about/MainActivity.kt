@@ -19,7 +19,9 @@ package com.ultimus.distantworlds.about
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.ultimus.distantworlds.R
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     companion object {

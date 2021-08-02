@@ -14,28 +14,14 @@
  *    limitations under the License.
  */
 
-buildscript {
-    repositories {
-        google()
-        mavenCentral()
-    }
+package com.ultimus.distantworlds.about
 
-    dependencies {
-        classpath("com.android.tools.build:gradle:_")
-        classpath("com.google.gms:google-services:_")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:_")
-        classpath("com.google.firebase:firebase-crashlytics-gradle:_")
-        classpath("com.google.dagger:hilt-android-gradle-plugin:_")
-    }
-}
+object AboutView {
 
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
+    sealed class Navigation {
+        object ToDistantWorlds1 : Navigation()
+        object ToDistantWorlds2 : Navigation()
+        object ToInstallMuzei : Navigation()
+        object ToOpenMuzei : Navigation()
     }
-}
-
-tasks.register<Delete>("clean") {
-    delete(rootProject.buildDir)
 }

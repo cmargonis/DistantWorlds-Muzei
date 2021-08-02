@@ -28,24 +28,24 @@
         android:layout_height="wrap_content">
 
         <Button
-            android:id="@+id/enable1"
+            android:id="@+id/btn_distant_worlds_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/enable_distant_worlds"
-            app:layout_constraintBottom_toTopOf="@+id/enable2"
+            app:layout_constraintBottom_toTopOf="@+id/btn_distant_worlds_2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/enable2"
+            android:id="@+id/btn_distant_worlds_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/enable_distant_worlds_2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/enable1" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_distant_worlds_1" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <FrameLayout

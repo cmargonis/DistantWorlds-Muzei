@@ -14,28 +14,10 @@
  *    limitations under the License.
  */
 
-buildscript {
-    repositories {
-        google()
-        mavenCentral()
-    }
+package com.ultimus.distantworlds
 
-    dependencies {
-        classpath("com.android.tools.build:gradle:_")
-        classpath("com.google.gms:google-services:_")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:_")
-        classpath("com.google.firebase:firebase-crashlytics-gradle:_")
-        classpath("com.google.dagger:hilt-android-gradle-plugin:_")
-    }
-}
+import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
 
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
-    }
-}
-
-tasks.register<Delete>("clean") {
-    delete(rootProject.buildDir)
-}
+@HiltAndroidApp
+class DistantWorldsApplication : Application()
