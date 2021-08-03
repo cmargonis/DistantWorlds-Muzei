@@ -44,8 +44,8 @@ android {
         applicationId = "com.ultimus.distantworlds_muzei"
         minSdk = 21
         targetSdk = 30
-        versionCode = 7
-        versionName = "3.3"
+        versionCode = 8
+        versionName = "3.3.1"
 
         val distantWorldsAuthorityValue = "com.ultimus.distantworlds"
         buildConfigField("String", "DISTANT_WORLDS_AUTHORITY", "\"${distantWorldsAuthorityValue}\"")
@@ -126,6 +126,7 @@ dependencies {
 
     implementation("com.google.firebase:firebase-core:_")
     implementation("com.google.firebase:firebase-crashlytics:_")
+    implementation("com.google.firebase:firebase-analytics-ktx:_")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:_")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:_")
