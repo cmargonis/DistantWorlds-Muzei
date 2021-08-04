@@ -74,6 +74,21 @@ class AboutFragment : Fragment() {
                 viewModel.effect.collect { effect -> handle(effect) }
             }
         }
+        viewModel.initialize(retrieveMuzeiStatus(requireContext()))
+    }
+
+    private fun retrieveMuzeiStatus(context: Context): MuzeiStatus {
+        val distantWorldsSelected =
+            MuzeiContract.Sources.isProviderSelected(requireContext(), BuildConfig.DISTANT_WORLDS_AUTHORITY)
+        val distantWorlds2Selected =
+            MuzeiContract.Sources.isProviderSelected(requireContext(), BuildConfig.DISTANT_WORLDS_TWO_AUTHORITY)
+        return when {
+            isMuzeiInstalled(context) -> MuzeiStatus.NOT_INSTALLED
+            !distantWorldsSelected && !distantWorlds2Selected -> MuzeiStatus.SELECTED_NONE
+            distantWorldsSelected -> MuzeiStatus.DW_1_SELECTED
+            distantWorlds2Selected -> MuzeiStatus.DW_2_SELECTED
+            else -> MuzeiStatus.NOT_INSTALLED
+        }
     }
 
     private fun render(state: AboutView.State) {
