@@ -70,9 +70,14 @@ class AboutFragment : Fragment() {
     private fun observeState() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.state.collect { state -> render(state) }
                 viewModel.effect.collect { effect -> handle(effect) }
             }
         }
+    }
+
+    private fun render(state: AboutView.State) {
+        TODO("Not yet implemented")
     }
 
     private fun handle(effect: AboutView.Navigation) {
