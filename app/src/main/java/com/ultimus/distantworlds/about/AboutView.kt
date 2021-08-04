@@ -35,5 +35,6 @@ object AboutView {
 enum class MuzeiStatus {
     NOT_INSTALLED,
     SELECTED_NONE,
-    DW_1_SELECTED
+    DW_1_SELECTED,
+    DW_2_SELECTED
 }

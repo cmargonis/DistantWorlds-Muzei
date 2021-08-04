@@ -32,6 +32,7 @@ class AboutViewModel : ViewModel() {
             MuzeiStatus.NOT_INSTALLED -> AboutView.State.InstallMuzeiPrompt
             MuzeiStatus.SELECTED_NONE -> AboutView.State.SelectDWSource(showDW1 = true, showDW2 = true)
             MuzeiStatus.DW_1_SELECTED -> AboutView.State.SelectDWSource(showDW1 = false, showDW2 = true)
+            MuzeiStatus.DW_2_SELECTED -> AboutView.State.SelectDWSource(showDW1 = true, showDW2 = false)
         }
     }
 
