@@ -76,4 +76,13 @@ class AboutViewModelTest {
             cancelAndConsumeRemainingEvents()
         }
     }
+
+    @Test
+    fun `given muzei is not installed, when initializing, then emit install muzei state`() = runBlockingTest {
+        testedClass.initialize(muzeiStatus = MuzeiStatus.NOT_INSTALLED)
+        testedClass.state.test {
+            assertEquals(AboutView.State.InstallMuzeiPrompt, awaitItem())
+            cancelAndConsumeRemainingEvents()
+        }
+    }
 }

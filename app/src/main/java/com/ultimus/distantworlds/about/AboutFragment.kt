@@ -58,20 +58,20 @@ class AboutFragment : Fragment() {
         observeState()
     }
 
-    private fun observeState() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.effect.collect { effect -> handle(effect) }
-            }
-        }
-    }
-
     private fun initializeListeners() {
         with(binding.redirectAnimator) {
             btnDistantWorlds1.setOnClickListener { viewModel.onDistantWorlds1Clicked() }
             btnDistantWorlds2.setOnClickListener { viewModel.onDistantWorlds2Clicked() }
             installMuzei.setOnClickListener { viewModel.onInstallMuzeiClicked() }
             openMuzei.setOnClickListener { viewModel.onOpenMuzeiClicked() }
+        }
+    }
+
+    private fun observeState() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.effect.collect { effect -> handle(effect) }
+            }
         }
     }
 

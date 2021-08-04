@@ -18,10 +18,19 @@ package com.ultimus.distantworlds.about
 
 object AboutView {
 
+    sealed class State {
+        object Idle : State()
+        object InstallMuzeiPrompt : State()
+    }
+
     sealed class Navigation {
         object ToDistantWorlds1 : Navigation()
         object ToDistantWorlds2 : Navigation()
         object ToInstallMuzei : Navigation()
         object ToOpenMuzei : Navigation()
     }
+}
+
+enum class MuzeiStatus {
+    NOT_INSTALLED
 }
