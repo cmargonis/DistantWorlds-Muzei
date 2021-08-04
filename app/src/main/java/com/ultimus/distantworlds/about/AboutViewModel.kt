@@ -28,7 +28,11 @@ class AboutViewModel : ViewModel() {
     val effect: MutableSharedFlow<AboutView.Navigation> = MutableSharedFlow(replay = 0)
 
     fun initialize(muzeiStatus: MuzeiStatus) {
-        state.value = AboutView.State.InstallMuzeiPrompt
+        state.value = when (muzeiStatus) {
+            MuzeiStatus.NOT_INSTALLED -> AboutView.State.InstallMuzeiPrompt
+            MuzeiStatus.SELECTED_NONE -> AboutView.State.SelectDWSource(showDW1 = true, showDW2 = true)
+            MuzeiStatus.DW_1_SELECTED -> TODO()
+        }
     }
 
     fun onDistantWorlds1Clicked() {

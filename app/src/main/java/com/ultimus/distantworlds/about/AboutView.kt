@@ -21,6 +21,7 @@ object AboutView {
     sealed class State {
         object Idle : State()
         object InstallMuzeiPrompt : State()
+        data class SelectDWSource(val showDW1: Boolean, val showDW2: Boolean) : State()
     }
 
     sealed class Navigation {
@@ -32,5 +33,7 @@ object AboutView {
 }
 
 enum class MuzeiStatus {
-    NOT_INSTALLED
+    NOT_INSTALLED,
+    SELECTED_NONE,
+    DW_1_SELECTED
 }
