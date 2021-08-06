@@ -106,9 +106,9 @@ class AboutFragment : Fragment() {
 
     private fun showSourceSelection(state: AboutView.State.SelectDWSource) {
         if (state.showDW1 || state.showDW2) {
-            binding.redirectAnimator.redirectAnimator.displayedChild = 2
-        } else {
             binding.redirectAnimator.redirectAnimator.displayedChild = 0
+        } else {
+            binding.redirectAnimator.redirectAnimator.displayedChild = 2
         }
     }
 
