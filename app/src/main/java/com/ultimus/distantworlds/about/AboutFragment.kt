@@ -53,7 +53,6 @@ class AboutFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        determineRedirectVisibility()
         initializeListeners()
         observeState()
     }
@@ -71,6 +70,11 @@ class AboutFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.state.collect { state -> render(state) }
+            }
+
+        }
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.effect.collect { effect -> handle(effect) }
             }
         }
@@ -83,7 +87,7 @@ class AboutFragment : Fragment() {
         val distantWorlds2Selected =
             MuzeiContract.Sources.isProviderSelected(requireContext(), BuildConfig.DISTANT_WORLDS_TWO_AUTHORITY)
         return when {
-            isMuzeiInstalled(context) -> MuzeiStatus.NOT_INSTALLED
+            !isMuzeiInstalled(context) -> MuzeiStatus.NOT_INSTALLED
             !distantWorldsSelected && !distantWorlds2Selected -> MuzeiStatus.SELECTED_NONE
             distantWorldsSelected -> MuzeiStatus.DW_1_SELECTED
             distantWorlds2Selected -> MuzeiStatus.DW_2_SELECTED
@@ -92,7 +96,20 @@ class AboutFragment : Fragment() {
     }
 
     private fun render(state: AboutView.State) {
-        TODO("Not yet implemented")
+        when (state) {
+            AboutView.State.Idle -> {
+            }
+            AboutView.State.InstallMuzeiPrompt -> binding.redirectAnimator.redirectAnimator.displayedChild = 1
+            is AboutView.State.SelectDWSource -> showSourceSelection(state)
+        }
+    }
+
+    private fun showSourceSelection(state: AboutView.State.SelectDWSource) {
+        if (state.showDW1 || state.showDW2) {
+            binding.redirectAnimator.redirectAnimator.displayedChild = 2
+        } else {
+            binding.redirectAnimator.redirectAnimator.displayedChild = 0
+        }
     }
 
     private fun handle(effect: AboutView.Navigation) {
@@ -135,25 +152,12 @@ class AboutFragment : Fragment() {
 
     private fun goToOpenMuzei() {
         val muzeiLaunchIntent = activity?.packageManager?.getLaunchIntentForPackage(MainActivity.muzeiPackage)
-        startActivity(muzeiLaunchIntent)
+        activity?.startActivity(muzeiLaunchIntent)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    private fun determineRedirectVisibility() {
-        val distantWorldsSelected =
-            MuzeiContract.Sources.isProviderSelected(requireContext(), BuildConfig.DISTANT_WORLDS_AUTHORITY)
-        val distantWorlds2Selected =
-            MuzeiContract.Sources.isProviderSelected(requireContext(), BuildConfig.DISTANT_WORLDS_TWO_AUTHORITY)
-        if (distantWorldsSelected || distantWorlds2Selected) {
-            binding.redirectAnimator.redirectAnimator.displayedChild = 2
-        } else {
-            val muzeiInstalled = isMuzeiInstalled(requireContext())
-            binding.redirectAnimator.redirectAnimator.displayedChild = if (muzeiInstalled) 0 else 1
-        }
     }
 
     private fun isMuzeiInstalled(context: Context): Boolean {
