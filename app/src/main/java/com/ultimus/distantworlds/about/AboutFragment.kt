@@ -26,6 +26,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.StringRes
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -99,16 +100,19 @@ class AboutFragment : Fragment() {
         when (state) {
             AboutView.State.Idle -> {
             }
-            AboutView.State.InstallMuzeiPrompt -> binding.layoutActions.redirectAnimator.displayedChild = 1
+            AboutView.State.InstallMuzeiPrompt -> binding.layoutActions.installMuzei.isVisible = true
             is AboutView.State.SelectDWSource -> showSourceSelection(state)
         }
     }
 
     private fun showSourceSelection(state: AboutView.State.SelectDWSource) {
-        if (state.showDW1 || state.showDW2) {
-            binding.layoutActions.redirectAnimator.displayedChild = 0
-        } else {
-            binding.layoutActions.redirectAnimator.displayedChild = 2
+        with(binding.layoutActions) {
+            if (state.showDW1 || state.showDW2) {
+                btnDistantWorlds1.isVisible = true
+                btnDistantWorlds2.isVisible = true
+            } else {
+                openMuzei.isVisible = true
+            }
         }
     }
 
