@@ -13,6 +13,8 @@
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
  */
+import com.android.build.api.dsl.ApplicationBuildType
+import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 import com.google.firebase.crashlytics.buildtools.gradle.CrashlyticsExtension
 import java.io.FileInputStream
 import java.util.Properties
@@ -79,21 +81,11 @@ android {
         getByName("debug") {
             versionNameSuffix = " Debug"
             isDebuggable = true
-            isMinifyEnabled = false
-            isShrinkResources = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-            (this as ExtensionAware).configure<CrashlyticsExtension> {
-                mappingFileUploadEnabled = false
-            }
+            setupMinification(this@android, minificationEnabled = false)
         }
         getByName("release") {
             isDebuggable = false
-            isMinifyEnabled = true
-            isShrinkResources = true
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-            (this as ExtensionAware).configure<CrashlyticsExtension> {
-                mappingFileUploadEnabled = true
-            }
+            setupMinification(this@android, minificationEnabled = true)
         }
     }
 
@@ -109,6 +101,16 @@ android {
     tasks.withType<Test> {
         useJUnitPlatform()
     }
+}
+
+fun ApplicationBuildType.setupMinification(baseAppModuleExtension: BaseAppModuleExtension, minificationEnabled: Boolean) {
+    isMinifyEnabled = minificationEnabled
+    isShrinkResources = minificationEnabled
+    proguardFiles(
+        baseAppModuleExtension.getDefaultProguardFile("proguard-android-optimize.txt"),
+        "proguard-rules.pro"
+    )
+    (this as ExtensionAware).configure<CrashlyticsExtension> { mappingFileUploadEnabled = minificationEnabled }
 }
 
 dependencies {
