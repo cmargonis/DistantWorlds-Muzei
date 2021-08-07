@@ -66,10 +66,13 @@ android {
 
         val imgurDW2Album = apiProps["imgur_dw2_album_id"]
         buildConfigField("String", "IMGUR_DW2_ALBUM", "\"${imgurDW2Album}\"")
+
     }
 
     buildFeatures {
         viewBinding = true
+        renderScript = false
+        shaders = false
     }
 
     buildTypes {
