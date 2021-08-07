@@ -20,6 +20,7 @@
 -dontwarn retrofit2.**
 -keep class retrofit2.** { *; }
 -keepattributes Exceptions
+-keepattributes LineNumberTable,SourceFile
 
 
 ##---------------Begin: proguard configuration for Gson  ----------
