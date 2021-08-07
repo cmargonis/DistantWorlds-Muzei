@@ -58,7 +58,7 @@ class AboutFragment : Fragment() {
     }
 
     private fun initializeListeners() {
-        with(binding.redirectAnimator) {
+        with(binding.layoutActions) {
             btnDistantWorlds1.setOnClickListener { viewModel.onDistantWorlds1Clicked() }
             btnDistantWorlds2.setOnClickListener { viewModel.onDistantWorlds2Clicked() }
             installMuzei.setOnClickListener { viewModel.onInstallMuzeiClicked() }
@@ -99,16 +99,16 @@ class AboutFragment : Fragment() {
         when (state) {
             AboutView.State.Idle -> {
             }
-            AboutView.State.InstallMuzeiPrompt -> binding.redirectAnimator.redirectAnimator.displayedChild = 1
+            AboutView.State.InstallMuzeiPrompt -> binding.layoutActions.redirectAnimator.displayedChild = 1
             is AboutView.State.SelectDWSource -> showSourceSelection(state)
         }
     }
 
     private fun showSourceSelection(state: AboutView.State.SelectDWSource) {
         if (state.showDW1 || state.showDW2) {
-            binding.redirectAnimator.redirectAnimator.displayedChild = 0
+            binding.layoutActions.redirectAnimator.displayedChild = 0
         } else {
-            binding.redirectAnimator.redirectAnimator.displayedChild = 2
+            binding.layoutActions.redirectAnimator.displayedChild = 2
         }
     }
 
