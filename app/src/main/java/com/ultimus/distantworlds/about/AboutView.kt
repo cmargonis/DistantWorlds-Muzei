@@ -18,10 +18,23 @@ package com.ultimus.distantworlds.about
 
 object AboutView {
 
+    sealed class State {
+        object Idle : State()
+        object InstallMuzeiPrompt : State()
+        data class SelectDWSource(val showDW1: Boolean, val showDW2: Boolean) : State()
+    }
+
     sealed class Navigation {
         object ToDistantWorlds1 : Navigation()
         object ToDistantWorlds2 : Navigation()
         object ToInstallMuzei : Navigation()
         object ToOpenMuzei : Navigation()
     }
+}
+
+enum class MuzeiStatus {
+    NOT_INSTALLED,
+    SELECTED_NONE,
+    DW_1_SELECTED,
+    DW_2_SELECTED
 }

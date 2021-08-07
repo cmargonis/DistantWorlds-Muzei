@@ -76,4 +76,47 @@ class AboutViewModelTest {
             cancelAndConsumeRemainingEvents()
         }
     }
+
+    @Test
+    fun `given muzei is not installed, when initializing, then emit install muzei state`() = runBlockingTest {
+        testedClass.initialize(muzeiStatus = MuzeiStatus.NOT_INSTALLED)
+        testedClass.state.test {
+            assertEquals(AboutView.State.InstallMuzeiPrompt, awaitItem())
+            cancelAndConsumeRemainingEvents()
+        }
+    }
+
+    @Test
+    fun `given distant worlds 1 & 2 is not selected, when initializing, then show select dw 1 & 2 button`() =
+        runBlockingTest {
+            testedClass.initialize(muzeiStatus = MuzeiStatus.SELECTED_NONE)
+
+            testedClass.state.test {
+                val expected = AboutView.State.SelectDWSource(showDW1 = true, showDW2 = true)
+                assertEquals(expected, awaitItem())
+                cancelAndConsumeRemainingEvents()
+            }
+        }
+
+    @Test
+    fun `given distant worlds 1 is selected, when initializing, then show select dw 2 button`() = runBlockingTest {
+        testedClass.initialize(muzeiStatus = MuzeiStatus.DW_1_SELECTED)
+
+        testedClass.state.test {
+            val expected = AboutView.State.SelectDWSource(showDW1 = false, showDW2 = true)
+            assertEquals(expected, awaitItem())
+            cancelAndConsumeRemainingEvents()
+        }
+    }
+
+    @Test
+    fun `given distant worlds 2 is selected, when initializing, then show select dw 1 button`() = runBlockingTest {
+        testedClass.initialize(muzeiStatus = MuzeiStatus.DW_2_SELECTED)
+
+        testedClass.state.test {
+            val expected = AboutView.State.SelectDWSource(showDW1 = true, showDW2 = false)
+            assertEquals(expected, awaitItem())
+            cancelAndConsumeRemainingEvents()
+        }
+    }
 }

@@ -26,6 +26,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.StringRes
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -53,25 +54,65 @@ class AboutFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        determineRedirectVisibility()
         initializeListeners()
         observeState()
+    }
+
+    private fun initializeListeners() {
+        with(binding.layoutActions) {
+            btnDistantWorlds1.setOnClickListener { viewModel.onDistantWorlds1Clicked() }
+            btnDistantWorlds2.setOnClickListener { viewModel.onDistantWorlds2Clicked() }
+            installMuzei.setOnClickListener { viewModel.onInstallMuzeiClicked() }
+            openMuzei.setOnClickListener { viewModel.onOpenMuzeiClicked() }
+        }
     }
 
     private fun observeState() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.state.collect { state -> render(state) }
+            }
+
+        }
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.effect.collect { effect -> handle(effect) }
             }
         }
+        viewModel.initialize(retrieveMuzeiStatus(requireContext()))
     }
 
-    private fun initializeListeners() {
-        with(binding.redirectAnimator) {
-            btnDistantWorlds1.setOnClickListener { viewModel.onDistantWorlds1Clicked() }
-            btnDistantWorlds2.setOnClickListener { viewModel.onDistantWorlds2Clicked() }
-            installMuzei.setOnClickListener { viewModel.onInstallMuzeiClicked() }
-            openMuzei.setOnClickListener { viewModel.onOpenMuzeiClicked() }
+    private fun retrieveMuzeiStatus(context: Context): MuzeiStatus {
+        val distantWorldsSelected =
+            MuzeiContract.Sources.isProviderSelected(requireContext(), BuildConfig.DISTANT_WORLDS_AUTHORITY)
+        val distantWorlds2Selected =
+            MuzeiContract.Sources.isProviderSelected(requireContext(), BuildConfig.DISTANT_WORLDS_TWO_AUTHORITY)
+        return when {
+            !isMuzeiInstalled(context) -> MuzeiStatus.NOT_INSTALLED
+            !distantWorldsSelected && !distantWorlds2Selected -> MuzeiStatus.SELECTED_NONE
+            distantWorldsSelected -> MuzeiStatus.DW_1_SELECTED
+            distantWorlds2Selected -> MuzeiStatus.DW_2_SELECTED
+            else -> MuzeiStatus.NOT_INSTALLED
+        }
+    }
+
+    private fun render(state: AboutView.State) {
+        when (state) {
+            AboutView.State.Idle -> {
+            }
+            AboutView.State.InstallMuzeiPrompt -> binding.layoutActions.installMuzei.isVisible = true
+            is AboutView.State.SelectDWSource -> showSourceSelection(state)
+        }
+    }
+
+    private fun showSourceSelection(state: AboutView.State.SelectDWSource) {
+        with(binding.layoutActions) {
+            if (state.showDW1 || state.showDW2) {
+                btnDistantWorlds1.isVisible = true
+                btnDistantWorlds2.isVisible = true
+            } else {
+                openMuzei.isVisible = true
+            }
         }
     }
 
@@ -115,25 +156,12 @@ class AboutFragment : Fragment() {
 
     private fun goToOpenMuzei() {
         val muzeiLaunchIntent = activity?.packageManager?.getLaunchIntentForPackage(MainActivity.muzeiPackage)
-        startActivity(muzeiLaunchIntent)
+        activity?.startActivity(muzeiLaunchIntent)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    private fun determineRedirectVisibility() {
-        val distantWorldsSelected =
-            MuzeiContract.Sources.isProviderSelected(requireContext(), BuildConfig.DISTANT_WORLDS_AUTHORITY)
-        val distantWorlds2Selected =
-            MuzeiContract.Sources.isProviderSelected(requireContext(), BuildConfig.DISTANT_WORLDS_TWO_AUTHORITY)
-        if (distantWorldsSelected || distantWorlds2Selected) {
-            binding.redirectAnimator.redirectAnimator.displayedChild = 2
-        } else {
-            val muzeiInstalled = isMuzeiInstalled(requireContext())
-            binding.redirectAnimator.redirectAnimator.displayedChild = if (muzeiInstalled) 0 else 1
-        }
     }
 
     private fun isMuzeiInstalled(context: Context): Boolean {

@@ -19,11 +19,22 @@ package com.ultimus.distantworlds.about
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
 class AboutViewModel : ViewModel() {
 
+    val state: MutableStateFlow<AboutView.State> = MutableStateFlow(value = AboutView.State.Idle)
     val effect: MutableSharedFlow<AboutView.Navigation> = MutableSharedFlow(replay = 0)
+
+    fun initialize(muzeiStatus: MuzeiStatus) {
+        state.value = when (muzeiStatus) {
+            MuzeiStatus.NOT_INSTALLED -> AboutView.State.InstallMuzeiPrompt
+            MuzeiStatus.SELECTED_NONE -> AboutView.State.SelectDWSource(showDW1 = true, showDW2 = true)
+            MuzeiStatus.DW_1_SELECTED -> AboutView.State.SelectDWSource(showDW1 = false, showDW2 = true)
+            MuzeiStatus.DW_2_SELECTED -> AboutView.State.SelectDWSource(showDW1 = true, showDW2 = false)
+        }
+    }
 
     fun onDistantWorlds1Clicked() {
         viewModelScope.launch {
