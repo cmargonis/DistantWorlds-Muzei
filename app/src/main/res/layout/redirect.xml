@@ -16,13 +16,13 @@
 
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout_actions"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingStart="@dimen/activity_horizontal_margin"
     android:paddingEnd="@dimen/activity_horizontal_margin"
     android:paddingBottom="@dimen/activity_vertical_margin">
-
 
     <Button
         android:id="@+id/btn_distant_worlds_1"
@@ -34,7 +34,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:visibility="visible" />
 
     <Button
         android:id="@+id/btn_distant_worlds_2"
@@ -46,7 +47,8 @@
         app:layout_constraintBottom_toTopOf="@+id/install_muzei"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_distant_worlds_1" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_distant_worlds_1"
+        tools:visibility="visible" />
 
     <Button
         android:id="@+id/install_muzei"
