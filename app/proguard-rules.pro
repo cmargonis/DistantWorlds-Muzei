@@ -15,7 +15,8 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
--printusage ./r8-output.txt # For debugging
+# For debugging
+#-printusage ./r8-output.txt
 # Retrofit
 -dontwarn retrofit2.**
 -keep class retrofit2.** { *; }
