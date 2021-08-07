@@ -110,6 +110,7 @@ dependencies {
     implementation("androidx.work:work-runtime-ktx:_")
     implementation("androidx.constraintlayout:constraintlayout:_")
     implementation("com.google.android.material:material:_")
+    implementation("androidx.fragment:fragment-ktx:_")
 
     implementation("androidx.navigation:navigation-fragment-ktx:_")
     implementation("androidx.navigation:navigation-ui-ktx:_")
