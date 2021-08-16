@@ -31,6 +31,7 @@ import com.ultimus.distantworlds.BuildConfig
 import com.ultimus.distantworlds.BuildConfig.DISTANT_WORLDS_AUTHORITY
 import com.ultimus.distantworlds.BuildConfig.DISTANT_WORLDS_TWO_AUTHORITY
 import com.ultimus.distantworlds.model.AlbumResponse
+import com.ultimus.distantworlds.model.Image
 import com.ultimus.distantworlds.provider.DistantWorldsSource
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -39,6 +40,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import timber.log.Timber
 import java.io.IOException
+import java.util.ArrayList
 
 /**
  * Created by Chris Margonis on 03/11/2018.
@@ -61,43 +63,16 @@ class ImgurWorker(context: Context, workerParams: WorkerParameters) : Worker(con
             ?: throw IllegalArgumentException("Source not specified. Has to be one from ${DistantWorldsSource::name}")
 
         val source = DistantWorldsSource.valueOf(inputSource)
-        val builder = OkHttpClient.Builder()
-        builder.addInterceptor { chain ->
-            val response = chain.proceed(chain.request())
-            if (response.code in 500..599) {
-                Timber.e("Got error code ${response.code}")
-            }
-            response
-        }
-        if (BuildConfig.DEBUG) {
-            val interceptor = HttpLoggingInterceptor()
-            interceptor.level = HttpLoggingInterceptor.Level.BODY
-            builder.addNetworkInterceptor(interceptor)
-        }
-        val client = builder.build()
-
-        val gsonBuilder = GsonBuilder()
-        gsonBuilder.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-        val retrofit = Retrofit.Builder()
-            .baseUrl(IMGUR_BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create(gsonBuilder.create()))
-            .client(client)
-            .build()
-
-        val service = retrofit.create(DistantWorldsService::class.java)
         val (albumId, authority) = when (source) {
             DistantWorldsSource.DISTANT_WORLDS_1 -> Pair(BuildConfig.IMGUR_DW_ALBUM, DISTANT_WORLDS_AUTHORITY)
             DistantWorldsSource.DISTANT_WORLDS_2 -> Pair(BuildConfig.IMGUR_DW2_ALBUM, DISTANT_WORLDS_TWO_AUTHORITY)
         }
-        val response = service.getAlbumDetails(
-            albumId,
-            BuildConfig.IMGUR_CLIENT_ID
-        )
+        val response = getRetrofit().getAlbumDetails(albumId, BuildConfig.IMGUR_CLIENT_ID)
         val album: Response<AlbumResponse>?
         try {
             album = response.execute()
         } catch (e: IOException) {
-            e.printStackTrace()
+            Timber.e(e)
             return Result.retry()
         }
 
@@ -111,10 +86,12 @@ class ImgurWorker(context: Context, workerParams: WorkerParameters) : Worker(con
             return Result.failure()
         }
 
-        val providerClient = ProviderContract.getProviderClient(
-            applicationContext,
-            authority
-        )
+        postArtworkToMuzei(authority, photosList)
+        return Result.success()
+    }
+
+    private fun postArtworkToMuzei(authority: String, photosList: ArrayList<Image>) {
+        val providerClient = ProviderContract.getProviderClient(applicationContext, authority)
         providerClient.addArtwork(photosList.map { image ->
             Artwork(
                 token = image.id,
@@ -124,6 +101,34 @@ class ImgurWorker(context: Context, workerParams: WorkerParameters) : Worker(con
                 persistentUri = Uri.parse(image.link)
             )
         }.shuffled())
-        return Result.success()
+    }
+
+    private fun getRetrofit(): DistantWorldsService {
+        val client = getHttpClient()
+        val gsonBuilder = GsonBuilder()
+        gsonBuilder.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+        val retrofit = Retrofit.Builder()
+            .baseUrl(IMGUR_BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create(gsonBuilder.create()))
+            .client(client)
+            .build()
+        return retrofit.create(DistantWorldsService::class.java)
+    }
+
+    private fun getHttpClient(): OkHttpClient {
+        val builder = OkHttpClient.Builder()
+        builder.addInterceptor { chain ->
+            val response = chain.proceed(chain.request())
+            if (response.code in 500..599) {
+                Timber.e("Got error code ${response.code}")
+            }
+            response
+        }
+        if (BuildConfig.DEBUG) {
+            val interceptor = HttpLoggingInterceptor()
+            interceptor.level = HttpLoggingInterceptor.Level.BODY
+            builder.addNetworkInterceptor(interceptor)
+        }
+        return builder.build()
     }
 }
