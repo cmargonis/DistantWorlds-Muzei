@@ -24,7 +24,7 @@ import com.ultimus.distantworlds.provider.DistantWorldsSource
  * @param source Whether images from Distant Worlds 1 or Distant Worlds 2 are selected.
  * @param albumId The Imgur album ID of the photo collection.
  */
-data class WorkConfiguration(val source: DistantWorldsSource, val albumId: String) {
+data class WorkConfiguration(val source: DistantWorldsSource, val albumId: String, val authority: String) {
 
     companion object {
 
@@ -40,7 +40,12 @@ data class WorkConfiguration(val source: DistantWorldsSource, val albumId: Strin
                 DistantWorldsSource.DISTANT_WORLDS_2 -> BuildConfig.IMGUR_DW2_ALBUM
             }
 
-            return WorkConfiguration(source = source, albumId = albumId)
+            val authority = when (source) {
+                DistantWorldsSource.DISTANT_WORLDS_1 -> BuildConfig.DISTANT_WORLDS_AUTHORITY
+                DistantWorldsSource.DISTANT_WORLDS_2 -> BuildConfig.DISTANT_WORLDS_TWO_AUTHORITY
+            }
+
+            return WorkConfiguration(source = source, albumId = albumId, authority = authority)
         }
     }
 

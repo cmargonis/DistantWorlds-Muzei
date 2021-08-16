@@ -28,8 +28,6 @@ import com.google.android.apps.muzei.api.provider.ProviderContract
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
 import com.ultimus.distantworlds.BuildConfig
-import com.ultimus.distantworlds.BuildConfig.DISTANT_WORLDS_AUTHORITY
-import com.ultimus.distantworlds.BuildConfig.DISTANT_WORLDS_TWO_AUTHORITY
 import com.ultimus.distantworlds.model.AlbumResponse
 import com.ultimus.distantworlds.model.Image
 import com.ultimus.distantworlds.provider.DistantWorldsSource
@@ -79,16 +77,12 @@ class ImgurWorker(context: Context, workerParams: WorkerParameters) : Worker(con
             return Result.failure()
         }
 
-        postArtworkToMuzei(configuration.source, photosList)
+        postArtworkToMuzei(configuration, photosList)
         return Result.success()
     }
 
-    private fun postArtworkToMuzei(source: DistantWorldsSource, photosList: ArrayList<Image>) {
-        val authority = when (source) {
-            DistantWorldsSource.DISTANT_WORLDS_1 -> DISTANT_WORLDS_AUTHORITY
-            DistantWorldsSource.DISTANT_WORLDS_2 -> DISTANT_WORLDS_TWO_AUTHORITY
-        }
-        val providerClient = ProviderContract.getProviderClient(applicationContext, authority)
+    private fun postArtworkToMuzei(configuration: WorkConfiguration, photosList: ArrayList<Image>) {
+        val providerClient = ProviderContract.getProviderClient(applicationContext, configuration.authority)
         providerClient.addArtwork(photosList.map { image ->
             Artwork(
                 token = image.id,
