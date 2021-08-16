@@ -18,7 +18,6 @@ package com.ultimus.distantworlds.service
 
 import android.content.Context
 import android.net.Uri
-import android.util.Log
 import androidx.work.Data
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
@@ -38,6 +37,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import timber.log.Timber
 import java.io.IOException
 
 /**
@@ -56,8 +56,6 @@ class ImgurWorker(context: Context, workerParams: WorkerParameters) : Worker(con
         }
     }
 
-    private val tag = "ImgurWorker"
-
     override fun doWork(): Result {
         val inputSource = inputData.getString(keySource)
             ?: throw IllegalArgumentException("Source not specified. Has to be one from ${DistantWorldsSource::name}")
@@ -67,7 +65,7 @@ class ImgurWorker(context: Context, workerParams: WorkerParameters) : Worker(con
         builder.addInterceptor { chain ->
             val response = chain.proceed(chain.request())
             if (response.code in 500..599) {
-                Log.e(tag, "Got error code ${response.code}")
+                Timber.e("Got error code ${response.code}")
             }
             response
         }
@@ -109,9 +107,7 @@ class ImgurWorker(context: Context, workerParams: WorkerParameters) : Worker(con
 
         val photosList = album.body()?.data?.images
         if (photosList.isNullOrEmpty()) {
-            if (BuildConfig.DEBUG) {
-                Log.w(tag, "No photos returned from API.")
-            }
+            Timber.w("No photos returned from API.")
             return Result.failure()
         }
 
