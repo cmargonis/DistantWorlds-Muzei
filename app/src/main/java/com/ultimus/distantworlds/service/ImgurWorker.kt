@@ -49,7 +49,7 @@ class ImgurWorker(context: Context, workerParams: WorkerParameters) : Worker(con
 
     companion object {
 
-        private const val keySource: String = "imgur_source"
+        internal const val keySource: String = "imgur_source"
         internal fun enqueueLoad(source: DistantWorldsSource, context: Context?) {
             context ?: return
             val workManager = WorkManager.getInstance(context)
@@ -59,15 +59,8 @@ class ImgurWorker(context: Context, workerParams: WorkerParameters) : Worker(con
     }
 
     override fun doWork(): Result {
-        val inputSource = inputData.getString(keySource)
-            ?: throw IllegalArgumentException("Source not specified. Has to be one from ${DistantWorldsSource::name}")
-
-        val source: DistantWorldsSource = DistantWorldsSource.valueOf(inputSource)
-        val albumId = when (source) {
-            DistantWorldsSource.DISTANT_WORLDS_1 -> BuildConfig.IMGUR_DW_ALBUM
-            DistantWorldsSource.DISTANT_WORLDS_2 -> BuildConfig.IMGUR_DW2_ALBUM
-        }
-        val response = getRetrofit().getAlbumDetails(albumId, BuildConfig.IMGUR_CLIENT_ID)
+        val configuration = WorkConfiguration.fromInput(inputData)
+        val response = getRetrofit().getAlbumDetails(configuration.albumId, BuildConfig.IMGUR_CLIENT_ID)
         val album: Response<AlbumResponse>?
         try {
             album = response.execute()
@@ -86,7 +79,7 @@ class ImgurWorker(context: Context, workerParams: WorkerParameters) : Worker(con
             return Result.failure()
         }
 
-        postArtworkToMuzei(source, photosList)
+        postArtworkToMuzei(configuration.source, photosList)
         return Result.success()
     }
 
