@@ -26,7 +26,7 @@ import com.ultimus.distantworlds.service.ImgurWorker
 class DistantWorldsArtProvider : MuzeiArtProvider() {
 
     override fun onLoadRequested(initial: Boolean) {
-        ImgurWorker.enqueueLoad(DistantWorldsSource.DISTANT_WORLDS_1)
+        ImgurWorker.enqueueLoad(DistantWorldsSource.DISTANT_WORLDS_1, context)
     }
 }
 

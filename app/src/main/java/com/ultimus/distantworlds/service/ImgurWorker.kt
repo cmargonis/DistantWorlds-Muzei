@@ -48,8 +48,9 @@ class ImgurWorker(context: Context, workerParams: WorkerParameters) : Worker(con
     companion object {
 
         private const val keySource: String = "imgur_source"
-        internal fun enqueueLoad(source: DistantWorldsSource) {
-            val workManager = WorkManager.getInstance()
+        internal fun enqueueLoad(source: DistantWorldsSource, context: Context?) {
+            context ?: return
+            val workManager = WorkManager.getInstance(context)
             val data = Data.Builder().putAll(mutableMapOf<String, Any>(keySource to source.name)).build()
             workManager.enqueue(OneTimeWorkRequestBuilder<ImgurWorker>().setInputData(data).build())
         }
