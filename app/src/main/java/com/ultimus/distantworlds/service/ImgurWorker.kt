@@ -62,10 +62,10 @@ class ImgurWorker(context: Context, workerParams: WorkerParameters) : Worker(con
         val inputSource = inputData.getString(keySource)
             ?: throw IllegalArgumentException("Source not specified. Has to be one from ${DistantWorldsSource::name}")
 
-        val source = DistantWorldsSource.valueOf(inputSource)
-        val (albumId, authority) = when (source) {
-            DistantWorldsSource.DISTANT_WORLDS_1 -> Pair(BuildConfig.IMGUR_DW_ALBUM, DISTANT_WORLDS_AUTHORITY)
-            DistantWorldsSource.DISTANT_WORLDS_2 -> Pair(BuildConfig.IMGUR_DW2_ALBUM, DISTANT_WORLDS_TWO_AUTHORITY)
+        val source: DistantWorldsSource = DistantWorldsSource.valueOf(inputSource)
+        val albumId = when (source) {
+            DistantWorldsSource.DISTANT_WORLDS_1 -> BuildConfig.IMGUR_DW_ALBUM
+            DistantWorldsSource.DISTANT_WORLDS_2 -> BuildConfig.IMGUR_DW2_ALBUM
         }
         val response = getRetrofit().getAlbumDetails(albumId, BuildConfig.IMGUR_CLIENT_ID)
         val album: Response<AlbumResponse>?
@@ -86,11 +86,15 @@ class ImgurWorker(context: Context, workerParams: WorkerParameters) : Worker(con
             return Result.failure()
         }
 
-        postArtworkToMuzei(authority, photosList)
+        postArtworkToMuzei(source, photosList)
         return Result.success()
     }
 
-    private fun postArtworkToMuzei(authority: String, photosList: ArrayList<Image>) {
+    private fun postArtworkToMuzei(source: DistantWorldsSource, photosList: ArrayList<Image>) {
+        val authority = when (source) {
+            DistantWorldsSource.DISTANT_WORLDS_1 -> DISTANT_WORLDS_AUTHORITY
+            DistantWorldsSource.DISTANT_WORLDS_2 -> DISTANT_WORLDS_TWO_AUTHORITY
+        }
         val providerClient = ProviderContract.getProviderClient(applicationContext, authority)
         providerClient.addArtwork(photosList.map { image ->
             Artwork(
