@@ -141,6 +141,7 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:_")
 
     implementation("com.google.code.gson:gson:_")
+    implementation("com.jakewharton.timber:timber:_")
 
     implementation("com.google.firebase:firebase-core:_")
     implementation("com.google.firebase:firebase-crashlytics:_")
