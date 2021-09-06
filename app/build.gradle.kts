@@ -42,7 +42,7 @@ fun getImgurApiProperties(): Properties {
 }
 
 android {
-    compileSdk = 30
+    compileSdk = 31
     defaultConfig {
         applicationId = "com.ultimus.distantworlds_muzei"
         minSdk = 21
@@ -141,6 +141,7 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:_")
 
     implementation("com.google.code.gson:gson:_")
+    implementation("com.jakewharton.timber:timber:_")
 
     implementation("com.google.firebase:firebase-core:_")
     implementation("com.google.firebase:firebase-crashlytics:_")
