@@ -2,8 +2,7 @@ package com.ultimus.distantworlds.utils
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.TestCoroutineDispatcher
-import kotlinx.coroutines.test.TestCoroutineScope
+import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
 import org.junit.jupiter.api.extension.AfterEachCallback
@@ -17,15 +16,13 @@ import org.junit.jupiter.api.extension.ExtensionContext
  * val coroutinesTestExtension = CoroutinesTestExtension()
  */
 @ExperimentalCoroutinesApi
-class CoroutinesTestExtension(private val dispatcher: TestCoroutineDispatcher = TestCoroutineDispatcher()) :
-    BeforeEachCallback, AfterEachCallback, TestCoroutineScope by TestCoroutineScope(dispatcher) {
+class CoroutinesTestExtension : BeforeEachCallback, AfterEachCallback {
 
     override fun beforeEach(context: ExtensionContext?) {
-        Dispatchers.setMain(dispatcher)
+        Dispatchers.setMain(StandardTestDispatcher())
     }
 
     override fun afterEach(context: ExtensionContext?) {
-        cleanupTestCoroutines()
         Dispatchers.resetMain()
     }
 }
