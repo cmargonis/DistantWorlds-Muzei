@@ -19,7 +19,7 @@ package com.ultimus.distantworlds.about
 import app.cash.turbine.test
 import com.ultimus.distantworlds.utils.CoroutinesTestExtension
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -42,7 +42,7 @@ class AboutViewModelTest {
     }
 
     @Test
-    fun `when select distant worlds 1 is pressed, then navigate to setup distant worlds 1`() = runBlockingTest {
+    fun `when select distant worlds 1 is pressed, then navigate to setup distant worlds 1`() = runTest {
         testedClass.effect.test {
             testedClass.onDistantWorlds1Clicked()
             assertEquals(AboutView.Navigation.ToDistantWorlds1, awaitItem())
@@ -51,7 +51,7 @@ class AboutViewModelTest {
     }
 
     @Test
-    fun `when select distant worlds 2 is pressed, then navigate to setup distant worlds 2`() = runBlockingTest {
+    fun `when select distant worlds 2 is pressed, then navigate to setup distant worlds 2`() = runTest {
         testedClass.effect.test {
             testedClass.onDistantWorlds2Clicked()
             assertEquals(AboutView.Navigation.ToDistantWorlds2, awaitItem())
@@ -60,7 +60,7 @@ class AboutViewModelTest {
     }
 
     @Test
-    fun `when install muzei is pressed, then navigate to play store to muzei page`() = runBlockingTest {
+    fun `when install muzei is pressed, then navigate to play store to muzei page`() = runTest {
         testedClass.effect.test {
             testedClass.onInstallMuzeiClicked()
             assertEquals(AboutView.Navigation.ToInstallMuzei, awaitItem())
@@ -69,7 +69,7 @@ class AboutViewModelTest {
     }
 
     @Test
-    fun `when open muzei is pressed, then navigate to open muzei page`() = runBlockingTest {
+    fun `when open muzei is pressed, then navigate to open muzei page`() = runTest {
         testedClass.effect.test {
             testedClass.onOpenMuzeiClicked()
             assertEquals(AboutView.Navigation.ToOpenMuzei, awaitItem())
@@ -78,7 +78,7 @@ class AboutViewModelTest {
     }
 
     @Test
-    fun `given muzei is not installed, when initializing, then emit install muzei state`() = runBlockingTest {
+    fun `given muzei is not installed, when initializing, then emit install muzei state`() = runTest {
         testedClass.initialize(muzeiStatus = MuzeiStatus.NOT_INSTALLED)
         testedClass.state.test {
             assertEquals(AboutView.State.InstallMuzeiPrompt, awaitItem())
@@ -87,19 +87,18 @@ class AboutViewModelTest {
     }
 
     @Test
-    fun `given distant worlds 1 & 2 is not selected, when initializing, then show select dw 1 & 2 button`() =
-        runBlockingTest {
-            testedClass.initialize(muzeiStatus = MuzeiStatus.SELECTED_NONE)
+    fun `given distant worlds 1 & 2 is not selected, when initializing, then show select dw 1 & 2 button`() = runTest {
+        testedClass.initialize(muzeiStatus = MuzeiStatus.SELECTED_NONE)
 
-            testedClass.state.test {
-                val expected = AboutView.State.SelectDWSource(showDW1 = true, showDW2 = true)
-                assertEquals(expected, awaitItem())
-                cancelAndConsumeRemainingEvents()
-            }
+        testedClass.state.test {
+            val expected = AboutView.State.SelectDWSource(showDW1 = true, showDW2 = true)
+            assertEquals(expected, awaitItem())
+            cancelAndConsumeRemainingEvents()
         }
+    }
 
     @Test
-    fun `given distant worlds 1 is selected, when initializing, then show select dw 2 button`() = runBlockingTest {
+    fun `given distant worlds 1 is selected, when initializing, then show select dw 2 button`() = runTest {
         testedClass.initialize(muzeiStatus = MuzeiStatus.DW_1_SELECTED)
 
         testedClass.state.test {
@@ -110,7 +109,7 @@ class AboutViewModelTest {
     }
 
     @Test
-    fun `given distant worlds 2 is selected, when initializing, then show select dw 1 button`() = runBlockingTest {
+    fun `given distant worlds 2 is selected, when initializing, then show select dw 1 button`() = runTest {
         testedClass.initialize(muzeiStatus = MuzeiStatus.DW_2_SELECTED)
 
         testedClass.state.test {

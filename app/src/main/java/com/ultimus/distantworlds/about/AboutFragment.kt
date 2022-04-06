@@ -37,7 +37,6 @@ import com.ultimus.distantworlds.BuildConfig
 import com.ultimus.distantworlds.R
 import com.ultimus.distantworlds.databinding.FragmentAboutBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
