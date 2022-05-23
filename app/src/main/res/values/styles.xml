@@ -17,7 +17,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme.Base" parent="Theme.MaterialComponents.Light.DarkActionBar" />
+    <style name="AppTheme.Base" parent="Theme.Material3.DayNight" />
 
     <style name="AppTheme" parent="AppTheme.Base">
         <item name="colorPrimary">@color/primaryColor</item>
