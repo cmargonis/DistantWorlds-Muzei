@@ -47,8 +47,8 @@ android {
         applicationId = "com.ultimus.distantworlds_muzei"
         minSdk = 21
         targetSdk = 30
-        versionCode = 9
-        versionName = "3.4.0"
+        versionCode = 10
+        versionName = "3.4.1"
 
         val distantWorldsAuthorityValue = "com.ultimus.distantworlds"
         buildConfigField("String", "DISTANT_WORLDS_AUTHORITY", "\"${distantWorldsAuthorityValue}\"")
