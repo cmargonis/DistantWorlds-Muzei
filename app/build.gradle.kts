@@ -104,6 +104,7 @@ android {
 
     lint {
         warningsAsErrors = true
+        informational.add("IconDensities")
     }
 }
 
