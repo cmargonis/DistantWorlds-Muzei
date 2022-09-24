@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><!--
-   Copyright 2018 Chris Margonis
+<?xml version="1.0" encoding="utf-8"?><!--   Copyright 2019 Chris Margonis
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,10 +13,9 @@
      limitations under the License.
   -->
 
-<resources>
-    <color name="primaryColor">#7e56c1</color>
-    <color name="primaryDarkColor">#4d2b90</color>
-    <color name="secondaryColor">#ffffff</color>
-    <color name="primaryTextColor">#ffffff</color>
-    <color name="secondaryTextColor">#000000</color>
-</resources>
+<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+    <background android:drawable="@drawable/ic_launcher_background" />
+    <foreground android:drawable="@mipmap/ic_launcher_foreground" />
+
+    <monochrome android:drawable="@drawable/ic_launcher_foreground_monochrome" />
+</adaptive-icon>
