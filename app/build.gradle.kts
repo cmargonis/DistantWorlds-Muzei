@@ -42,11 +42,11 @@ fun getImgurApiProperties(): Properties {
 }
 
 android {
-    compileSdk = 31
+    compileSdk = 33
     defaultConfig {
         applicationId = "com.ultimus.distantworlds_muzei"
         minSdk = 21
-        targetSdk = 30
+        targetSdk = 33
         versionCode = 10
         versionName = "3.4.1"
 
