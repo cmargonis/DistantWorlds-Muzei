@@ -45,7 +45,7 @@ android {
     compileSdk = 33
     defaultConfig {
         applicationId = "com.ultimus.distantworlds_muzei"
-        minSdk = 21
+        minSdk = 29
         targetSdk = 33
         versionCode = 10
         versionName = "3.4.1"
