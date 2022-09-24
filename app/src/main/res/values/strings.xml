@@ -22,11 +22,8 @@
     <string name="provider_name_dw2">Distant Worlds 2</string>
     <string name="app_version">Version 3.4.1</string>
     <string name="source_description">A journey beyond the Abyss</string>
-    <string name="title_activity_settings">DWE For Muzei - Settings</string>
     <string name="app_name_formatted">Elite Dangerous - Distant Worlds Expedition\n For Muzei</string>
 
-    <string name="source_name">Distant Worlds Expedition</string>
-    <string name="title_activity_about">About</string>
     <string name="about_description">This application was made to honor the explorers of the Distant Worlds Expeditions of the years 3302 and 3305.\nYou can select either expedition as your wallpaper source.</string>
     <string name="about_forum_thread">Images from Distant Worlds can be found here: <a href="https://forums.frontier.co.uk/showthread.php?t=222490">[Distant Worlds] Centralized photo gallery</a></string>
     <string name="about_forum_thread_dw2">Link for images from Distant Worlds 2 will be uploaded soon</string>
