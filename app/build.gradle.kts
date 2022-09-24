@@ -101,6 +101,10 @@ android {
     tasks.withType<Test> {
         useJUnitPlatform()
     }
+
+    lint {
+        warningsAsErrors = true
+    }
 }
 
 fun ApplicationBuildType.setupMinification(baseAppModuleExtension: BaseAppModuleExtension, minificationEnabled: Boolean) {
