@@ -42,6 +42,7 @@ fun getImgurApiProperties(): Properties {
 }
 
 android {
+    namespace = "com.ultimus.distantworlds_muzei"
     compileSdk = 33
     defaultConfig {
         applicationId = "com.ultimus.distantworlds_muzei"
@@ -49,6 +50,10 @@ android {
         targetSdk = 33
         versionCode = 11
         versionName = "3.5.0"
+
+        buildFeatures {
+            buildConfig = true
+        }
 
         val distantWorldsAuthorityValue = "com.ultimus.distantworlds"
         buildConfigField("String", "DISTANT_WORLDS_AUTHORITY", "\"${distantWorldsAuthorityValue}\"")
