@@ -17,8 +17,8 @@
 package com.ultimus.distantworlds.service
 
 import androidx.work.Data
-import com.ultimus.distantworlds.BuildConfig
 import com.ultimus.distantworlds.provider.DistantWorldsSource
+import com.ultimus.distantworlds_muzei.BuildConfig
 
 /**
  * @param source Whether images from Distant Worlds 1 or Distant Worlds 2 are selected.

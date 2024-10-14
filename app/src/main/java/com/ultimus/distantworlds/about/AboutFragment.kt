@@ -33,9 +33,9 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.google.android.apps.muzei.api.MuzeiContract
-import com.ultimus.distantworlds.BuildConfig
-import com.ultimus.distantworlds.R
-import com.ultimus.distantworlds.databinding.FragmentAboutBinding
+import com.ultimus.distantworlds_muzei.BuildConfig
+import com.ultimus.distantworlds_muzei.R
+import com.ultimus.distantworlds_muzei.databinding.FragmentAboutBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 

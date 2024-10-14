@@ -123,6 +123,13 @@ fun ApplicationBuildType.setupMinification(baseAppModuleExtension: BaseAppModule
     (this as ExtensionAware).configure<CrashlyticsExtension> { mappingFileUploadEnabled = minificationEnabled }
 }
 
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(19)
+        vendor = JvmVendorSpec.AZUL
+    }
+}
+
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib:_")
 
