@@ -99,6 +99,7 @@ class AboutFragment : Fragment() {
         when (state) {
             AboutView.State.Idle -> {
             }
+
             AboutView.State.InstallMuzeiPrompt -> binding.layoutActions.installMuzei.isVisible = true
             is AboutView.State.SelectDWSource -> showSourceSelection(state)
         }
@@ -121,10 +122,12 @@ class AboutFragment : Fragment() {
                 BuildConfig.DISTANT_WORLDS_AUTHORITY,
                 R.string.warning_select_source
             )
+
             AboutView.Navigation.ToDistantWorlds2 -> goToDistantWolds(
                 BuildConfig.DISTANT_WORLDS_TWO_AUTHORITY,
                 R.string.warning_select_source_2
             )
+
             AboutView.Navigation.ToInstallMuzei -> goToInstallMuzei()
             AboutView.Navigation.ToOpenMuzei -> goToOpenMuzei()
         }
@@ -136,8 +139,8 @@ class AboutFragment : Fragment() {
             startActivity(deepLinkIntent)
         } catch (e: Exception) {
             Toast.makeText(activity, failedMessage, Toast.LENGTH_LONG).show()
-            val muzeiLaunchIntent = activity?.packageManager?.getLaunchIntentForPackage(MainActivity.muzeiPackage)
-            startActivity(muzeiLaunchIntent)
+            val muzeiLaunchIntent = requireActivity().packageManager.getLaunchIntentForPackage(MainActivity.muzeiPackage)
+            muzeiLaunchIntent?.let { startActivity(it) }
         }
     }
 
