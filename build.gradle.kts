@@ -13,25 +13,11 @@
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
  */
-
-buildscript {
-    repositories {
-        google()
-        mavenCentral()
-    }
-
-    dependencies {
-        classpath("com.android.tools.build:gradle:_")
-        classpath("com.google.gms:google-services:_")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:_")
-        classpath("com.google.firebase:firebase-crashlytics-gradle:_")
-        classpath("com.google.dagger:hilt-android-gradle-plugin:_")
-    }
-}
-
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
-    }
+plugins {
+    alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.kotlin.android) apply false
+    alias(libs.plugins.google.services) apply false
+    alias(libs.plugins.firebaseCrashlytics) apply false
+    alias(libs.plugins.kapt) apply false
+    alias(libs.plugins.dagger.hilt) apply false
 }

@@ -20,7 +20,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".DistantWorldsApplication"
+        android:name="com.ultimus.distantworlds.DistantWorldsApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -63,7 +63,7 @@
         </provider>
 
         <provider
-            android:name=".provider.DistantWorldsArtDocumentsProvider"
+            android:name="com.ultimus.distantworlds.provider.DistantWorldsArtDocumentsProvider"
             android:authorities="${distantWorldsAuthority}.documents"
             android:exported="true"
             android:grantUriPermissions="true"
@@ -90,7 +90,7 @@
         </provider>
 
         <provider
-            android:name=".provider.DistantWorlds2ArtDocumentsProvider"
+            android:name="com.ultimus.distantworlds.provider.DistantWorlds2ArtDocumentsProvider"
             android:authorities="${distantWorlds2Authority}.documents"
             android:exported="true"
             android:grantUriPermissions="true"

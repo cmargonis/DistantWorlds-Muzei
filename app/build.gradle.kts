@@ -20,12 +20,12 @@ import java.io.FileInputStream
 import java.util.Properties
 
 plugins {
-    id("com.android.application")
-    id("kotlin-android")
-    id("com.google.gms.google-services")
-    id("com.google.firebase.crashlytics")
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.google.services)
+    alias(libs.plugins.firebaseCrashlytics)
     kotlin("kapt")
-    id("dagger.hilt.android.plugin")
+    alias(libs.plugins.dagger.hilt)
 }
 
 fun getImgurApiProperties(): Properties {
@@ -131,49 +131,41 @@ java {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:_")
+    implementation(libs.dagger.hilt)
+    implementation(libs.hilt.navigation)
+    kapt(libs.hilt.kapt)
 
-    implementation("com.google.dagger:hilt-android:_")
-    implementation("androidx.hilt:hilt-navigation-fragment:_")
-    kapt("com.google.dagger:hilt-android-compiler:_")
+    implementation(libs.core.ktx)
+    implementation(libs.appcompat)
+    implementation(libs.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.work.runtime.ktx)
+    implementation(libs.androidx.constraintlayout)
+    implementation(libs.material)
+    implementation(libs.androidx.fragment.ktx)
 
-    implementation("androidx.core:core-ktx:_")
-    implementation("androidx.appcompat:appcompat:_")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:_")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:_")
-    implementation("androidx.work:work-runtime-ktx:_")
-    implementation("androidx.constraintlayout:constraintlayout:_")
-    implementation("com.google.android.material:material:_")
-    implementation("androidx.fragment:fragment-ktx:_")
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
+    implementation(libs.androidx.navigation.compose)
 
-    implementation("androidx.navigation:navigation-fragment-ktx:_")
-    implementation("androidx.navigation:navigation-ui-ktx:_")
-    implementation("androidx.navigation:navigation-compose:_")
+    implementation(libs.muzei.api)
+    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.okhttp)
+    implementation(libs.logging.interceptor)
 
-    implementation("com.google.android.apps.muzei:muzei-api:_")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:_")
-    implementation("com.squareup.retrofit2:retrofit:_")
-    implementation("com.squareup.retrofit2:converter-gson:_")
-    implementation("com.squareup.okhttp3:okhttp:_")
-    implementation("com.squareup.okhttp3:logging-interceptor:_")
+    implementation(libs.gson)
+    implementation(libs.timber)
 
-    implementation("com.google.code.gson:gson:_")
-    implementation("com.jakewharton.timber:timber:_")
+    implementation(libs.firebase.core)
+    implementation(libs.firebase.crashlytics)
+    implementation(libs.firebase.analytics.ktx)
 
-    implementation("com.google.firebase:firebase-core:_")
-    implementation("com.google.firebase:firebase-crashlytics:_")
-    implementation("com.google.firebase:firebase-analytics-ktx:_")
-
-    testImplementation("org.junit.jupiter:junit-jupiter-api:_")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:_")
-    testImplementation("org.junit.jupiter:junit-jupiter-params:_")
-    testImplementation("io.mockk:mockk:_")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:_")
-    testImplementation("app.cash.turbine:turbine:_")
-
-    androidTestImplementation("androidx.test:runner:_")
-    androidTestImplementation("androidx.test:rules:_")
-    // Optional -- UI testing with Espresso
-    androidTestImplementation("androidx.test.espresso:espresso-core:_")
-    androidTestImplementation("androidx.navigation:navigation-testing:_")
+    testImplementation(libs.junit.jupiter.api)
+    testRuntimeOnly(libs.junit.jupiter.engine)
+    testImplementation(libs.junit.jupiter.params)
+    testImplementation(libs.mockk)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.turbine)
 }
