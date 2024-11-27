@@ -125,7 +125,7 @@ fun ApplicationBuildType.setupMinification(baseAppModuleExtension: BaseAppModule
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(19)
+        languageVersion = JavaLanguageVersion.of(21)
         vendor = JvmVendorSpec.AZUL
     }
 }
