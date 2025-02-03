@@ -11,3 +11,6 @@
 # Local configuration file (sdk path, etc)
 local.properties
 apikeys.properties
+.java-version
+
+/.kotlin

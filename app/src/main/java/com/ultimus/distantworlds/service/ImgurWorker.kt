@@ -27,10 +27,10 @@ import com.google.android.apps.muzei.api.provider.Artwork
 import com.google.android.apps.muzei.api.provider.ProviderContract
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
-import com.ultimus.distantworlds.BuildConfig
 import com.ultimus.distantworlds.model.AlbumResponse
 import com.ultimus.distantworlds.model.Image
 import com.ultimus.distantworlds.provider.DistantWorldsSource
+import com.ultimus.distantworlds_muzei.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Response

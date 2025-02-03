@@ -33,9 +33,9 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.google.android.apps.muzei.api.MuzeiContract
-import com.ultimus.distantworlds.BuildConfig
-import com.ultimus.distantworlds.R
-import com.ultimus.distantworlds.databinding.FragmentAboutBinding
+import com.ultimus.distantworlds_muzei.BuildConfig
+import com.ultimus.distantworlds_muzei.R
+import com.ultimus.distantworlds_muzei.databinding.FragmentAboutBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -99,6 +99,7 @@ class AboutFragment : Fragment() {
         when (state) {
             AboutView.State.Idle -> {
             }
+
             AboutView.State.InstallMuzeiPrompt -> binding.layoutActions.installMuzei.isVisible = true
             is AboutView.State.SelectDWSource -> showSourceSelection(state)
         }
@@ -121,10 +122,12 @@ class AboutFragment : Fragment() {
                 BuildConfig.DISTANT_WORLDS_AUTHORITY,
                 R.string.warning_select_source
             )
+
             AboutView.Navigation.ToDistantWorlds2 -> goToDistantWolds(
                 BuildConfig.DISTANT_WORLDS_TWO_AUTHORITY,
                 R.string.warning_select_source_2
             )
+
             AboutView.Navigation.ToInstallMuzei -> goToInstallMuzei()
             AboutView.Navigation.ToOpenMuzei -> goToOpenMuzei()
         }
@@ -136,8 +139,8 @@ class AboutFragment : Fragment() {
             startActivity(deepLinkIntent)
         } catch (e: Exception) {
             Toast.makeText(activity, failedMessage, Toast.LENGTH_LONG).show()
-            val muzeiLaunchIntent = activity?.packageManager?.getLaunchIntentForPackage(MainActivity.muzeiPackage)
-            startActivity(muzeiLaunchIntent)
+            val muzeiLaunchIntent = requireActivity().packageManager.getLaunchIntentForPackage(MainActivity.muzeiPackage)
+            muzeiLaunchIntent?.let { startActivity(it) }
         }
     }
 
