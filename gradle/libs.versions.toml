@@ -2,13 +2,14 @@
 constraintlayout = "2.2.0-beta01"
 fragment-ktx = "1.8.4"
 kotlin = "2.0.21"
-android-gradle-plugin = "8.7.2"
+android-gradle-plugin = "8.8.0"
 appcompat = "1.7.0"
 core-ktx = "1.13.1"
 firebase-analytics-ktx = "22.1.2"
 firebase-crashlytics = "19.2.0"
 junit = "5.11.2"
 dagger-hilt = "2.51.1"
+hilt = "1.2.0"
 kotlinx-coroutines = "1.9.0"
 firebase-core = "21.1.1"
 lifecycle = "2.8.6"
@@ -52,7 +53,7 @@ material = { module = "com.google.android.material:material", version.ref = "mat
 gson = "com.google.code.gson:gson:2.11.0"
 firebase-core = { group = "com.google.firebase", name = "firebase-core", version.ref = "firebase-core" }
 dagger-hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "dagger-hilt" }
-hilt-navigation = { group = "androidx.hilt", name = "hilt-navigation-fragment", version.ref = "dagger-hilt" }
+hilt-navigation = { group = "androidx.hilt", name = "hilt-navigation-fragment", version.ref = "hilt" }
 hilt-kapt = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "dagger-hilt" }
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 muzei-api = { module = "com.google.android.apps.muzei:muzei-api", version = "3.4.1" }

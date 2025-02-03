@@ -130,6 +130,10 @@ java {
     }
 }
 
+kapt {
+    correctErrorTypes = true
+}
+
 dependencies {
     implementation(libs.dagger.hilt)
     implementation(libs.hilt.navigation)
