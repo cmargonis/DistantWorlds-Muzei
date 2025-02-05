@@ -6,23 +6,6 @@ on:
 
 jobs:
 
-  # Add the PR author as assignee.
-  add-assignee:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Add assignee
-        if: ${{ github.event.action == 'opened' || github.event.action == 'ready_for_review' }}
-        uses: actions/github-script@v7
-        with:
-          github-token: ${{github.token}}
-          script: |
-            await github.issues.addAssignees({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: context.payload.number,
-              assignees: context.payload.pull_request.user.login
-            })
-
   # Add labels based on branch name
   add-branch-labels:
     runs-on: ubuntu-latest
