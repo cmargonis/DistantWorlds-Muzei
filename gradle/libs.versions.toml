@@ -1,6 +1,6 @@
 [versions]
 constraintlayout = "2.2.0-beta01"
-fragment-ktx = "1.8.5"
+fragment-ktx = "1.8.6"
 kotlin = "2.1.10"
 android-gradle-plugin = "8.8.0"
 appcompat = "1.7.0"
