@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
 
-        const val muzeiPackage: String = "net.nurik.roman.muzei"
+        const val MUZEI_PACKAGE: String = "net.nurik.roman.muzei"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

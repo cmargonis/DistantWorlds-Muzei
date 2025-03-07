@@ -19,4 +19,4 @@ package com.ultimus.distantworlds.model
 /**
  * Created by Chris Margonis on 03/11/2018.
  */
-class AlbumResponse(var data: Album?, var success: Boolean, var status: Int)
+class AlbumResponse(var data: Album?, var success: Boolean)

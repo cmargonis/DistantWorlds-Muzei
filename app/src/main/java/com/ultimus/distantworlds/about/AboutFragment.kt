@@ -19,13 +19,13 @@ package com.ultimus.distantworlds.about
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.StringRes
+import androidx.core.net.toUri
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -137,9 +137,9 @@ class AboutFragment : Fragment() {
         val deepLinkIntent = MuzeiContract.Sources.createChooseProviderIntent(authority)
         try {
             startActivity(deepLinkIntent)
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             Toast.makeText(activity, failedMessage, Toast.LENGTH_LONG).show()
-            val muzeiLaunchIntent = requireActivity().packageManager.getLaunchIntentForPackage(MainActivity.muzeiPackage)
+            val muzeiLaunchIntent = requireActivity().packageManager.getLaunchIntentForPackage(MainActivity.MUZEI_PACKAGE)
             muzeiLaunchIntent?.let { startActivity(it) }
         }
     }
@@ -147,17 +147,17 @@ class AboutFragment : Fragment() {
     private fun goToInstallMuzei() {
         val installIntent = Intent(
             Intent.ACTION_VIEW,
-            Uri.parse("https://play.google.com/store/apps/details?id=${MainActivity.muzeiPackage}")
+            "https://play.google.com/store/apps/details?id=${MainActivity.MUZEI_PACKAGE}".toUri()
         )
         try {
             startActivity(installIntent)
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             Toast.makeText(activity, R.string.warning_muzei_not_installed, Toast.LENGTH_LONG).show()
         }
     }
 
     private fun goToOpenMuzei() {
-        val muzeiLaunchIntent = activity?.packageManager?.getLaunchIntentForPackage(MainActivity.muzeiPackage)
+        val muzeiLaunchIntent = activity?.packageManager?.getLaunchIntentForPackage(MainActivity.MUZEI_PACKAGE)
         activity?.startActivity(muzeiLaunchIntent)
     }
 
@@ -169,9 +169,9 @@ class AboutFragment : Fragment() {
     private fun isMuzeiInstalled(context: Context): Boolean {
         val packageManager = context.packageManager
         return try {
-            val info = packageManager.getApplicationInfo(MainActivity.muzeiPackage, 0)
+            val info = packageManager.getApplicationInfo(MainActivity.MUZEI_PACKAGE, 0)
             info.enabled
-        } catch (ex: PackageManager.NameNotFoundException) {
+        } catch (_: PackageManager.NameNotFoundException) {
             false
         }
     }

@@ -32,7 +32,7 @@ data class WorkConfiguration(val source: DistantWorldsSource, val albumId: Strin
          * Constructs a configuration object based on which pictures will be fetched from remote source.
          */
         fun fromInput(inputData: Data): WorkConfiguration {
-            val inputSource = inputData.getString(ImgurWorker.keySource)
+            val inputSource = inputData.getString(ImgurWorker.KEY_SOURCE)
                 ?: throw IllegalArgumentException("Source not specified. Has to be one from ${DistantWorldsSource::name}")
             val source: DistantWorldsSource = DistantWorldsSource.valueOf(inputSource)
             val albumId = when (source) {

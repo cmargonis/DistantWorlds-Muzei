@@ -23,14 +23,5 @@ class Image(
     var id: String,
     var title: String,
     var description: String,
-    var datetime: Int,
-    var type: String,
-    var animated: Boolean,
-    var width: Int,
-    var height: Int,
-    var size: Int,
-    var views: Int,
-    var bandwidth: Double,
-    var link: String,
-    var nsfw: Boolean
+    var link: String
 )
