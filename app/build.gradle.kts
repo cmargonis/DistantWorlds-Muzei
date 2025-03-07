@@ -24,7 +24,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.google.services)
     alias(libs.plugins.firebaseCrashlytics)
-    kotlin("kapt")
+    alias(libs.plugins.ksp)
     alias(libs.plugins.dagger.hilt)
 }
 
@@ -95,12 +95,13 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
+        allWarningsAsErrors = true
     }
 
     tasks.withType<Test> {
@@ -126,18 +127,13 @@ fun ApplicationBuildType.setupMinification(baseAppModuleExtension: BaseAppModule
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(21)
-        vendor = JvmVendorSpec.AZUL
     }
-}
-
-kapt {
-    correctErrorTypes = true
 }
 
 dependencies {
     implementation(libs.dagger.hilt)
     implementation(libs.hilt.navigation)
-    kapt(libs.hilt.kapt)
+    ksp(libs.hilt.compiler)
 
     implementation(libs.core.ktx)
     implementation(libs.appcompat)

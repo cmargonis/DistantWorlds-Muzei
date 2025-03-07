@@ -2,7 +2,8 @@
 constraintlayout = "2.2.0-beta01"
 fragment-ktx = "1.8.6"
 kotlin = "2.1.10"
-android-gradle-plugin = "8.8.0"
+android-gradle-plugin = "8.9.0"
+ksp = "2.1.10-1.0.31"
 appcompat = "1.7.0"
 core-ktx = "1.15.0"
 firebase-analytics-ktx = "22.2.0"
@@ -27,7 +28,7 @@ android-application = { id = "com.android.application", version.ref = "android-g
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 google-services = { id = "com.google.gms.google-services", version = "4.4.2" }
 firebaseCrashlytics = { id = "com.google.firebase.crashlytics", version = "3.0.3" }
-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "dagger-hilt" }
 
 [libraries]
@@ -54,7 +55,7 @@ gson = "com.google.code.gson:gson:2.12.1"
 firebase-core = { group = "com.google.firebase", name = "firebase-core", version.ref = "firebase-core" }
 dagger-hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "dagger-hilt" }
 hilt-navigation = { group = "androidx.hilt", name = "hilt-navigation-fragment", version.ref = "hilt" }
-hilt-kapt = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "dagger-hilt" }
+hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "dagger-hilt" }
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 muzei-api = { module = "com.google.android.apps.muzei:muzei-api", version = "3.4.2" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }

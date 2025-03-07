@@ -16,19 +16,10 @@
 
 package com.ultimus.distantworlds.model
 
-import java.util.*
-
 /**
  * Created by ultimus on 29/3/2016.
  */
 class Album(
     var id: String? = null,
-    var title: String? = null,
-    var description: String? = null,
-    var datetime: Int = 0,
-    var cover: String? = null,
-    var link: String? = null,
-    var nsfw: Boolean = false,
-    var imagesCount: Int = 0,
     var images: ArrayList<Image>? = null
 )

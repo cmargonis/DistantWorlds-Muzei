@@ -17,7 +17,7 @@
 package com.ultimus.distantworlds.service
 
 import android.content.Context
-import android.net.Uri
+import androidx.core.net.toUri
 import androidx.work.Data
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
@@ -38,7 +38,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import timber.log.Timber
 import java.io.IOException
-import java.util.ArrayList
 
 /**
  * Created by Chris Margonis on 03/11/2018.
@@ -47,11 +46,11 @@ class ImgurWorker(context: Context, workerParams: WorkerParameters) : Worker(con
 
     companion object {
 
-        internal const val keySource: String = "imgur_source"
+        internal const val KEY_SOURCE: String = "imgur_source"
         internal fun enqueueLoad(source: DistantWorldsSource, context: Context?) {
             context ?: return
             val workManager = WorkManager.getInstance(context)
-            val data = Data.Builder().putAll(mutableMapOf<String, Any>(keySource to source.name)).build()
+            val data = Data.Builder().putAll(mutableMapOf<String, Any>(KEY_SOURCE to source.name)).build()
             workManager.enqueue(OneTimeWorkRequestBuilder<ImgurWorker>().setInputData(data).build())
         }
     }
@@ -88,8 +87,8 @@ class ImgurWorker(context: Context, workerParams: WorkerParameters) : Worker(con
                 token = image.id,
                 title = image.title,
                 byline = image.description,
-                webUri = Uri.parse(image.link),
-                persistentUri = Uri.parse(image.link)
+                webUri = image.link.toUri(),
+                persistentUri = image.link.toUri()
             )
         }.shuffled())
     }
