@@ -22,7 +22,7 @@ retrofit = "2.11.0"
 timber = "5.0.1"
 turbine = "1.2.0"
 work-runtime-ktx = "2.10.0"
-compose-bom = "2025.3.01"
+compose-bom = "2025.03.01"
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "android-gradle-plugin" }
@@ -71,6 +71,6 @@ compose-bom = { module = "androidx.compose:compose-bom", version.ref = "compose-
 compose-material3 = { module = "androidx.compose.material3:material3" }
 compose-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
 compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
-activity-compose = { module = "androidx.compose.ui:ui-tooling", version = "1.10.0" }
+activity-compose = { module = "androidx.activity:activity-compose", version = "1.10.0" }
 compose-junit4 = { module = "androidx.compose.ui:ui-test-junit4" }
 compose-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
