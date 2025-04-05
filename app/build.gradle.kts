@@ -150,6 +150,7 @@ dependencies {
     implementation(libs.compose.tooling.preview)
     debugImplementation(libs.compose.ui.tooling)
     implementation(libs.activity.compose)
+    implementation(libs.google.fonts)
 
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
