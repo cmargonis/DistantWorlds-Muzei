@@ -30,6 +30,13 @@ object AboutView {
         object ToInstallMuzei : Navigation()
         object ToOpenMuzei : Navigation()
     }
+
+    sealed interface UIAction {
+        data object DW1Clicked : UIAction
+        data object DW2Clicked : UIAction
+        data object InstallMuzeiClicked : UIAction
+        data object OpenMuzeiClicked : UIAction
+    }
 }
 
 enum class MuzeiStatus {

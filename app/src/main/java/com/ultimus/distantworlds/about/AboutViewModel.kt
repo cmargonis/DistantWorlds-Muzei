@@ -18,6 +18,10 @@ package com.ultimus.distantworlds.about
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.ultimus.distantworlds.about.AboutView.UIAction.DW1Clicked
+import com.ultimus.distantworlds.about.AboutView.UIAction.DW2Clicked
+import com.ultimus.distantworlds.about.AboutView.UIAction.InstallMuzeiClicked
+import com.ultimus.distantworlds.about.AboutView.UIAction.OpenMuzeiClicked
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
@@ -36,25 +40,34 @@ class AboutViewModel : ViewModel() {
         }
     }
 
-    fun onDistantWorlds1Clicked() {
+    fun onUserAction(action: AboutView.UIAction) {
+        when (action) {
+            is DW1Clicked -> onDistantWorlds1Clicked()
+            is DW2Clicked -> onDistantWorlds2Clicked()
+            is InstallMuzeiClicked -> onInstallMuzeiClicked()
+            is OpenMuzeiClicked -> onOpenMuzeiClicked()
+        }
+    }
+
+    private fun onDistantWorlds1Clicked() {
         viewModelScope.launch {
             effect.emit(AboutView.Navigation.ToDistantWorlds1)
         }
     }
 
-    fun onDistantWorlds2Clicked() {
+    private fun onDistantWorlds2Clicked() {
         viewModelScope.launch {
             effect.emit(AboutView.Navigation.ToDistantWorlds2)
         }
     }
 
-    fun onInstallMuzeiClicked() {
+    private fun onInstallMuzeiClicked() {
         viewModelScope.launch {
             effect.emit(AboutView.Navigation.ToInstallMuzei)
         }
     }
 
-    fun onOpenMuzeiClicked() {
+    private fun onOpenMuzeiClicked() {
         viewModelScope.launch {
             effect.emit(AboutView.Navigation.ToOpenMuzei)
         }
