@@ -16,23 +16,16 @@
 
 package com.ultimus.distantworlds.about
 
-import android.content.Context
-import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
-import androidx.annotation.StringRes
-import androidx.core.net.toUri
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.google.android.apps.muzei.api.MuzeiContract
+import com.ultimus.distantworlds.about.AboutView.Navigation
+import com.ultimus.distantworlds.about.AboutView.State
 import com.ultimus.distantworlds_muzei.BuildConfig
 import com.ultimus.distantworlds_muzei.R
 import com.ultimus.distantworlds_muzei.databinding.FragmentAboutBinding
@@ -45,11 +38,6 @@ class AboutFragment : Fragment() {
     private var _binding: FragmentAboutBinding? = null
     private val binding get() = _binding!!
     private val viewModel: AboutViewModel by viewModels()
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        _binding = FragmentAboutBinding.inflate(inflater, container, false)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -81,31 +69,15 @@ class AboutFragment : Fragment() {
         viewModel.initialize(retrieveMuzeiStatus(requireContext()))
     }
 
-    private fun retrieveMuzeiStatus(context: Context): MuzeiStatus {
-        val distantWorldsSelected =
-            MuzeiContract.Sources.isProviderSelected(requireContext(), BuildConfig.DISTANT_WORLDS_AUTHORITY)
-        val distantWorlds2Selected =
-            MuzeiContract.Sources.isProviderSelected(requireContext(), BuildConfig.DISTANT_WORLDS_TWO_AUTHORITY)
-        return when {
-            !isMuzeiInstalled(context) -> MuzeiStatus.NOT_INSTALLED
-            !distantWorldsSelected && !distantWorlds2Selected -> MuzeiStatus.SELECTED_NONE
-            distantWorldsSelected -> MuzeiStatus.DW_1_SELECTED
-            distantWorlds2Selected -> MuzeiStatus.DW_2_SELECTED
-            else -> MuzeiStatus.NOT_INSTALLED
-        }
-    }
-
-    private fun render(state: AboutView.State) {
+    private fun render(state: State) {
         when (state) {
-            AboutView.State.Idle -> {
-            }
-
-            AboutView.State.InstallMuzeiPrompt -> binding.layoutActions.installMuzei.isVisible = true
-            is AboutView.State.SelectDWSource -> showSourceSelection(state)
+            State.Idle -> Unit
+            State.InstallMuzeiPrompt -> binding.layoutActions.installMuzei.isVisible = true
+            is State.SelectDWSource -> showSourceSelection(state)
         }
     }
 
-    private fun showSourceSelection(state: AboutView.State.SelectDWSource) {
+    private fun showSourceSelection(state: State.SelectDWSource) {
         with(binding.layoutActions) {
             if (state.showDW1 || state.showDW2) {
                 btnDistantWorlds1.isVisible = true
@@ -116,63 +88,22 @@ class AboutFragment : Fragment() {
         }
     }
 
-    private fun handle(effect: AboutView.Navigation) {
+    private fun handle(effect: Navigation) {
         when (effect) {
-            AboutView.Navigation.ToDistantWorlds1 -> goToDistantWolds(
+            Navigation.ToDistantWorlds1 -> goToDistantWolds(
+                requireContext(),
                 BuildConfig.DISTANT_WORLDS_AUTHORITY,
                 R.string.warning_select_source
             )
 
-            AboutView.Navigation.ToDistantWorlds2 -> goToDistantWolds(
+            Navigation.ToDistantWorlds2 -> goToDistantWolds(
+                requireContext(),
                 BuildConfig.DISTANT_WORLDS_TWO_AUTHORITY,
                 R.string.warning_select_source_2
             )
 
-            AboutView.Navigation.ToInstallMuzei -> goToInstallMuzei()
-            AboutView.Navigation.ToOpenMuzei -> goToOpenMuzei()
-        }
-    }
-
-    private fun goToDistantWolds(authority: String, @StringRes failedMessage: Int) {
-        val deepLinkIntent = MuzeiContract.Sources.createChooseProviderIntent(authority)
-        try {
-            startActivity(deepLinkIntent)
-        } catch (_: Exception) {
-            Toast.makeText(activity, failedMessage, Toast.LENGTH_LONG).show()
-            val muzeiLaunchIntent = requireActivity().packageManager.getLaunchIntentForPackage(MainActivity.MUZEI_PACKAGE)
-            muzeiLaunchIntent?.let { startActivity(it) }
-        }
-    }
-
-    private fun goToInstallMuzei() {
-        val installIntent = Intent(
-            Intent.ACTION_VIEW,
-            "https://play.google.com/store/apps/details?id=${MainActivity.MUZEI_PACKAGE}".toUri()
-        )
-        try {
-            startActivity(installIntent)
-        } catch (_: Exception) {
-            Toast.makeText(activity, R.string.warning_muzei_not_installed, Toast.LENGTH_LONG).show()
-        }
-    }
-
-    private fun goToOpenMuzei() {
-        val muzeiLaunchIntent = activity?.packageManager?.getLaunchIntentForPackage(MainActivity.MUZEI_PACKAGE)
-        activity?.startActivity(muzeiLaunchIntent)
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
-    private fun isMuzeiInstalled(context: Context): Boolean {
-        val packageManager = context.packageManager
-        return try {
-            val info = packageManager.getApplicationInfo(MainActivity.MUZEI_PACKAGE, 0)
-            info.enabled
-        } catch (_: PackageManager.NameNotFoundException) {
-            false
+            Navigation.ToInstallMuzei -> goToInstallMuzei(requireContext())
+            Navigation.ToOpenMuzei -> goToOpenMuzei(requireContext())
         }
     }
 }
