@@ -18,6 +18,7 @@ package com.ultimus.distantworlds.about
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.ultimus.distantworlds.about.AboutView.State
 import com.ultimus.distantworlds.about.AboutView.UIAction.DW1Clicked
 import com.ultimus.distantworlds.about.AboutView.UIAction.DW2Clicked
 import com.ultimus.distantworlds.about.AboutView.UIAction.InstallMuzeiClicked
@@ -28,15 +29,15 @@ import kotlinx.coroutines.launch
 
 class AboutViewModel : ViewModel() {
 
-    val state: MutableStateFlow<AboutView.State> = MutableStateFlow(value = AboutView.State.Idle)
+    val state: MutableStateFlow<State> = MutableStateFlow(value = State.Idle)
     val effect: MutableSharedFlow<AboutView.Navigation> = MutableSharedFlow(replay = 0)
 
     fun initialize(muzeiStatus: MuzeiStatus) {
         state.value = when (muzeiStatus) {
-            MuzeiStatus.NOT_INSTALLED -> AboutView.State.InstallMuzeiPrompt
-            MuzeiStatus.SELECTED_NONE -> AboutView.State.SelectDWSource(showDW1 = true, showDW2 = true)
-            MuzeiStatus.DW_1_SELECTED -> AboutView.State.SelectDWSource(showDW1 = false, showDW2 = true)
-            MuzeiStatus.DW_2_SELECTED -> AboutView.State.SelectDWSource(showDW1 = true, showDW2 = false)
+            MuzeiStatus.NOT_INSTALLED -> State.InstallMuzeiPrompt
+            MuzeiStatus.SELECTED_NONE -> State.SelectDWSource(showDW1 = true, showDW2 = true)
+            MuzeiStatus.DW_1_SELECTED -> State.SelectDWSource(showDW1 = false, showDW2 = true)
+            MuzeiStatus.DW_2_SELECTED -> State.SelectDWSource(showDW1 = true, showDW2 = false)
         }
     }
 
