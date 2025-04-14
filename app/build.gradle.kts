@@ -79,7 +79,7 @@ android {
     }
 
     buildFeatures {
-        viewBinding = true
+        viewBinding = false
         renderScript = false
         shaders = false
     }
