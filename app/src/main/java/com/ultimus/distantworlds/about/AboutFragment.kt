@@ -26,7 +26,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.ultimus.distantworlds.about.AboutView.Navigation
 import com.ultimus.distantworlds.about.AboutView.State
-import com.ultimus.distantworlds.about.AboutView.UIAction
 import com.ultimus.distantworlds_muzei.BuildConfig
 import com.ultimus.distantworlds_muzei.R
 import com.ultimus.distantworlds_muzei.databinding.FragmentAboutBinding
@@ -42,17 +41,7 @@ class AboutFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initializeListeners()
         observeState()
-    }
-
-    private fun initializeListeners() {
-        with(binding.layoutActions) {
-            btnDistantWorlds1.setOnClickListener { viewModel.onUserAction(UIAction.DW1Clicked) }
-            btnDistantWorlds2.setOnClickListener { viewModel.onUserAction(UIAction.DW2Clicked) }
-            installMuzei.setOnClickListener { viewModel.onUserAction(UIAction.InstallMuzeiClicked) }
-            openMuzei.setOnClickListener { viewModel.onUserAction(UIAction.OpenMuzeiClicked) }
-        }
     }
 
     private fun observeState() {

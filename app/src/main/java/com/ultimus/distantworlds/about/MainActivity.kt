@@ -17,8 +17,12 @@
 package com.ultimus.distantworlds.about
 
 import android.os.Bundle
+import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.ultimus.distantworlds_muzei.R
+import androidx.compose.runtime.getValue
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.ultimus.distantworlds.theme.DistantWorldsTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -29,8 +33,19 @@ class MainActivity : AppCompatActivity() {
         const val MUZEI_PACKAGE: String = "net.nurik.roman.muzei"
     }
 
+    private val viewModel: AboutViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        viewModel.initialize(retrieveMuzeiStatus(this))
+        setContent {
+            DistantWorldsTheme {
+                val state by viewModel.state.collectAsStateWithLifecycle()
+                AboutScreen(
+                    state = state,
+                    onEvent = viewModel::onUserAction
+                )
+            }
+        }
     }
 }
