@@ -17,22 +17,13 @@
 package com.ultimus.distantworlds.about
 
 import app.cash.turbine.test
-import com.ultimus.distantworlds.utils.CoroutinesTestExtension
-import kotlinx.coroutines.ExperimentalCoroutinesApi
+import com.ultimus.distantworlds.about.AboutView.UIAction
 import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.extension.RegisterExtension
-import kotlin.time.ExperimentalTime
 
-@ExperimentalTime
-@ExperimentalCoroutinesApi
 class AboutViewModelTest {
-
-    @JvmField
-    @RegisterExtension
-    val coroutinesTestExtension = CoroutinesTestExtension()
 
     private lateinit var testedClass: AboutViewModel
 
@@ -44,7 +35,7 @@ class AboutViewModelTest {
     @Test
     fun `when select distant worlds 1 is pressed, then navigate to setup distant worlds 1`() = runTest {
         testedClass.effect.test {
-            testedClass.onDistantWorlds1Clicked()
+            testedClass.onUserAction(UIAction.DW1Clicked)
             assertEquals(AboutView.Navigation.ToDistantWorlds1, awaitItem())
             cancelAndConsumeRemainingEvents()
         }
@@ -53,7 +44,7 @@ class AboutViewModelTest {
     @Test
     fun `when select distant worlds 2 is pressed, then navigate to setup distant worlds 2`() = runTest {
         testedClass.effect.test {
-            testedClass.onDistantWorlds2Clicked()
+            testedClass.onUserAction(UIAction.DW2Clicked)
             assertEquals(AboutView.Navigation.ToDistantWorlds2, awaitItem())
             cancelAndConsumeRemainingEvents()
         }
@@ -62,7 +53,7 @@ class AboutViewModelTest {
     @Test
     fun `when install muzei is pressed, then navigate to play store to muzei page`() = runTest {
         testedClass.effect.test {
-            testedClass.onInstallMuzeiClicked()
+            testedClass.onUserAction(UIAction.InstallMuzeiClicked)
             assertEquals(AboutView.Navigation.ToInstallMuzei, awaitItem())
             cancelAndConsumeRemainingEvents()
         }
@@ -71,7 +62,7 @@ class AboutViewModelTest {
     @Test
     fun `when open muzei is pressed, then navigate to open muzei page`() = runTest {
         testedClass.effect.test {
-            testedClass.onOpenMuzeiClicked()
+            testedClass.onUserAction(UIAction.OpenMuzeiClicked)
             assertEquals(AboutView.Navigation.ToOpenMuzei, awaitItem())
             cancelAndConsumeRemainingEvents()
         }
@@ -87,11 +78,11 @@ class AboutViewModelTest {
     }
 
     @Test
-    fun `given distant worlds 1 & 2 is not selected, when initializing, then show select dw 1 & 2 button`() = runTest {
+    fun `given distant worlds 1 & 2 is not selected, when initializing, then open muzei button`() = runTest {
         testedClass.initialize(muzeiStatus = MuzeiStatus.SELECTED_NONE)
 
         testedClass.state.test {
-            val expected = AboutView.State.SelectDWSource(showDW1 = true, showDW2 = true)
+            val expected = AboutView.State.SelectDWSource(showDW1 = false, showDW2 = false)
             assertEquals(expected, awaitItem())
             cancelAndConsumeRemainingEvents()
         }

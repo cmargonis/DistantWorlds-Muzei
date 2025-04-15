@@ -15,7 +15,7 @@
   -->
 
 <!--suppress LongLine -->
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Elite Dangerous - Distant Worlds Expedition For Muzei</string>
     <string name="app_name_short">Distant Worlds</string>
     <string name="provider_name_dw">Distant Worlds</string>
@@ -25,8 +25,7 @@
     <string name="app_name_formatted">Elite Dangerous - Distant Worlds Expedition\n For Muzei</string>
 
     <string name="about_description">This application was made to honor the explorers of the Distant Worlds Expeditions of the years 3302 and 3305.\nYou can select either expedition as your wallpaper source.</string>
-    <string name="about_forum_thread">Images from Distant Worlds can be found here: <a href="https://forums.frontier.co.uk/showthread.php?t=222490">[Distant Worlds] Centralized photo gallery</a></string>
-    <string name="about_forum_thread_dw2">Link for images from Distant Worlds 2 will be uploaded soon</string>
+    <string name="about_forum_thread" tools:ignore="TypographyQuotes">Images from Distant Worlds can be found here:&lt;a href="https://forums.frontier.co.uk/threads/distant-worlds-centralized-photo-gallery.222490/">[Distant Worlds] Centralized photo gallery&lt;/a>&lt;p/>&lt;a href="https://forums.frontier.co.uk/threads/dw2-newsletters.226066/">[Distant Worlds 2] Newsletters&lt;/a>.</string>
 
     <string name="enable_distant_worlds">Select Distant Worlds</string>
     <string name="enable_distant_worlds_2">Select Distant Worlds 2</string>

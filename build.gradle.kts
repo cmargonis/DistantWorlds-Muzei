@@ -20,4 +20,5 @@ plugins {
     alias(libs.plugins.firebaseCrashlytics) apply false
     alias(libs.plugins.ksp) apply false
     alias(libs.plugins.dagger.hilt) apply false
+    alias(libs.plugins.compose.compiler) apply false
 }
