@@ -36,6 +36,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.TextLinkStyles
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.fromHtml
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ultimus.distantworlds.about.AboutView.State
@@ -84,7 +90,16 @@ internal fun AboutScreen(state: State, onEvent: (UIAction) -> Unit) {
                 style = MaterialTheme.typography.bodyLarge
             )
             Text(
-                text = stringResource(R.string.about_forum_thread),
+                text = AnnotatedString.fromHtml(
+                    htmlString = stringResource(R.string.about_forum_thread),
+                    linkStyles = TextLinkStyles(
+                        style = SpanStyle(
+                            textDecoration = TextDecoration.Underline,
+                            fontStyle = FontStyle.Italic,
+                            color = MaterialTheme.colorScheme.tertiary
+                        )
+                    )
+                ),
                 style = MaterialTheme.typography.bodyLarge
             )
             Text(
