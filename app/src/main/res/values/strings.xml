@@ -30,6 +30,8 @@
 
     <string name="enable_distant_worlds">Select Distant Worlds</string>
     <string name="enable_distant_worlds_2">Select Distant Worlds 2</string>
+    <string name="warning_select_source">Select Distant Worlds from the “Sources” screen</string>
+    <string name="warning_select_source_2">Select Distant Worlds 2 from the “Sources” screen</string>
     <string name="install_muzei">Install Muzei</string>
     <string name="warning_muzei_not_installed">Failed to launch the Google Play Store to install Muzei</string>
     <string name="open_muzei">Open Muzei</string>
