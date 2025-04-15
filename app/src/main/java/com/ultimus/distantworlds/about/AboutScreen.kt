@@ -102,10 +102,6 @@ internal fun AboutScreen(state: State, onEvent: (UIAction) -> Unit) {
                 ),
                 style = MaterialTheme.typography.bodyLarge
             )
-            Text(
-                text = stringResource(R.string.about_forum_thread_dw2),
-                style = MaterialTheme.typography.bodyLarge
-            )
 
             when (state) {
                 State.Idle -> Unit
