@@ -78,11 +78,11 @@ class AboutViewModelTest {
     }
 
     @Test
-    fun `given distant worlds 1 & 2 is not selected, when initializing, then show select dw 1 & 2 button`() = runTest {
+    fun `given distant worlds 1 & 2 is not selected, when initializing, then open muzei button`() = runTest {
         testedClass.initialize(muzeiStatus = MuzeiStatus.SELECTED_NONE)
 
         testedClass.state.test {
-            val expected = AboutView.State.SelectDWSource(showDW1 = true, showDW2 = true)
+            val expected = AboutView.State.SelectDWSource(showDW1 = false, showDW2 = false)
             assertEquals(expected, awaitItem())
             cancelAndConsumeRemainingEvents()
         }

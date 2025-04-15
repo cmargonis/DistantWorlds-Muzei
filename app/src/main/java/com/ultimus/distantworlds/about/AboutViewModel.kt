@@ -35,7 +35,7 @@ class AboutViewModel : ViewModel() {
     fun initialize(muzeiStatus: MuzeiStatus) {
         state.value = when (muzeiStatus) {
             MuzeiStatus.NOT_INSTALLED -> State.InstallMuzeiPrompt
-            MuzeiStatus.SELECTED_NONE -> State.SelectDWSource(showDW1 = true, showDW2 = true)
+            MuzeiStatus.SELECTED_NONE -> State.SelectDWSource(showDW1 = false, showDW2 = false)
             MuzeiStatus.DW_1_SELECTED -> State.SelectDWSource(showDW1 = false, showDW2 = true)
             MuzeiStatus.DW_2_SELECTED -> State.SelectDWSource(showDW1 = true, showDW2 = false)
         }
