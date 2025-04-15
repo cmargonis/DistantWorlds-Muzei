@@ -22,7 +22,7 @@ retrofit = "2.11.0"
 timber = "5.0.1"
 turbine = "1.2.0"
 work-runtime-ktx = "2.10.0"
-compose-bom = "2025.03.01"
+compose-bom = "2025.04.00"
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "android-gradle-plugin" }
