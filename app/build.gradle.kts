@@ -16,6 +16,7 @@
 import com.android.build.api.dsl.ApplicationBuildType
 import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 import com.google.firebase.crashlytics.buildtools.gradle.CrashlyticsExtension
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import java.io.FileInputStream
 import java.util.Properties
 
@@ -101,11 +102,6 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
 
-    kotlinOptions {
-        jvmTarget = "11"
-        allWarningsAsErrors = true
-    }
-
     tasks.withType<Test> {
         useJUnitPlatform()
     }
@@ -113,6 +109,13 @@ android {
     lint {
         warningsAsErrors = true
         informational.add("IconDensities")
+    }
+}
+
+kotlin {
+    compilerOptions {
+        jvmTarget.set(JvmTarget.JVM_11)
+        allWarningsAsErrors.set(true)
     }
 }
 
@@ -136,6 +139,7 @@ dependencies {
     implementation(libs.dagger.hilt)
     implementation(libs.hilt.navigation)
     ksp(libs.hilt.compiler)
+    ksp(libs.kotlin.metadata.jvm)
 
     implementation(libs.core.ktx)
     implementation(libs.appcompat)
