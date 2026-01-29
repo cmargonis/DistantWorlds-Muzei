@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 import com.android.build.api.dsl.ApplicationBuildType
-import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
+import com.android.build.api.dsl.ApplicationExtension
 import com.google.firebase.crashlytics.buildtools.gradle.CrashlyticsExtension
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import java.io.FileInputStream
@@ -22,7 +22,6 @@ import java.util.Properties
 
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.google.services)
     alias(libs.plugins.firebaseCrashlytics)
@@ -81,7 +80,6 @@ android {
 
     buildFeatures {
         viewBinding = false
-        renderScript = false
         shaders = false
     }
 
@@ -102,14 +100,14 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
 
-    tasks.withType<Test> {
-        useJUnitPlatform()
-    }
-
     lint {
         warningsAsErrors = true
         informational.add("IconDensities")
     }
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform()
 }
 
 kotlin {
@@ -119,7 +117,7 @@ kotlin {
     }
 }
 
-fun ApplicationBuildType.setupMinification(baseAppModuleExtension: BaseAppModuleExtension, minificationEnabled: Boolean) {
+fun ApplicationBuildType.setupMinification(baseAppModuleExtension: ApplicationExtension, minificationEnabled: Boolean) {
     isMinifyEnabled = minificationEnabled
     isShrinkResources = minificationEnabled
     proguardFiles(
