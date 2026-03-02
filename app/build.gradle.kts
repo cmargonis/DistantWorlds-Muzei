@@ -139,7 +139,9 @@ java {
 dependencies {
     implementation(libs.dagger.hilt)
     implementation(libs.hilt.navigation)
+    implementation(libs.hilt.work)
     ksp(libs.hilt.compiler)
+    ksp(libs.hilt.work.compiler)
     ksp(libs.kotlin.metadata.jvm)
 
     implementation(libs.core.ktx)

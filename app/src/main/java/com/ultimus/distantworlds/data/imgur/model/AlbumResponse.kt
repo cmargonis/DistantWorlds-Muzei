@@ -14,9 +14,6 @@
  *    limitations under the License.
  */
 
-package com.ultimus.distantworlds.model
+package com.ultimus.distantworlds.data.imgur.model
 
-/**
- * Created by Chris Margonis on 03/11/2018.
- */
-class AlbumResponse(var data: Album?, var success: Boolean)
+data class AlbumResponse(val data: Album?, val success: Boolean)

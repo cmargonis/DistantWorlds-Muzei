@@ -16,11 +16,16 @@
 
 package com.ultimus.distantworlds.provider
 
-/**
- * Created by Chris Margonis on 15/01/2019.
- */
+import com.ultimus.distantworlds_muzei.BuildConfig
+
 enum class DistantWorldsSource {
 
     DISTANT_WORLDS_1,
     DISTANT_WORLDS_2
 }
+
+val DistantWorldsSource.authority: String
+    get() = when (this) {
+        DistantWorldsSource.DISTANT_WORLDS_1 -> BuildConfig.DISTANT_WORLDS_AUTHORITY
+        DistantWorldsSource.DISTANT_WORLDS_2 -> BuildConfig.DISTANT_WORLDS_TWO_AUTHORITY
+    }

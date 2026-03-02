@@ -23,11 +23,14 @@ import com.ultimus.distantworlds.about.AboutView.UIAction.DW1Clicked
 import com.ultimus.distantworlds.about.AboutView.UIAction.DW2Clicked
 import com.ultimus.distantworlds.about.AboutView.UIAction.InstallMuzeiClicked
 import com.ultimus.distantworlds.about.AboutView.UIAction.OpenMuzeiClicked
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class AboutViewModel : ViewModel() {
+@HiltViewModel
+class AboutViewModel @Inject constructor() : ViewModel() {
 
     val state: MutableStateFlow<State> = MutableStateFlow(value = State.Idle)
     val effect: MutableSharedFlow<AboutView.Navigation> = MutableSharedFlow(replay = 0)

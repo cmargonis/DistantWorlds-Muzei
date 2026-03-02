@@ -14,12 +14,9 @@
  *    limitations under the License.
  */
 
-package com.ultimus.distantworlds.model
+package com.ultimus.distantworlds.data.imgur.model
 
-/**
- * Created by ultimus on 29/3/2016.
- */
-class Album(
-    var id: String? = null,
-    var images: ArrayList<Image>? = null
+data class Album(
+    val id: String? = null,
+    val images: ArrayList<Image>? = null
 )

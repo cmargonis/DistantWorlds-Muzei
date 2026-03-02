@@ -60,7 +60,9 @@ gson = "com.google.code.gson:gson:2.14.0"
 firebase-core = { group = "com.google.firebase", name = "firebase-core", version.ref = "firebase-core" }
 dagger-hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "dagger-hilt" }
 hilt-navigation = { group = "androidx.hilt", name = "hilt-navigation-fragment", version.ref = "hilt" }
+hilt-work = { group = "androidx.hilt", name = "hilt-work", version.ref = "hilt" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "dagger-hilt" }
+hilt-work-compiler = { group = "androidx.hilt", name = "hilt-compiler", version.ref = "hilt" }
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 muzei-api = { module = "com.google.android.apps.muzei:muzei-api", version = "3.4.2" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }

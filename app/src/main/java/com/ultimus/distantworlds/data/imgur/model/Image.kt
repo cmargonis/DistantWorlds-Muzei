@@ -14,22 +14,11 @@
  *    limitations under the License.
  */
 
-package com.ultimus.distantworlds.service
+package com.ultimus.distantworlds.data.imgur.model
 
-import com.ultimus.distantworlds.model.AlbumResponse
-import retrofit2.Call
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.Path
-
-/**
- * Created by cmargonis on 28/3/2016.
- */
-const val IMGUR_API_VERSION: String = "3"
-const val IMGUR_BASE_URL: String = "https://api.imgur.com/$IMGUR_API_VERSION/"
-
-internal interface DistantWorldsService {
-
-    @GET("album/{id}")
-    fun getAlbumDetails(@Path("id") albumId: String, @Header("Authorization") clientId: String): Call<AlbumResponse>
-}
+data class Image(
+    val id: String,
+    val title: String,
+    val description: String,
+    val link: String
+)
