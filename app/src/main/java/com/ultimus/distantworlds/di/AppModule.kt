@@ -2,27 +2,26 @@ package com.ultimus.distantworlds.di
 
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
+import com.ultimus.distantworlds.about.AboutViewModel
 import com.ultimus.distantworlds.data.imgur.IMGUR_BASE_URL
+import com.ultimus.distantworlds.data.imgur.ImgurImageProvider
 import com.ultimus.distantworlds.data.imgur.ImgurService
+import com.ultimus.distantworlds.domain.ImageProvider
+import com.ultimus.distantworlds.provider.DistantWorldsSource
+import com.ultimus.distantworlds.worker.ArtworkWorker
+import com.ultimus.distantworlds.worker.ImageProviderFactory
 import com.ultimus.distantworlds_muzei.BuildConfig
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.androidx.workmanager.dsl.worker
+import org.koin.core.module.dsl.viewModel
+import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import timber.log.Timber
-import javax.inject.Singleton
 
-@Module
-@InstallIn(SingletonComponent::class)
-object NetworkModule {
-
-    @Provides
-    @Singleton
-    fun provideOkHttpClient(): OkHttpClient {
+val appModule = module {
+    single<OkHttpClient> {
         val builder = OkHttpClient.Builder()
         builder.addInterceptor { chain ->
             val response = chain.proceed(chain.request())
@@ -36,20 +35,37 @@ object NetworkModule {
             interceptor.level = HttpLoggingInterceptor.Level.BODY
             builder.addNetworkInterceptor(interceptor)
         }
-        return builder.build()
+        builder.build()
     }
 
-    @Provides
-    @Singleton
-    fun provideImgurService(client: OkHttpClient): ImgurService {
+    single<ImgurService> {
         val gson = GsonBuilder()
             .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
             .create()
-        return Retrofit.Builder()
+        Retrofit.Builder()
             .baseUrl(IMGUR_BASE_URL)
             .addConverterFactory(GsonConverterFactory.create(gson))
-            .client(client)
+            .client(get())
             .build()
             .create(ImgurService::class.java)
     }
+
+    single<Map<DistantWorldsSource, ImageProvider>> {
+        mapOf(
+            DistantWorldsSource.DISTANT_WORLDS_1 to ImgurImageProvider(
+                get(),
+                BuildConfig.IMGUR_DW_ALBUM,
+                BuildConfig.IMGUR_CLIENT_ID,
+            ),
+            DistantWorldsSource.DISTANT_WORLDS_2 to ImgurImageProvider(
+                get(),
+                BuildConfig.IMGUR_DW2_ALBUM,
+                BuildConfig.IMGUR_CLIENT_ID,
+            ),
+        )
+    }
+
+    single { ImageProviderFactory(get()) }
+    viewModel { AboutViewModel() }
+    worker { ArtworkWorker(get(), get(), get()) }
 }

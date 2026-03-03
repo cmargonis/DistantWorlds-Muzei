@@ -25,8 +25,6 @@ plugins {
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.google.services)
     alias(libs.plugins.firebaseCrashlytics)
-    alias(libs.plugins.ksp)
-    alias(libs.plugins.dagger.hilt)
 }
 
 fun getImgurApiProperties(): Properties {
@@ -137,12 +135,8 @@ java {
 }
 
 dependencies {
-    implementation(libs.dagger.hilt)
-    implementation(libs.hilt.navigation)
-    implementation(libs.hilt.work)
-    ksp(libs.hilt.compiler)
-    ksp(libs.hilt.work.compiler)
-    ksp(libs.kotlin.metadata.jvm)
+    implementation(libs.koin.android)
+    implementation(libs.koin.workmanager)
 
     implementation(libs.core.ktx)
     implementation(libs.appcompat)

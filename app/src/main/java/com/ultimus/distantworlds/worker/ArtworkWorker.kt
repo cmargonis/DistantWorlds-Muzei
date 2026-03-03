@@ -2,7 +2,6 @@ package com.ultimus.distantworlds.worker
 
 import android.content.Context
 import androidx.core.net.toUri
-import androidx.hilt.work.HiltWorker
 import androidx.work.Data
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
@@ -12,15 +11,12 @@ import com.google.android.apps.muzei.api.provider.Artwork
 import com.google.android.apps.muzei.api.provider.ProviderContract
 import com.ultimus.distantworlds.provider.DistantWorldsSource
 import com.ultimus.distantworlds.provider.authority
-import dagger.assisted.Assisted
-import dagger.assisted.AssistedInject
 import timber.log.Timber
 import java.io.IOException
 
-@HiltWorker
-class ArtworkWorker @AssistedInject constructor(
-    @Assisted context: Context,
-    @Assisted workerParams: WorkerParameters,
+class ArtworkWorker(
+    context: Context,
+    workerParams: WorkerParameters,
     private val imageProviderFactory: ImageProviderFactory,
 ) : Worker(context, workerParams) {
 
@@ -34,9 +30,7 @@ class ArtworkWorker @AssistedInject constructor(
             val data = Data.Builder()
                 .putAll(mutableMapOf<String, Any>(KEY_SOURCE to source.name))
                 .build()
-            workManager.enqueue(
-                OneTimeWorkRequestBuilder<ArtworkWorker>().setInputData(data).build()
-            )
+            workManager.enqueue(OneTimeWorkRequestBuilder<ArtworkWorker>().setInputData(data).build())
         }
     }
 
@@ -60,13 +54,13 @@ class ArtworkWorker @AssistedInject constructor(
 
         val providerClient = ProviderContract.getProviderClient(applicationContext, source.authority)
         providerClient.addArtwork(
-            artworkList.map { artworkData ->
+            artworkList.map { (token, title, byline, imageUri, webUri) ->
                 Artwork(
-                    token = artworkData.token,
-                    title = artworkData.title,
-                    byline = artworkData.byline,
-                    webUri = artworkData.webUri.toUri(),
-                    persistentUri = artworkData.imageUri.toUri(),
+                    token = token,
+                    title = title,
+                    byline = byline,
+                    webUri = webUri.toUri(),
+                    persistentUri = imageUri.toUri(),
                 )
             }.shuffled()
         )

@@ -17,23 +17,19 @@
 package com.ultimus.distantworlds
 
 import android.app.Application
-import androidx.hilt.work.HiltWorkerFactory
 import androidx.work.Configuration
+import com.ultimus.distantworlds.di.appModule
 import com.ultimus.distantworlds_muzei.BuildConfig
-import dagger.hilt.android.HiltAndroidApp
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
+import org.koin.androidx.workmanager.koin.workManagerFactory
+import org.koin.core.context.startKoin
 import timber.log.Timber
-import javax.inject.Inject
 
-@HiltAndroidApp
 class DistantWorldsApplication : Application(), Configuration.Provider {
 
-    @Inject
-    lateinit var workerFactory: HiltWorkerFactory
-
     override val workManagerConfiguration: Configuration by lazy {
-        Configuration.Builder()
-            .setWorkerFactory(workerFactory)
-            .build()
+        Configuration.Builder().build()
     }
 
     override fun onCreate() {
@@ -41,6 +37,13 @@ class DistantWorldsApplication : Application(), Configuration.Provider {
 
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
+        }
+
+        startKoin {
+            androidLogger()
+            androidContext(this@DistantWorldsApplication)
+            workManagerFactory()
+            modules(appModule)
         }
     }
 }

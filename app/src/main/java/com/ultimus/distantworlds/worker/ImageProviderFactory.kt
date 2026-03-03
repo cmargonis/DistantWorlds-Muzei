@@ -2,9 +2,8 @@ package com.ultimus.distantworlds.worker
 
 import com.ultimus.distantworlds.domain.ImageProvider
 import com.ultimus.distantworlds.provider.DistantWorldsSource
-import javax.inject.Inject
 
-class ImageProviderFactory @Inject constructor(
+class ImageProviderFactory(
     private val providers: Map<DistantWorldsSource, @JvmSuppressWildcards ImageProvider>,
 ) {
 

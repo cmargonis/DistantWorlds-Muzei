@@ -29,10 +29,8 @@ import com.ultimus.distantworlds.about.AboutView.Navigation
 import com.ultimus.distantworlds.theme.DistantWorldsTheme
 import com.ultimus.distantworlds_muzei.BuildConfig
 import com.ultimus.distantworlds_muzei.R
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
-@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     companion object {
