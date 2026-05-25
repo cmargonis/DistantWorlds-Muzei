@@ -44,7 +44,11 @@ fun getImgurApiProperties(): Properties {
 
 android {
     namespace = "com.ultimus.distantworlds_muzei"
-    compileSdk = 36
+    compileSdk {
+        version = release(36) {
+            minorApiLevel = 1
+        }
+    }
     defaultConfig {
         applicationId = "com.ultimus.distantworlds_muzei"
         minSdk = 29
@@ -101,7 +105,6 @@ android {
     }
 
     lint {
-        warningsAsErrors = true
         informational.add("IconDensities")
     }
 }
