@@ -22,7 +22,7 @@ okhttp = "5.3.2"
 retrofit = "3.0.0"
 timber = "5.0.1"
 turbine = "1.2.1"
-work-runtime-ktx = "2.11.1"
+work-runtime-ktx = "2.11.2"
 compose-bom = "2026.05.01"
 
 [plugins]
