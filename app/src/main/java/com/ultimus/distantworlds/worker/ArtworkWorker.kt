@@ -1,16 +1,29 @@
+/*
+ *  Copyright 2026 Chris Margonis
+ *
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
+
 package com.ultimus.distantworlds.worker
 
 import android.content.Context
-import androidx.core.net.toUri
 import androidx.work.Data
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.Worker
 import androidx.work.WorkerParameters
-import com.google.android.apps.muzei.api.provider.Artwork
-import com.google.android.apps.muzei.api.provider.ProviderContract
-import com.ultimus.distantworlds.provider.DistantWorldsSource
-import com.ultimus.distantworlds.provider.authority
+import com.ultimus.distantworlds.domain.ArtworkPublisher
+import com.ultimus.distantworlds.domain.DistantWorldsSource
 import timber.log.Timber
 import java.io.IOException
 
@@ -18,6 +31,7 @@ class ArtworkWorker(
     context: Context,
     workerParams: WorkerParameters,
     private val imageProviderFactory: ImageProviderFactory,
+    private val publishers: Map<DistantWorldsSource, @JvmSuppressWildcards ArtworkPublisher>,
 ) : Worker(context, workerParams) {
 
     companion object {
@@ -52,18 +66,9 @@ class ArtworkWorker(
             return Result.failure()
         }
 
-        val providerClient = ProviderContract.getProviderClient(applicationContext, source.authority)
-        providerClient.addArtwork(
-            artworkList.map { (token, title, byline, imageUri, webUri) ->
-                Artwork(
-                    token = token,
-                    title = title,
-                    byline = byline,
-                    webUri = webUri.toUri(),
-                    persistentUri = imageUri.toUri(),
-                )
-            }.shuffled()
-        )
+        val publisher = publishers[source]
+            ?: throw IllegalArgumentException("No ArtworkPublisher registered for source: $source")
+        publisher.publish(artworkList)
 
         return Result.success()
     }

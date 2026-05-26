@@ -1,5 +1,5 @@
 /*
- *  Copyright 2019 Chris Margonis
+ *  Copyright 2026 Chris Margonis
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ package com.ultimus.distantworlds.provider
 
 import com.google.android.apps.muzei.api.provider.MuzeiArtDocumentsProvider
 import com.google.android.apps.muzei.api.provider.MuzeiArtProvider
+import com.ultimus.distantworlds.domain.DistantWorldsSource
 import com.ultimus.distantworlds.worker.ArtworkWorker
 
 class DistantWorldsArtProvider : MuzeiArtProvider() {

@@ -1,5 +1,5 @@
 /*
- *  Copyright 2019 Chris Margonis
+ *  Copyright 2026 Chris Margonis
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -14,18 +14,11 @@
  *    limitations under the License.
  */
 
-package com.ultimus.distantworlds.provider
+package com.ultimus.distantworlds.domain
 
-import com.ultimus.distantworlds_muzei.BuildConfig
+import com.ultimus.distantworlds.domain.model.ArtworkData
 
-enum class DistantWorldsSource {
+fun interface ArtworkPublisher {
 
-    DISTANT_WORLDS_1,
-    DISTANT_WORLDS_2
+    fun publish(artworkList: List<ArtworkData>)
 }
-
-val DistantWorldsSource.authority: String
-    get() = when (this) {
-        DistantWorldsSource.DISTANT_WORLDS_1 -> BuildConfig.DISTANT_WORLDS_AUTHORITY
-        DistantWorldsSource.DISTANT_WORLDS_2 -> BuildConfig.DISTANT_WORLDS_TWO_AUTHORITY
-    }

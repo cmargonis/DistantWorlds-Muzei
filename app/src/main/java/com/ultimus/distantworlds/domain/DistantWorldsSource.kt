@@ -14,11 +14,10 @@
  *    limitations under the License.
  */
 
-package com.ultimus.distantworlds.data.imgur.model
+package com.ultimus.distantworlds.domain
 
-data class Image(
-    val id: String,
-    val title: String,
-    val description: String,
-    val link: String
-)
+enum class DistantWorldsSource {
+
+    DISTANT_WORLDS_1,
+    DISTANT_WORLDS_2
+}
