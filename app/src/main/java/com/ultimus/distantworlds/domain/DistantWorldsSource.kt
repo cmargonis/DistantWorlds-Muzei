@@ -14,18 +14,10 @@
  *    limitations under the License.
  */
 
-package com.ultimus.distantworlds.provider
+package com.ultimus.distantworlds.domain
 
-import com.google.android.apps.muzei.api.provider.MuzeiArtDocumentsProvider
-import com.google.android.apps.muzei.api.provider.MuzeiArtProvider
-import com.ultimus.distantworlds.domain.DistantWorldsSource
-import com.ultimus.distantworlds.worker.ArtworkWorker
+enum class DistantWorldsSource {
 
-class DistantWorldsArtProvider : MuzeiArtProvider() {
-
-    override fun onLoadRequested(initial: Boolean) {
-        ArtworkWorker.enqueueLoad(DistantWorldsSource.DISTANT_WORLDS_1, context)
-    }
+    DISTANT_WORLDS_1,
+    DISTANT_WORLDS_2
 }
-
-class DistantWorldsArtDocumentsProvider : MuzeiArtDocumentsProvider()

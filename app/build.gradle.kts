@@ -1,5 +1,5 @@
 /*
- *  Copyright 2021 Chris Margonis
+ *  Copyright 2026 Chris Margonis
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -25,8 +25,6 @@ plugins {
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.google.services)
     alias(libs.plugins.firebaseCrashlytics)
-    alias(libs.plugins.ksp)
-    alias(libs.plugins.dagger.hilt)
 }
 
 fun getImgurApiProperties(): Properties {
@@ -137,10 +135,8 @@ java {
 }
 
 dependencies {
-    implementation(libs.dagger.hilt)
-    implementation(libs.hilt.navigation)
-    ksp(libs.hilt.compiler)
-    ksp(libs.kotlin.metadata.jvm)
+    implementation(libs.koin.android)
+    implementation(libs.koin.workmanager)
 
     implementation(libs.core.ktx)
     implementation(libs.appcompat)

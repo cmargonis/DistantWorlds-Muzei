@@ -14,18 +14,15 @@
  *    limitations under the License.
  */
 
-package com.ultimus.distantworlds.provider
+package com.ultimus.distantworlds.worker
 
-import com.google.android.apps.muzei.api.provider.MuzeiArtDocumentsProvider
-import com.google.android.apps.muzei.api.provider.MuzeiArtProvider
 import com.ultimus.distantworlds.domain.DistantWorldsSource
-import com.ultimus.distantworlds.worker.ArtworkWorker
+import com.ultimus.distantworlds.domain.ImageProvider
 
-class DistantWorldsArtProvider : MuzeiArtProvider() {
+class ImageProviderFactory(
+    private val providers: Map<DistantWorldsSource, @JvmSuppressWildcards ImageProvider>,
+) {
 
-    override fun onLoadRequested(initial: Boolean) {
-        ArtworkWorker.enqueueLoad(DistantWorldsSource.DISTANT_WORLDS_1, context)
-    }
+    fun getProvider(source: DistantWorldsSource): ImageProvider =
+        providers[source] ?: throw IllegalArgumentException("No ImageProvider registered for source: $source")
 }
-
-class DistantWorldsArtDocumentsProvider : MuzeiArtDocumentsProvider()

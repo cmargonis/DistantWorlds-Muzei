@@ -1,5 +1,5 @@
 /*
- *  Copyright 2018 Chris Margonis
+ *  Copyright 2026 Chris Margonis
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -14,14 +14,6 @@
  *    limitations under the License.
  */
 
-package com.ultimus.distantworlds.model
+package com.ultimus.distantworlds.data.imgur.model
 
-/**
- * Created by ultimus on 29/3/2016.
- */
-class Image(
-    var id: String,
-    var title: String,
-    var description: String,
-    var link: String
-)
+data class AlbumResponse(val data: Album?, val success: Boolean)

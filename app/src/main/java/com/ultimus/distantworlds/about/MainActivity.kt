@@ -1,5 +1,5 @@
 /*
- *  Copyright 2018 Chris Margonis
+ *  Copyright 2026 Chris Margonis
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -18,7 +18,6 @@ package com.ultimus.distantworlds.about
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.Lifecycle
@@ -29,10 +28,9 @@ import com.ultimus.distantworlds.about.AboutView.Navigation
 import com.ultimus.distantworlds.theme.DistantWorldsTheme
 import com.ultimus.distantworlds_muzei.BuildConfig
 import com.ultimus.distantworlds_muzei.R
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     companion object {
@@ -40,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         const val MUZEI_PACKAGE: String = "net.nurik.roman.muzei"
     }
 
-    private val viewModel: AboutViewModel by viewModels()
+    private val viewModel: AboutViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

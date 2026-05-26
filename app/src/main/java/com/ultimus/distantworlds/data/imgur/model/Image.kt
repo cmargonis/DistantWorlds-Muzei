@@ -1,5 +1,5 @@
 /*
- *  Copyright 2019 Chris Margonis
+ *  Copyright 2026 Chris Margonis
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -14,13 +14,11 @@
  *    limitations under the License.
  */
 
-package com.ultimus.distantworlds.provider
+package com.ultimus.distantworlds.data.imgur.model
 
-/**
- * Created by Chris Margonis on 15/01/2019.
- */
-enum class DistantWorldsSource {
-
-    DISTANT_WORLDS_1,
-    DISTANT_WORLDS_2
-}
+data class Image(
+    val id: String,
+    val title: String,
+    val description: String,
+    val link: String
+)

@@ -1,5 +1,5 @@
 /*
- *  Copyright 2019 Chris Margonis
+ *  Copyright 2026 Chris Margonis
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -18,15 +18,13 @@ package com.ultimus.distantworlds.provider
 
 import com.google.android.apps.muzei.api.provider.MuzeiArtDocumentsProvider
 import com.google.android.apps.muzei.api.provider.MuzeiArtProvider
-import com.ultimus.distantworlds.service.ImgurWorker
+import com.ultimus.distantworlds.domain.DistantWorldsSource
+import com.ultimus.distantworlds.worker.ArtworkWorker
 
-/**
- * Created by Chris Margonis on 03/11/2018.
- */
 class DistantWorlds2ArtProvider : MuzeiArtProvider() {
 
     override fun onLoadRequested(initial: Boolean) {
-        ImgurWorker.enqueueLoad(DistantWorldsSource.DISTANT_WORLDS_2, context)
+        ArtworkWorker.enqueueLoad(DistantWorldsSource.DISTANT_WORLDS_2, context)
     }
 }
 

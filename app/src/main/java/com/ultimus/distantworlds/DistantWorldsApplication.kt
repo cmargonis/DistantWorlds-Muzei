@@ -1,5 +1,5 @@
 /*
- *  Copyright 2021 Chris Margonis
+ *  Copyright 2026 Chris Margonis
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -17,11 +17,14 @@
 package com.ultimus.distantworlds
 
 import android.app.Application
+import com.ultimus.distantworlds.di.appModule
 import com.ultimus.distantworlds_muzei.BuildConfig
-import dagger.hilt.android.HiltAndroidApp
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
+import org.koin.androidx.workmanager.koin.workManagerFactory
+import org.koin.core.context.startKoin
 import timber.log.Timber
 
-@HiltAndroidApp
 class DistantWorldsApplication : Application() {
 
     override fun onCreate() {
@@ -29,6 +32,13 @@ class DistantWorldsApplication : Application() {
 
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
+        }
+
+        startKoin {
+            androidLogger()
+            androidContext(this@DistantWorldsApplication)
+            workManagerFactory()
+            modules(appModule)
         }
     }
 }

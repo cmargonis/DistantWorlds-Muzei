@@ -1,5 +1,5 @@
 /*
- *  Copyright 2018 Chris Margonis
+ *  Copyright 2026 Chris Margonis
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -14,12 +14,11 @@
  *    limitations under the License.
  */
 
-package com.ultimus.distantworlds.model
+package com.ultimus.distantworlds.domain
 
-/**
- * Created by ultimus on 29/3/2016.
- */
-class Album(
-    var id: String? = null,
-    var images: ArrayList<Image>? = null
-)
+import com.ultimus.distantworlds.domain.model.ArtworkData
+
+fun interface ImageProvider {
+
+    fun fetchArtwork(): List<ArtworkData>
+}

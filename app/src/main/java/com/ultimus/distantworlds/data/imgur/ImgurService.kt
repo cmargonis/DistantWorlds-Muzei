@@ -14,18 +14,19 @@
  *    limitations under the License.
  */
 
-package com.ultimus.distantworlds.provider
+package com.ultimus.distantworlds.data.imgur
 
-import com.google.android.apps.muzei.api.provider.MuzeiArtDocumentsProvider
-import com.google.android.apps.muzei.api.provider.MuzeiArtProvider
-import com.ultimus.distantworlds.domain.DistantWorldsSource
-import com.ultimus.distantworlds.worker.ArtworkWorker
+import com.ultimus.distantworlds.data.imgur.model.AlbumResponse
+import retrofit2.Call
+import retrofit2.http.GET
+import retrofit2.http.Header
+import retrofit2.http.Path
 
-class DistantWorldsArtProvider : MuzeiArtProvider() {
+const val IMGUR_API_VERSION: String = "3"
+const val IMGUR_BASE_URL: String = "https://api.imgur.com/$IMGUR_API_VERSION/"
 
-    override fun onLoadRequested(initial: Boolean) {
-        ArtworkWorker.enqueueLoad(DistantWorldsSource.DISTANT_WORLDS_1, context)
-    }
+interface ImgurService {
+
+    @GET("album/{id}")
+    fun getAlbumDetails(@Path("id") albumId: String, @Header("Authorization") clientId: String): Call<AlbumResponse>
 }
-
-class DistantWorldsArtDocumentsProvider : MuzeiArtDocumentsProvider()

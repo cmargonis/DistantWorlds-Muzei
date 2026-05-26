@@ -1,5 +1,5 @@
 /*
- *  Copyright 2021 Chris Margonis
+ *  Copyright 2026 Chris Margonis
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -17,7 +17,5 @@ plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.google.services) apply false
     alias(libs.plugins.firebaseCrashlytics) apply false
-    alias(libs.plugins.ksp) apply false
-    alias(libs.plugins.dagger.hilt) apply false
     alias(libs.plugins.compose.compiler) apply false
 }

@@ -1,5 +1,5 @@
 /*
- *  Copyright 2018 Chris Margonis
+ *  Copyright 2026 Chris Margonis
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -14,22 +14,11 @@
  *    limitations under the License.
  */
 
-package com.ultimus.distantworlds.service
+package com.ultimus.distantworlds.domain
 
-import com.ultimus.distantworlds.model.AlbumResponse
-import retrofit2.Call
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.Path
+import com.ultimus.distantworlds.domain.model.ArtworkData
 
-/**
- * Created by cmargonis on 28/3/2016.
- */
-const val IMGUR_API_VERSION: String = "3"
-const val IMGUR_BASE_URL: String = "https://api.imgur.com/$IMGUR_API_VERSION/"
+fun interface ArtworkPublisher {
 
-internal interface DistantWorldsService {
-
-    @GET("album/{id}")
-    fun getAlbumDetails(@Path("id") albumId: String, @Header("Authorization") clientId: String): Call<AlbumResponse>
+    fun publish(artworkList: List<ArtworkData>)
 }
