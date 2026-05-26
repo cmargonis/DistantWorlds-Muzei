@@ -17,7 +17,6 @@
 package com.ultimus.distantworlds
 
 import android.app.Application
-import androidx.work.Configuration
 import com.ultimus.distantworlds.di.appModule
 import com.ultimus.distantworlds_muzei.BuildConfig
 import org.koin.android.ext.koin.androidContext
@@ -26,11 +25,7 @@ import org.koin.androidx.workmanager.koin.workManagerFactory
 import org.koin.core.context.startKoin
 import timber.log.Timber
 
-class DistantWorldsApplication : Application(), Configuration.Provider {
-
-    override val workManagerConfiguration: Configuration by lazy {
-        Configuration.Builder().build()
-    }
+class DistantWorldsApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()

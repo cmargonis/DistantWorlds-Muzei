@@ -3,6 +3,7 @@ package com.ultimus.distantworlds.data.imgur
 import com.ultimus.distantworlds.domain.ImageProvider
 import com.ultimus.distantworlds.domain.model.ArtworkData
 import timber.log.Timber
+import java.io.IOException
 
 class ImgurImageProvider(
     private val service: ImgurService,
@@ -15,7 +16,7 @@ class ImgurImageProvider(
 
         val body = response.body()
         if (body?.success == false) {
-            return emptyList()
+            throw IOException("Imgur API returned success=false for album $albumId")
         }
 
         val images = body?.data?.images

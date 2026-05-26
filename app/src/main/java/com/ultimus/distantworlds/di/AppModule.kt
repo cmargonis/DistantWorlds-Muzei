@@ -14,13 +14,14 @@ import com.ultimus.distantworlds_muzei.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.androidx.workmanager.dsl.worker
+import org.koin.core.module.Module
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import timber.log.Timber
 
-val appModule = module {
+val appModule: Module = module {
     single<OkHttpClient> {
         val builder = OkHttpClient.Builder()
         builder.addInterceptor { chain ->
@@ -66,6 +67,7 @@ val appModule = module {
     }
 
     single { ImageProviderFactory(get()) }
-    viewModel { AboutViewModel() }
     worker { ArtworkWorker(get(), get(), get()) }
+
+    viewModel { AboutViewModel() }
 }

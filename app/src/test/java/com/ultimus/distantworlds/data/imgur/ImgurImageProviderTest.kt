@@ -61,15 +61,15 @@ class ImgurImageProviderTest {
     }
 
     @Test
-    fun `given unsuccessful response, when fetching artwork, then return empty list`() {
+    fun `given unsuccessful response, when fetching artwork, then throw IOException for retry`() {
         val albumResponse = AlbumResponse(data = null, success = false)
         val call: Call<AlbumResponse> = mockk()
         every { service.getAlbumDetails(any(), any()) } returns call
         every { call.execute() } returns Response.success(albumResponse)
 
-        val result = testedClass.fetchArtwork()
-
-        assertTrue(result.isEmpty())
+        assertThrows(IOException::class.java) {
+            testedClass.fetchArtwork()
+        }
     }
 
     @Test
