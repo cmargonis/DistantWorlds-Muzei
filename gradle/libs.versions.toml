@@ -25,7 +25,7 @@ compose-bom = "2026.05.01"
 [plugins]
 android-application = { id = "com.android.application", version.ref = "android-gradle-plugin" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
-google-services = { id = "com.google.gms.google-services", version = "4.4.4" }
+google-services = { id = "com.google.gms.google-services", version = "4.5.0" }
 firebaseCrashlytics = { id = "com.google.firebase.crashlytics", version = "3.0.7" }
 
 [libraries]
